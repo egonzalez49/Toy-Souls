@@ -59,13 +59,10 @@ namespace OOB
             float m = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
             states.moveAmount = Mathf.Clamp01(m);
 
-            if (runInput)
+
+            if (runInput || states.run)
             {
                 states.run = (states.moveAmount > 0);
-            }
-            else
-            {
-                states.run = false;
             }
             
         }

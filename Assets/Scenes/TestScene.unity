@@ -364,7 +364,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5c5cd362a440a684b9c06f569559bc9f, type: 2}
+  - {fileID: 2100000, guid: 438b2951efbe61243a6011f71872e3bb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -895,6 +895,7 @@ MonoBehaviour:
   toGround: 0.5
   run: 0
   onGround: 0
+  lockon: 0
   anim: {fileID: 0}
   rigid: {fileID: 0}
   delta: 0
