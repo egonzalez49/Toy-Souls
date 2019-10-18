@@ -599,27 +599,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 711720812}
-  - component: {fileID: 711720811}
   - component: {fileID: 711720813}
   m_Layer: 0
-  m_Name: MenuManager
+  m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &711720811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711720810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71eeb1664006b954ca5a7536a689092d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &711720812
 Transform:
   m_ObjectHideFlags: 0
@@ -847,6 +834,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6179845420140196990, guid: 81ceff82c70dc8f4ba594052951a46a7,
+        type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 0c0d6467cf73e4f4aa80affdfdae3428, type: 3}
     - target: {fileID: 321832467334145159, guid: 81ceff82c70dc8f4ba594052951a46a7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -876,7 +868,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 711720811}
+      objectReference: {fileID: 0}
     - target: {fileID: 321832467334145159, guid: 81ceff82c70dc8f4ba594052951a46a7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -887,11 +879,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 6179845420140196990, guid: 81ceff82c70dc8f4ba594052951a46a7,
-        type: 3}
-      propertyPath: m_Texture
-      value: 
-      objectReference: {fileID: 2800000, guid: 0c0d6467cf73e4f4aa80affdfdae3428, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81ceff82c70dc8f4ba594052951a46a7, type: 3}
 --- !u!1 &1007637610
@@ -906,6 +893,8 @@ GameObject:
   - component: {fileID: 1007637613}
   - component: {fileID: 1007637612}
   - component: {fileID: 1007637611}
+  - component: {fileID: 1007637615}
+  - component: {fileID: 1007637616}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -998,6 +987,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &1007637615
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007637610}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1007637616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007637610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71eeb1664006b954ca5a7536a689092d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1079618703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1115,6 +1128,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6179845420140196990, guid: 81ceff82c70dc8f4ba594052951a46a7,
+        type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 71acc9967b73f2d48be514b49d3064e5, type: 3}
     - target: {fileID: 321832467334145159, guid: 81ceff82c70dc8f4ba594052951a46a7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1144,7 +1162,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 711720811}
+      objectReference: {fileID: 0}
     - target: {fileID: 321832467334145159, guid: 81ceff82c70dc8f4ba594052951a46a7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -1155,11 +1173,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 6179845420140196990, guid: 81ceff82c70dc8f4ba594052951a46a7,
-        type: 3}
-      propertyPath: m_Texture
-      value: 
-      objectReference: {fileID: 2800000, guid: 71acc9967b73f2d48be514b49d3064e5, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81ceff82c70dc8f4ba594052951a46a7, type: 3}
 --- !u!1 &1150577281
