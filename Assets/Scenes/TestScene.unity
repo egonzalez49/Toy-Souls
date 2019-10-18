@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockon: 0
-  followSpeed: 9
+  followSpeed: 3
   mouseSpeed: 2
   controllerSpeed: 5
   target: {fileID: 0}
@@ -364,7 +364,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5c5cd362a440a684b9c06f569559bc9f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -825,8 +825,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.3
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &2041479481
@@ -891,7 +891,13 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0, z: 0}
   moveSpeed: 0
   runSpeed: 0
+  rotateSpeed: 0
+  toGround: 0.5
   run: 0
+  onGround: 0
   anim: {fileID: 0}
   rigid: {fileID: 0}
   delta: 0
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0

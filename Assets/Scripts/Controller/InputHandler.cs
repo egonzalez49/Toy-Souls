@@ -9,6 +9,7 @@ namespace OOB
 
         float vertical;
         float horizontal;
+        bool runInput;
 
         StateManager states;
         CameraManager cameraManager;
@@ -34,16 +35,17 @@ namespace OOB
             cameraManager.Tick(delta);
         }
 
-        /*void Update()
+        void Update()
         {
             delta = Time.deltaTime;
-            
-        }*/
+            states.Tick(delta);
+        }
 
         void GetInput()
         {
             vertical = Input.GetAxis("Vertical");
             horizontal = Input.GetAxis("Horizontal");
+            runInput = Input.GetButton("RunInput");
         }
 
         void UpdateStates()
@@ -56,6 +58,16 @@ namespace OOB
             states.moveDirection = (v + h).normalized;
             float m = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
             states.moveAmount = Mathf.Clamp01(m);
+
+            if (runInput)
+            {
+                states.run = (states.moveAmount > 0);
+            }
+            else
+            {
+                states.run = false;
+            }
+            
         }
     }
 }

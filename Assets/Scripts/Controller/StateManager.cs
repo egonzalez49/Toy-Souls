@@ -19,9 +19,12 @@ namespace OOB
         public float moveSpeed;
         public float runSpeed;
         public float rotateSpeed;
+        public float toGround = 0.5f;
 
         [Header("States")]
         public bool run;
+        public bool onGround;
+        public bool lockon;
 
         [HideInInspector]
         public Animator anim;
@@ -29,17 +32,24 @@ namespace OOB
         public Rigidbody rigid;
         [HideInInspector]
         public float delta;
+        [HideInInspector]
+        public LayerMask ignoreLayers;
        
         public void Init()
         {
-            moveSpeed = 3;
-            runSpeed = 4.0f;
-            rotateSpeed = 5;
+            moveSpeed = 3.5f;
+            runSpeed = 5.75f;
+            rotateSpeed = 9;
+            toGround = 0.5f;
             SetupAnimator();
             rigid = GetComponent<Rigidbody>();
             rigid.angularDrag = 999;
             rigid.drag = 4;
             rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            gameObject.layer = 8;
+            ignoreLayers = ~(1 << 9);
+
+            anim.SetBool("onGround", true);
         }
 
         
@@ -67,31 +77,67 @@ namespace OOB
         {
             delta = d;
 
-            rigid.drag = (moveAmount > 0) ? 0 : 4;
+            rigid.drag = (moveAmount > 0 || !onGround ) ? 0 : 4;
 
             float targetSpeed = moveSpeed;
             if (run)
             {
                 targetSpeed = runSpeed;
             }
+            if (onGround)
+                rigid.velocity = moveDirection * (targetSpeed * moveAmount);
 
-            rigid.velocity = moveDirection * (targetSpeed * moveAmount);
+            if (run)
+            {
+                lockon = false;
+            }
 
-            Vector3 targetDirection = moveDirection;
-            targetDirection.y = 0;
-            if (targetDirection == Vector3.zero)
-                targetDirection = transform.forward;
-            Quaternion tempTR = Quaternion.LookRotation(targetDirection);
-            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tempTR, delta * moveAmount * rotateSpeed);
-            transform.rotation = targetRotation;
+            if (!lockon)
+            {
+                Vector3 targetDirection = moveDirection;
+                targetDirection.y = 0;
+                if (targetDirection == Vector3.zero)
+                    targetDirection = transform.forward;
+                Quaternion tempTR = Quaternion.LookRotation(targetDirection);
+                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tempTR, delta * moveAmount * rotateSpeed);
+                transform.rotation = targetRotation;
 
+                
+            }
             HandleMovementAnimations();
+
+        }
+
+        public void Tick(float d)
+        {
+            delta = d;
+            onGround = OnGround();
+            anim.SetBool("onGround", onGround);
         }
 
         void HandleMovementAnimations()
         {
+            anim.SetBool("run", run);
             anim.SetFloat("vertical", moveAmount, 0.4f, delta);
 
+        }
+
+        public bool OnGround()
+        {
+            bool r = false;
+
+            Vector3 origin = transform.position + (Vector3.up * toGround);
+            Vector3 dir = -Vector3.up;
+            float dis = toGround + 0.2f;
+            RaycastHit hit;
+            Debug.DrawRay(origin, dir * dis);
+            if (Physics.Raycast(origin, dir, out hit, dis, ignoreLayers))
+            {
+                r = true;
+                Vector3 targetPos = hit.point;
+                transform.position = targetPos;
+            }
+            return r;
         }
     }
 }
