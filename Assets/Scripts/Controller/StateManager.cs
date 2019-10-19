@@ -15,12 +15,14 @@ namespace PC
         public float moveAmount;
         public Vector3 moveDirection;
         public bool rt, rb, lt, lb, b, a, y, x, lsb, rsb;
+        public bool rollInput;
 
         [Header("Stats")]
         public float moveSpeed;
         public float runSpeed;
         public float rotateSpeed;
         public float toGround = 0.5f;
+        public float rollSpeed = 1;
 
         [Header("States")]
         public bool run;
@@ -29,6 +31,7 @@ namespace PC
         public bool inAttack;
         public bool canMove;
         public bool twoHanded = false;
+        
 
         [Header("Other")]
         public EnemyTarget lockonTarget;
@@ -124,6 +127,9 @@ namespace PC
             if (!canMove)
                 return;
 
+            a_hook.rm_multi = 1;
+            HandleRolls();
+            
             // If we're not in an attack animation...
             anim.applyRootMotion = false;
             rigid.drag = (moveAmount > 0 || onGround==false ) ? 0 : 4;
@@ -132,14 +138,10 @@ namespace PC
             if (run)
             {
                 targetSpeed = runSpeed;
+                lockon = false;
             }
             if (onGround)
                 rigid.velocity = moveDirection * (targetSpeed * moveAmount);
-
-            if (run)
-            {
-                lockon = false;
-            }
 
             Vector3 targetDirection = (lockon==false)? moveDirection
                 : lockonTarget.transform.position - transform.position;
@@ -207,6 +209,45 @@ namespace PC
         public void HandleTwoHanded()
         {
             anim.SetBool("two_handed", twoHanded);
+        }
+
+        void HandleRolls()
+        {
+            if (!rollInput)
+                return;
+            float v = vertical;
+            float h = horizontal;
+            v = (moveAmount > 0.4f) ? 1 : 0;
+            h = 0;
+
+            /*if (!lockon)
+            {
+                v = (moveAmount > 0.4f) ? 1 : 0;
+                h = 0;
+            }
+            else
+            {
+                if(Mathf.Abs(v) < 0.4f)
+                    v = 0;
+                if(Mathf.Abs(h) < 0.4f)
+                    h = 0;
+            }*/
+            if (v != 0)
+            {
+                if (moveDirection == Vector3.zero)
+                    moveDirection = transform.forward;
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+                transform.rotation = targetRotation;
+            }
+
+            a_hook.rm_multi = rollSpeed;
+
+            anim.SetFloat("vertical", v);
+            anim.SetFloat("horizontal", h);
+
+            canMove = false;
+            inAttack = true;
+            anim.CrossFade("Rolls", 0.2f);
         }
 
         public void Tick(float d)

@@ -9,6 +9,8 @@ namespace PC
         Animator anim;
         StateManager states;
 
+        public float rm_multi;
+
         public void Init(StateManager s)
         {
             states = s;
@@ -24,11 +26,13 @@ namespace PC
                 return;
 
             states.rigid.drag = 0;
-            float multiplier = 1;
+
+            if(rm_multi <= 0)
+                rm_multi = 1;
 
             Vector3 del = anim.deltaPosition;
             del.y = 0;
-            Vector3 v = (del * multiplier) / states.delta;
+            Vector3 v = (del * rm_multi) / states.delta;
             states.rigid.velocity = v;
         }
     }

@@ -82,8 +82,9 @@ namespace PC
             tiltAngle -= smoothY * targetSpeed;
             tiltAngle = Mathf.Clamp(tiltAngle, minAngle, maxAngle);
             pivot.localRotation = Quaternion.Euler(tiltAngle, 0, 0);
+            lookAngle += smoothX * targetSpeed;
 
-            if (lockon && lockonTarget == true)
+            if (lockon && lockonTarget != null)
             {
                 Vector3 targetDir = lockonTarget.position - transform.position;
                 targetDir.Normalize();
@@ -98,7 +99,7 @@ namespace PC
                 return;
             }
 
-            lookAngle += smoothX * targetSpeed;
+            
             transform.rotation = Quaternion.Euler(0, lookAngle, 0);
 
             

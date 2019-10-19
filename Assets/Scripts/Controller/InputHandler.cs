@@ -106,9 +106,13 @@ namespace PC
             states.y = y_input;
             states.lsb = left_stick_input;
 
+            states.rollInput = b_input;
+
             if (left_stick_input)
             {
                 states.run = (states.moveAmount > 0);
+                if (states.run)
+                    cameraManager.lockon = false;
             }
             else
             {
