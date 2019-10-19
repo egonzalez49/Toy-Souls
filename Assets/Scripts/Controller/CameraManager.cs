@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OOB
+namespace PC
 {
     public class CameraManager : MonoBehaviour
     {
@@ -12,6 +12,7 @@ namespace OOB
         public float controllerSpeed = 5;
 
         public Transform target;
+        public Transform lockonTarget;
 
         [HideInInspector]
         public Transform pivot;
@@ -78,17 +79,29 @@ namespace OOB
                 smoothY = v;
             }
 
-            if (lockon)
-            {
+            tiltAngle -= smoothY * targetSpeed;
+            tiltAngle = Mathf.Clamp(tiltAngle, minAngle, maxAngle);
+            pivot.localRotation = Quaternion.Euler(tiltAngle, 0, 0);
 
+            if (lockon && lockonTarget == true)
+            {
+                Vector3 targetDir = lockonTarget.position - transform.position;
+                targetDir.Normalize();
+                //targetDir.y = 0;
+
+                if(targetDir == Vector3.zero)
+                    targetDir = transform.forward;
+                Quaternion targetRotation = Quaternion.LookRotation(targetDir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, d * 9);
+                tiltAngle = transform.eulerAngles.z+12.5f;
+                lookAngle = transform.eulerAngles.y;
+                return;
             }
 
             lookAngle += smoothX * targetSpeed;
             transform.rotation = Quaternion.Euler(0, lookAngle, 0);
 
-            tiltAngle -= smoothY * targetSpeed;
-            tiltAngle = Mathf.Clamp(tiltAngle, minAngle, maxAngle);
-            pivot.localRotation = Quaternion.Euler(tiltAngle, 0, 0);
+            
         }
 
         public static CameraManager singleton;

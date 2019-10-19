@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OOB
+namespace PC
 {
     public class InputHandler : MonoBehaviour
     {
@@ -10,6 +10,10 @@ namespace OOB
         float vertical;
         float horizontal;
         bool left_stick_input;
+
+        bool right_stick_input;
+        bool rs_mem;
+
         bool b_input;
         bool a_input;
         bool x_input;
@@ -19,6 +23,7 @@ namespace OOB
         float rt_axis;
         bool rt_input;
         bool lb_input;
+        bool lb_input_mem;
         float lt_axis;
         bool lt_input;
 
@@ -58,9 +63,9 @@ namespace OOB
             horizontal = Input.GetAxis("Horizontal");
 
             left_stick_input = Input.GetButton("RunInput");
+            right_stick_input = Input.GetButton("LockonInput");
 
-
-            lb_input = Input.GetButtonDown("LB");
+            lb_input = Input.GetButton("LB");
             rb_input = Input.GetButton("RB");
 
             a_input = Input.GetButton("A");
@@ -77,9 +82,6 @@ namespace OOB
             lt_axis = Input.GetAxis("LT");
             if(lt_axis != 0)
                 lt_input = true;
-
-            
-          
            
         }
 
@@ -104,12 +106,6 @@ namespace OOB
             states.y = y_input;
             states.lsb = left_stick_input;
 
-            if (lb_input)
-            {
-                states.twoHanded = !states.twoHanded;
-                states.HandleTwoHanded();
-            }
-
             if (left_stick_input)
             {
                 states.run = (states.moveAmount > 0);
@@ -119,7 +115,24 @@ namespace OOB
                 states.run = false;
             }
 
-            
+            if (lb_input != lb_input_mem && lb_input)
+            {
+                states.twoHanded = !states.twoHanded;
+                states.HandleTwoHanded();
+            }
+            lb_input_mem = lb_input;
+
+            if (rs_mem != right_stick_input && right_stick_input)
+            {
+                states.lockon = !states.lockon;
+                if(states.lockonTarget == null)
+                {
+                    states.lockon = false;
+                }
+                cameraManager.lockonTarget = states.lockonTarget.transform;
+                cameraManager.lockon = states.lockon;
+            }
+            rs_mem = right_stick_input;
 
         }
     }

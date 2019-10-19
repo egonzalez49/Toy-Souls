@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OOB
+namespace PC
 {
     public class StateManager : MonoBehaviour
     {
@@ -29,6 +29,9 @@ namespace OOB
         public bool inAttack;
         public bool canMove;
         public bool twoHanded = false;
+
+        [Header("Other")]
+        public EnemyTarget lockonTarget;
 
         [HideInInspector]
         public Animator anim;
@@ -63,6 +66,7 @@ namespace OOB
             ignoreLayers = ~(1 << 9);
 
             anim.SetBool("onGround", true);
+            anim.SetBool("run", false);
         }
 
         
@@ -122,7 +126,7 @@ namespace OOB
 
             // If we're not in an attack animation...
             anim.applyRootMotion = false;
-            rigid.drag = (moveAmount > 0 || !onGround ) ? 0 : 4;
+            rigid.drag = (moveAmount > 0 || onGround==false ) ? 0 : 4;
 
             float targetSpeed = moveSpeed;
             if (run)
@@ -137,20 +141,21 @@ namespace OOB
                 lockon = false;
             }
 
-            if (!lockon)
-            {
-                Vector3 targetDirection = moveDirection;
-                targetDirection.y = 0;
-                if (targetDirection == Vector3.zero)
-                    targetDirection = transform.forward;
-                Quaternion tempTR = Quaternion.LookRotation(targetDirection);
-                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tempTR, delta * moveAmount * rotateSpeed);
-                transform.rotation = targetRotation;
+            Vector3 targetDirection = (lockon==false)? moveDirection
+                : lockonTarget.transform.position - transform.position;
+            targetDirection.y = 0;
+            if (targetDirection == Vector3.zero)
+                targetDirection = transform.forward;
+            Quaternion tempTR = Quaternion.LookRotation(targetDirection);
+            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tempTR, delta * moveAmount * rotateSpeed);
+            transform.rotation = targetRotation;
 
-                
-            }
-            HandleMovementAnimations();
+            anim.SetBool("lock_on", lockon);
 
+            if (lockon == false)
+                HandleMovementAnimations();
+            else
+                HandleLockOnAnimations(moveDirection);
         }
         /**
          * Detects to see if as a result of inputs, the player character 
@@ -215,7 +220,15 @@ namespace OOB
         {
             anim.SetBool("run", run);
             anim.SetFloat("vertical", moveAmount, 0.4f, delta);
+        }
 
+        void HandleLockOnAnimations(Vector3 moveDir)
+        {
+            Vector3 relativeDir = transform.InverseTransformDirection(moveDir);
+            float h = relativeDir.x;
+            float v = relativeDir.z;
+            anim.SetFloat("vertical", v, 0.2f, delta);
+            anim.SetFloat("horizontal", h, 0.2f, delta);
         }
 
         public bool OnGround()
@@ -224,7 +237,7 @@ namespace OOB
 
             Vector3 origin = transform.position + (Vector3.up * toGround);
             Vector3 dir = -Vector3.up;
-            float dis = toGround + 0.2f;
+            float dis = toGround + 0.3f;
             RaycastHit hit;
             Debug.DrawRay(origin, dir * dis);
             if (Physics.Raycast(origin, dir, out hit, dis, ignoreLayers))
