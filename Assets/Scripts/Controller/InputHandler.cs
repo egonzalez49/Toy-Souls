@@ -9,7 +9,18 @@ namespace OOB
 
         float vertical;
         float horizontal;
-        bool runInput;
+        bool left_stick_input;
+        bool b_input;
+        bool a_input;
+        bool x_input;
+        bool y_input;
+
+        bool rb_input;
+        float rt_axis;
+        bool rt_input;
+        bool lb_input;
+        float lt_axis;
+        bool lt_input;
 
         StateManager states;
         CameraManager cameraManager;
@@ -45,7 +56,31 @@ namespace OOB
         {
             vertical = Input.GetAxis("Vertical");
             horizontal = Input.GetAxis("Horizontal");
-            runInput = Input.GetButton("RunInput");
+
+            left_stick_input = Input.GetButton("RunInput");
+
+
+            lb_input = Input.GetButtonDown("LB");
+            rb_input = Input.GetButton("RB");
+
+            a_input = Input.GetButton("A");
+            b_input = Input.GetButton("B");
+            x_input = Input.GetButton("X");
+            y_input = Input.GetButton("Y");
+
+            rt_input = Input.GetButton("RT");
+            rt_axis = Input.GetAxis("RT");
+            if(rt_axis != 0)
+                rt_input = true;
+            
+            lt_input = Input.GetButton("LT");
+            lt_axis = Input.GetAxis("LT");
+            if(lt_axis != 0)
+                lt_input = true;
+
+            
+          
+           
         }
 
         void UpdateStates()
@@ -59,12 +94,33 @@ namespace OOB
             float m = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
             states.moveAmount = Mathf.Clamp01(m);
 
+            states.rt = rt_input;
+            states.lt = lt_input;
+            states.rb = rb_input;
+            states.lb = lb_input;
+            states.a = a_input;
+            states.b = b_input;
+            states.x = x_input;
+            states.y = y_input;
+            states.lsb = left_stick_input;
 
-            if (runInput || states.run)
+            if (lb_input)
+            {
+                states.twoHanded = !states.twoHanded;
+                states.HandleTwoHanded();
+            }
+
+            if (left_stick_input)
             {
                 states.run = (states.moveAmount > 0);
             }
+            else
+            {
+                states.run = false;
+            }
+
             
+
         }
     }
 }
