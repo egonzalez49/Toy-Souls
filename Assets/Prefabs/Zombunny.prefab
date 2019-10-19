@@ -5044,11 +5044,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 0
   aiState: 0
-  dist: 0
   random_radius: 45
   wanderTimer: 28
-  chaseDistance: 12
+  chaseDistance: 7
   attackDistance: 2
+  attackThrust: 3
+  chaseSpeed: 2.5
+  wanderSpeed: 0.8
+  isHit: 0
 --- !u!1 &1877581238003195411
 GameObject:
   m_ObjectHideFlags: 0
