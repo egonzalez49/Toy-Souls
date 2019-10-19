@@ -11,7 +11,6 @@ namespace Enemy
         Transform player;
         NavMeshAgent agent;
         Animator anim;
-        Rigidbody rb;
         public float timer;
 
         public enum AIState
@@ -25,19 +24,14 @@ namespace Enemy
         private float dist;
         public float random_radius = 45.0f;
         public float wanderTimer = 28.0f;
-        public float chaseDistance = 7.0f;
+        public float chaseDistance = 12.0f;
         public float attackDistance = 2.0f;
-        public float attackThrust = 3.0f;
-        public float chaseSpeed = 2.5f;
-        public float wanderSpeed = 0.8f;
-        public bool isHit;
 
         private void Awake()
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
             agent = GetComponent<NavMeshAgent>();
             anim = GetComponent<Animator>();
-            rb = GetComponent<Rigidbody>();
             aiState = AIState.wander;
             dist = Vector3.Distance(player.position, transform.position);
             agent.destination = RandomNavMeshLocation(random_radius);
@@ -48,7 +42,6 @@ namespace Enemy
         {
             timer += Time.deltaTime;
             dist = Vector3.Distance(player.position, transform.position);
-
             if (dist >= chaseDistance)
             {
                 aiState = AIState.wander;
@@ -68,17 +61,9 @@ namespace Enemy
             */
         }
 
-        private void FixedUpdate()
-        {
-            if (isHit)
-            {
-                rb.AddForce(transform.forward * -1 * attackThrust);
-            }
-        }
-
         void wander()
         {
-            agent.speed = wanderSpeed;
+            agent.speed = 1.25f;
             if (timer > wanderTimer)
             {
                 anim.SetBool("IsMoving", true);
@@ -100,7 +85,7 @@ namespace Enemy
 
         void chasePlayer()
         {
-            agent.speed = chaseSpeed;
+            agent.speed = 3.5f;
             agent.destination = player.position;
         }
 
