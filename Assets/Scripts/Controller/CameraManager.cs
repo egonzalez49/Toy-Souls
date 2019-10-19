@@ -12,12 +12,15 @@ namespace PC
         public float controllerSpeed = 5;
 
         public Transform target;
-        public Transform lockonTarget;
+        public EnemyTarget lockonTarget;
+        public Transform lockonTransform;
 
         [HideInInspector]
         public Transform pivot;
         [HideInInspector]
         public Transform camTrans;
+        [HideInInspector]
+        StateManager states;
 
         float turnSmoothing = .1f;
         public float minAngle = -35;
@@ -30,9 +33,12 @@ namespace PC
         public float lookAngle;
         public float tiltAngle;
 
-        public void Init(Transform t)
+        bool usedRightAxis;
+
+        public void Init(StateManager st)
         {
-            target = t;
+            states = st;
+            target = st.transform;
             camTrans = Camera.main.transform;
             pivot = camTrans.parent;
         }
@@ -46,6 +52,33 @@ namespace PC
             float c_v = Input.GetAxis("RightAxis Y");
 
             float targetSpeed = mouseSpeed;
+
+            if(lockonTarget != null)
+            {
+                if (lockonTransform == null)
+                {
+                    lockonTransform = lockonTarget.GetTarget();
+                    states.lockonTransform = lockonTransform;
+                }
+                if(Mathf.Abs(c_h) >= 0.6f)
+                {
+                    if (!usedRightAxis)
+                    {
+                        lockonTransform = lockonTarget.GetTarget( (c_h>0) );
+                        states.lockonTransform = lockonTransform;
+                        usedRightAxis = true;
+                    }
+                }
+            }
+
+            if (usedRightAxis)
+            {
+                if(Mathf.Abs(c_h) < 0.6f)
+                {
+                    usedRightAxis = false;
+                }
+            }
+            
 
             if(c_h != 0 || c_v != 0)
             {
@@ -82,11 +115,11 @@ namespace PC
             tiltAngle -= smoothY * targetSpeed;
             tiltAngle = Mathf.Clamp(tiltAngle, minAngle, maxAngle);
             pivot.localRotation = Quaternion.Euler(tiltAngle, 0, 0);
-            lookAngle += smoothX * targetSpeed;
+            
 
             if (lockon && lockonTarget != null)
             {
-                Vector3 targetDir = lockonTarget.position - transform.position;
+                Vector3 targetDir = lockonTransform.position - transform.position;
                 targetDir.Normalize();
                 //targetDir.y = 0;
 
@@ -94,12 +127,12 @@ namespace PC
                     targetDir = transform.forward;
                 Quaternion targetRotation = Quaternion.LookRotation(targetDir);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, d * 9);
-                tiltAngle = transform.eulerAngles.z+12.5f;
+                //tiltAngle = transform.eulerAngles.z+12.5f;
                 lookAngle = transform.eulerAngles.y;
                 return;
             }
 
-            
+            lookAngle += smoothX * targetSpeed;
             transform.rotation = Quaternion.Euler(0, lookAngle, 0);
 
             

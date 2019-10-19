@@ -35,6 +35,8 @@ namespace PC
 
         [Header("Other")]
         public EnemyTarget lockonTarget;
+        public Transform lockonTransform;
+        public AnimationCurve roll_curve;
 
         [HideInInspector]
         public Animator anim;
@@ -127,7 +129,8 @@ namespace PC
             if (!canMove)
                 return;
 
-            a_hook.rm_multi = 1;
+            //a_hook.rm_multi = 1;
+            a_hook.CloseRoll();
             HandleRolls();
             
             // If we're not in an attack animation...
@@ -143,8 +146,10 @@ namespace PC
             if (onGround)
                 rigid.velocity = moveDirection * (targetSpeed * moveAmount);
 
-            Vector3 targetDirection = (lockon==false)? moveDirection
-                : lockonTarget.transform.position - transform.position;
+            Vector3 targetDirection = (lockon == false) ? moveDirection
+                : (lockonTransform != null) ?
+                    lockonTransform.transform.position - transform.position 
+                    : moveDirection;
             targetDirection.y = 0;
             if (targetDirection == Vector3.zero)
                 targetDirection = transform.forward;
@@ -238,9 +243,15 @@ namespace PC
                     moveDirection = transform.forward;
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
                 transform.rotation = targetRotation;
+                a_hook.InitForRoll();
+                a_hook.rm_multi = rollSpeed;
+            }
+            else
+            {
+                a_hook.rm_multi = Mathf.Max(rollSpeed/6, 1.5f);
             }
 
-            a_hook.rm_multi = rollSpeed;
+            
 
             anim.SetFloat("vertical", v);
             anim.SetFloat("horizontal", h);
@@ -248,6 +259,7 @@ namespace PC
             canMove = false;
             inAttack = true;
             anim.CrossFade("Rolls", 0.2f);
+            
         }
 
         public void Tick(float d)

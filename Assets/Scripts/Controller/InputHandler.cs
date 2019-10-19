@@ -38,7 +38,7 @@ namespace PC
             states = GetComponent<StateManager>();
             states.Init();
             cameraManager = CameraManager.singleton;
-            cameraManager.Init(this.transform);
+            cameraManager.Init(states);
         }
 
         // Update is called once per frame
@@ -133,7 +133,8 @@ namespace PC
                 {
                     states.lockon = false;
                 }
-                cameraManager.lockonTarget = states.lockonTarget.transform;
+                cameraManager.lockonTarget = states.lockonTarget;
+                states.lockonTransform = cameraManager.lockonTransform;
                 cameraManager.lockon = states.lockon;
             }
             rs_mem = right_stick_input;
