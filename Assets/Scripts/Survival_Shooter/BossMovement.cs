@@ -22,7 +22,6 @@ namespace Enemy
         public AIState aiState;
         private float dist;
         public float attackDistance = 2.0f;
-        public float chaseSpeed = 1.5f;
 
         private void Awake()
         {
@@ -31,7 +30,6 @@ namespace Enemy
             anim = GetComponent<Animator>();
             playerVelocityReporter = player.GetComponent<VelocityReporter>();
             aiState = AIState.chasePlayer;
-            agent.speed = chaseSpeed;
             dist = Vector3.Distance(player.position, transform.position);
         }
 
@@ -51,8 +49,7 @@ namespace Enemy
 
         void chasePlayer()
         {
-            //SetDestinationMoving();
-            agent.destination = player.position;
+            SetDestinationMoving();
         }
 
         private void SetDestinationMoving()
