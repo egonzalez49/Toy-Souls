@@ -23,7 +23,7 @@ namespace Enemy
         };
 
         public AIState aiState;
-        private float dist;
+        public float dist;
         public float random_radius = 45.0f;
         public float wanderTimer = 28.0f;
         public float chaseDistance = 7.0f;
@@ -54,16 +54,17 @@ namespace Enemy
                 aiState = AIState.wander;
                 wander();
             }
+            if (dist < attackDistance && aiState != AIState.attack)
+            {
+                aiState = AIState.attack;
+                attack();
+            }
             else if (dist < chaseDistance && aiState != AIState.attack)
             {
                 aiState = AIState.chasePlayer;
                 chasePlayer();
             }
-            else if (dist < attackDistance && aiState != AIState.attack)
-            {
-                aiState = AIState.attack;
-                attack();
-            }
+
             if (aiState == AIState.attack)
             {
                 attackTimer -= Time.deltaTime;
@@ -109,6 +110,9 @@ namespace Enemy
         void attack()
         {
             agent.speed = attackingSpeed;
+            anim.SetBool("IsIdle", false);
+            anim.SetBool("IsWalking", false);
+            anim.SetBool("IsRunning", false);
             anim.SetTrigger("Attack");
         }
 
