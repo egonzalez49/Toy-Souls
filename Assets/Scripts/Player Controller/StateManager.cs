@@ -18,9 +18,9 @@ namespace PC
         public bool rollInput;
 
         [Header("Stats")]
-        public float moveSpeed;
-        public float runSpeed;
-        public float rotateSpeed;
+        public float moveSpeed = 4f;
+        public float runSpeed = 5.75f;
+        public float rotateSpeed = 9;
         public float toGround = 0.5f;
         public float rollSpeed = 1;
 
@@ -45,6 +45,10 @@ namespace PC
         [HideInInspector]
         public AnimatorHook a_hook;
         [HideInInspector]
+        public ActionManager actionManager;
+        [HideInInspector]
+        public InventoryManager inventoryManager;
+        [HideInInspector]
         public float delta;
         [HideInInspector]
         public LayerMask ignoreLayers;
@@ -53,16 +57,17 @@ namespace PC
        
         public void Init()
         {
-            moveSpeed = 3.5f;
-            runSpeed = 5.75f;
-            rotateSpeed = 9;
-            toGround = 0.5f;
-
             SetupAnimator();
             rigid = GetComponent<Rigidbody>();
             rigid.angularDrag = 999;
             rigid.drag = 4;
             rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+            inventoryManager = GetComponent<InventoryManager>();
+            inventoryManager.Init();
+
+            actionManager = GetComponent<ActionManager>();
+            actionManager.Init(this);
 
             a_hook = activeModel.AddComponent<AnimatorHook>();
             a_hook.Init(this);
@@ -129,11 +134,12 @@ namespace PC
             if (!canMove)
                 return;
 
-            //a_hook.rm_multi = 1;
+                
             a_hook.CloseRoll();
             HandleRolls();
             
             // If we're not in an attack animation...
+            // Determine player orientation and physics attributes.
             anim.applyRootMotion = false;
             rigid.drag = (moveAmount > 0 || onGround==false ) ? 0 : 4;
 
@@ -145,7 +151,6 @@ namespace PC
             }
             if (onGround)
                 rigid.velocity = moveDirection * (targetSpeed * moveAmount);
-
             Vector3 targetDirection = (lockon == false) ? moveDirection
                 : (lockonTransform != null) ?
                     lockonTransform.transform.position - transform.position 
@@ -157,55 +162,34 @@ namespace PC
             Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tempTR, delta * moveAmount * rotateSpeed);
             transform.rotation = targetRotation;
 
+            // Either handle lock-on translational motion or normal translational motion.
             anim.SetBool("lock_on", lockon);
-
             if (lockon == false)
                 HandleMovementAnimations();
             else
                 HandleLockOnAnimations(moveDirection);
         }
+        
         /**
          * Detects to see if as a result of inputs, the player character 
          * is in an attack animation state.
          */
         public void DetectAction()
         {
-            if (canMove == false)
+            // Check if we are in a state to be able to do an action.
+            if (canMove == false || (!rb && !rt && !lt && !lb))
                 return;
 
-            if (!rb && !rt)
-                return;
+            // Pull action animation from Action Manager
             string targetAnim = null;
-            if (twoHanded)
-            {
-                if (rb)
-                {
-                    targetAnim = "th_attack_1";
-                }
-                if (rt)
-                {
-                    targetAnim = "th_attack_2";
-                }
-            }
-            else
-            {
-                if (rb)
-                {
-                    targetAnim = "oh_attack_1";
-                }
-                if (rt)
-                {
-                    targetAnim = "oh_attack_2";
-                }
-                if (run)
-                {
-                    targetAnim = "oh_attack_3";
-                }
-            }
-
+            Action slot = actionManager.GetActionSlots(this);
+            if (slot == null)
+                return;
+            targetAnim = slot.targetAnimation;
             if (string.IsNullOrEmpty(targetAnim))
                 return;
 
+            // Cross-fade into new animation
             canMove = false;
             inAttack = true;
             anim.CrossFade(targetAnim, 0.2f);
@@ -214,6 +198,10 @@ namespace PC
         public void HandleTwoHanded()
         {
             anim.SetBool("two_handed", twoHanded);
+            if (twoHanded)
+                actionManager.UpdateActionsTwoHanded();
+            else
+                actionManager.UpdateActionsOneHanded();
         }
 
         void HandleRolls()

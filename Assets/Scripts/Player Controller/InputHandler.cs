@@ -49,6 +49,7 @@ namespace PC
             UpdateStates();
             states.FixedTick(delta);
             cameraManager.Tick(delta);
+
         }
 
         void Update()
@@ -82,7 +83,7 @@ namespace PC
             lt_axis = Input.GetAxis("LT");
             if(lt_axis != 0)
                 lt_input = true;
-           
+
         }
 
         void UpdateStates()
