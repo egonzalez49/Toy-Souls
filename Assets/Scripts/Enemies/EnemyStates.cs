@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Enemy;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,6 +20,7 @@ namespace PC {
         public Animator anim;
         public Rigidbody rigid;
         SoulScript soulScript;
+        EnemyManager enemyManager;
         EnemyTarget enemyTarget;
         AnimatorHook a_hook;
         CapsuleCollider capsuleCollider;
@@ -86,6 +88,9 @@ namespace PC {
 
             GameObject SoulsText = GameObject.FindGameObjectWithTag("Souls");
             soulScript = SoulsText.GetComponent<SoulScript>();
+
+            GameObject enemySpawner = GameObject.FindGameObjectWithTag("Enemy Manager");
+            enemyManager = enemySpawner.GetComponent<EnemyManager>();
 
         }
 
@@ -163,7 +168,9 @@ namespace PC {
             capsuleCollider.isTrigger = true;
             enemyAudio.clip = deathClip;
             enemyAudio.Play();
+
             soulScript.AddSouls(10);
+            enemyManager.currentEnemies--;
         }
 
         void wander()

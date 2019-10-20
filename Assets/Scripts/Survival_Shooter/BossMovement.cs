@@ -94,8 +94,9 @@ namespace Enemy
         {
             if (other.gameObject.tag == "Player" && attackTimer <= 0.1f && attackTimer >= -0.55f)
             {
+                playerHealth.TakeDamage(15);
+                attackTimer = 1.5f;
                 //Debug.Log("Damage Done to Player");
-                playerHealth.TakeDamage(5);
             }
         }
 

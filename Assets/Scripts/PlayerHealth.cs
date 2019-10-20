@@ -33,11 +33,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            TakeDamage(10);
-        }
-
         if (damaged)
         {
             damageImage.color = flashColour;
@@ -52,6 +47,7 @@ public class PlayerHealth : MonoBehaviour
     //call this function to deal damage to the player
     public void TakeDamage(int amount)
     {
+        if (currentHealth <= 0) return;
         damaged = true;
 
         currentHealth -= amount;
