@@ -56,6 +56,7 @@ namespace Enemy
             {
                 aiState = AIState.wander;
                 anim.applyRootMotion = false;
+                isAttacking = false;
                 wander();
             }
             if (dist <= attackDistance && (!isAttacking || _actionDelay >= attackDuration))
@@ -70,6 +71,7 @@ namespace Enemy
             {
                 aiState = AIState.chasePlayer;
                 anim.applyRootMotion = false;
+                isAttacking = false;
                 chasePlayer();
                 timer = wanderTimer;
             }
