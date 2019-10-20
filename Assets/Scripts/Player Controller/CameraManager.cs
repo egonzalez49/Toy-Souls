@@ -83,7 +83,7 @@ namespace PC
             if(c_h != 0 || c_v != 0)
             {
                 h = c_h;
-                v = c_v;
+                v = -c_v;
                 targetSpeed = controllerSpeed;
             }
 

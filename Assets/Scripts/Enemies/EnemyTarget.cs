@@ -11,9 +11,12 @@ namespace PC
         public int index;
         Animator anim;
 
-        public void Init(Animator a)
+        public EnemyStates enemyStates;
+
+        public void Init(EnemyStates es)
         {
-            anim = a;
+            enemyStates = es;
+            anim = es.anim;
             if (anim.isHuman == false)
                 return;
 

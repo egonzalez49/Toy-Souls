@@ -134,13 +134,24 @@ namespace PC
             }
             y_input_mem = y_input;
 
+            if (states.lockonTarget != null)
+            {
+                if (states.lockonTarget.enemyStates.isDead)
+                {
+                    states.lockon = false;
+                    states.lockonTarget = null;
+                    states.lockonTransform = null;
+                    cameraManager.lockon = false;
+                    cameraManager.lockonTarget = null;
+                }
+            }
+            
+
             if (rs_mem != right_stick_input && right_stick_input)
             {
                 states.lockon = !states.lockon;
                 if(states.lockonTarget == null)
-                {
                     states.lockon = false;
-                }
                 cameraManager.lockonTarget = states.lockonTarget;
                 states.lockonTransform = cameraManager.lockonTransform;
                 cameraManager.lockon = states.lockon;
