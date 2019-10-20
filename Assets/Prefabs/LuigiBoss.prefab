@@ -557,6 +557,7 @@ GameObject:
   - component: {fileID: 5490365010967215497}
   - component: {fileID: 5490365010967215496}
   - component: {fileID: 5490365010967215503}
+  - component: {fileID: 3714194223919879488}
   m_Layer: 0
   m_Name: LuigiBoss
   m_TagString: Untagged
@@ -678,6 +679,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiState: 0
   attackDistance: 2
+--- !u!114 &3714194223919879488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4544234231552828556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064a6b770c1f144498182808ad36772d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets: []
+  humanoidBones: 
+  index: 0
 --- !u!1 &4551426402166591721
 GameObject:
   m_ObjectHideFlags: 0
