@@ -671,22 +671,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!54 &6217638834992638297
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2695563281699554706}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &2755650961746791447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,6 +1396,8 @@ GameObject:
   - component: {fileID: 6217638833146238079}
   - component: {fileID: 6217638833146238078}
   - component: {fileID: 6217638833146238072}
+  - component: {fileID: 1062409277}
+  - component: {fileID: 1062409278}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1504,17 +1490,19 @@ MonoBehaviour:
   lsb: 0
   rsb: 0
   rollInput: 0
-  moveSpeed: 0
-  runSpeed: 0
-  rotateSpeed: 0
+  itemInput: 0
+  moveSpeed: 4
+  runSpeed: 5.75
+  rotateSpeed: 9
   toGround: 0.5
-  rollSpeed: 12
+  rollSpeed: 10
   run: 0
   onGround: 0
   lockon: 0
   inAttack: 0
   canMove: 0
   twoHanded: 0
+  usingItem: 0
   lockonTarget: {fileID: 0}
   lockonTransform: {fileID: 0}
   roll_curve:
@@ -1523,24 +1511,24 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 10
-      outSlope: 10
+      inSlope: 15.056807
+      outSlope: 15.056807
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.1
-      value: 1
+      time: 0.0664154
+      value: 1.0000038
       inSlope: 5
-      outSlope: 0
+      outSlope: -0.00784877
       tangentMode: 65
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.78
-      value: 1
+      time: 0.67005825
+      value: 0.99526596
       inSlope: 0
       outSlope: 0
       tangentMode: 1
@@ -1550,7 +1538,7 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -4.545454
+      inSlope: -3.01649
       outSlope: -3.3333333
       tangentMode: 5
       weightedMode: 0
@@ -1568,6 +1556,58 @@ MonoBehaviour:
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &1062409277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6217638833146238067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f38df0087f27804fbd497fadf89ec48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionSlots:
+  - input: 0
+    targetAnimation: 
+  - input: 1
+    targetAnimation: 
+  - input: 2
+    targetAnimation: 
+  - input: 3
+    targetAnimation: 
+  consumableItem:
+    targetAnim: bestus
+    item_id: 
+--- !u!114 &1062409278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6217638833146238067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80c244c7c0f3c441a844438e7edfb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon:
+    actions:
+    - input: 0
+      targetAnimation: oh_attack_1
+    - input: 2
+      targetAnimation: oh_attack_3
+    - input: 1
+      targetAnimation: oh_attack_2
+    - input: 3
+      targetAnimation: parry
+    two_handed_actions:
+    - input: 0
+      targetAnimation: th_attack_1
+    - input: 2
+      targetAnimation: th_attack_2
+    weaponModel: {fileID: 2695563281699554706}
 --- !u!1 &6346241891659077042
 GameObject:
   m_ObjectHideFlags: 0

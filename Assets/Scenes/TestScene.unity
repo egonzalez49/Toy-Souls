@@ -656,58 +656,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13250d40d4c0bfa49845bd3fff14af25, type: 3}
---- !u!114 &1062409277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2041479479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f38df0087f27804fbd497fadf89ec48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionSlots:
-  - input: 0
-    targetAnimation: 
-  - input: 1
-    targetAnimation: 
-  - input: 2
-    targetAnimation: 
-  - input: 3
-    targetAnimation: 
-  consumableItem:
-    targetAnim: bestus
-    item_id: 
---- !u!114 &1062409278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2041479479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c80c244c7c0f3c441a844438e7edfb8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentWeapon:
-    actions:
-    - input: 0
-      targetAnimation: oh_attack_1
-    - input: 2
-      targetAnimation: oh_attack_3
-    - input: 1
-      targetAnimation: oh_attack_2
-    - input: 3
-      targetAnimation: parry
-    two_handed_actions:
-    - input: 0
-      targetAnimation: th_attack_1
-    - input: 2
-      targetAnimation: th_attack_2
-    weaponModel: {fileID: 8296172667837108438}
 --- !u!1001 &1414216526
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -991,12 +939,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13250d40d4c0bfa49845bd3fff14af25, type: 3}
---- !u!1 &2041479479 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6217638833146238067, guid: bf21279e0e7f7264fb18b5506d201451,
-    type: 3}
-  m_PrefabInstance: {fileID: 6217638835152852292}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2043171139 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 61d5292248fa91b40ba2b6b71b46dabc,
@@ -1242,82 +1184,5 @@ PrefabInstance:
       propertyPath: lockonTarget
       value: 
       objectReference: {fileID: 2143479138}
-    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: runSpeed
-      value: 5.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: rotateSpeed
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: roll_curve.m_Curve.Array.data[0].inSlope
-      value: 15.056807
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: roll_curve.m_Curve.Array.data[0].outSlope
-      value: 15.056807
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: roll_curve.m_Curve.Array.data[1].value
-      value: 1.0000038
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: roll_curve.m_Curve.Array.data[1].outSlope
-      value: -0.00784877
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: roll_curve.m_Curve.Array.data[1].time
-      value: 0.0664154
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: roll_curve.m_Curve.Array.data[2].time
-      value: 0.67005825
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: roll_curve.m_Curve.Array.data[3].inSlope
-      value: -3.01649
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: roll_curve.m_Curve.Array.data[2].value
-      value: 0.99526596
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: rollSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638834992638297, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217638834992638297, guid: bf21279e0e7f7264fb18b5506d201451,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6217638834992638297, guid: bf21279e0e7f7264fb18b5506d201451, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf21279e0e7f7264fb18b5506d201451, type: 3}
---- !u!1 &8296172667837108438 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2695563281699554706, guid: bf21279e0e7f7264fb18b5506d201451,
-    type: 3}
-  m_PrefabInstance: {fileID: 6217638835152852292}
-  m_PrefabAsset: {fileID: 0}

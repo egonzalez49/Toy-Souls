@@ -11,7 +11,9 @@ namespace Enemy
         Transform player;
         NavMeshAgent agent;
         Animator anim;
-        public float timer;
+        private float attackTimer = 1.0f;
+        private bool isPlayerColliding;
+        
 
         public enum AIState
         {
@@ -21,13 +23,16 @@ namespace Enemy
         };
 
         public AIState aiState;
-        private float dist;
+        public float dist;
         public float random_radius = 45.0f;
         public float wanderTimer = 28.0f;
         public float chaseDistance = 7.0f;
         public float attackDistance = 1.5f;
         public float chaseSpeed = 2.0f;
         public float wanderSpeed = 1.0f;
+        public float attackingSpeed = 0.2f;
+        public float timer;
+
 
         private void Awake()
         {
@@ -44,23 +49,26 @@ namespace Enemy
         {
             timer += Time.deltaTime;
             dist = Vector3.Distance(player.position, transform.position);
-            if (dist >= chaseDistance)
+            if (dist >= chaseDistance && aiState != AIState.attack)
             {
                 aiState = AIState.wander;
                 wander();
+            }
+            if (dist < attackDistance && aiState != AIState.attack)
+            {
+                aiState = AIState.attack;
+                attack();
             }
             else if (dist < chaseDistance && aiState != AIState.attack)
             {
                 aiState = AIState.chasePlayer;
                 chasePlayer();
             }
-            /*
-            else if (dist < attackDistance)
+
+            if (aiState == AIState.attack)
             {
-                aiState = AIState.attack;
-                attack();
+                attackTimer -= Time.deltaTime;
             }
-            */
         }
 
         void wander()
@@ -75,6 +83,7 @@ namespace Enemy
                 Vector3 random_direction = RandomNavMeshLocation(random_radius);
                 agent.destination = random_direction;
             }
+
             else if (!agent.pathPending)
             {
                 if (agent.remainingDistance <= agent.stoppingDistance)
@@ -96,6 +105,44 @@ namespace Enemy
             anim.SetBool("IsRunning", true);
             agent.speed = chaseSpeed;
             agent.destination = player.position;
+        }
+
+        void attack()
+        {
+            agent.speed = attackingSpeed;
+            anim.SetBool("IsIdle", false);
+            anim.SetBool("IsWalking", false);
+            anim.SetBool("IsRunning", false);
+            anim.SetTrigger("Attack");
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.tag == "Player" && aiState == AIState.attack)
+            {
+                isPlayerColliding = true;
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.tag == "Player" && isPlayerColliding == true)
+            {
+                if (attackTimer <= 0.0f)
+                {
+                    Debug.Log("Damage Done to Player");
+                    aiState = AIState.chasePlayer;
+                    isPlayerColliding = false;
+                    attackTimer = 1.0f;
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            attackTimer = 1.0f;
+            isPlayerColliding = false;
+            aiState = AIState.chasePlayer;
         }
 
         public Vector3 RandomNavMeshLocation(float radius)
