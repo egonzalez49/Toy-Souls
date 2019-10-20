@@ -496,9 +496,13 @@ MonoBehaviour:
   canMove: 0
   delta: 0
   isDead: 0
+  isSinking: 0
+  sinkSpeed: 2.5
+  idleTimer: 0
   anim: {fileID: 0}
   rigid: {fileID: 0}
   deathClip: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
+  enemyDamagePossible: 0
   aiState: 0
   dist: 0
   random_radius: 45

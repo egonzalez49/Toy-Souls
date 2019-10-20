@@ -13,6 +13,8 @@ namespace PC {
         public bool isDead;
         public bool isSinking;
         public float sinkSpeed = 2.5f;
+        public float idleTimer = 0.0f;
+        public bool ableToDealDamage = true;
 
         public Animator anim;
         public Rigidbody rigid;
@@ -20,13 +22,17 @@ namespace PC {
         EnemyTarget enemyTarget;
         AnimatorHook a_hook;
         CapsuleCollider capsuleCollider;
+        GameObject playerObject;
+        PlayerHealth playerHealth;
 
         Transform player;
         NavMeshAgent agent;
         private float attackTimer = 1.0f;
-        private bool isPlayerColliding;
+        private bool isPlayerColliding = false;
         AudioSource enemyAudio;
         public AudioClip deathClip;
+        public bool enemyDamagePossible = false;
+        private SphereCollider enemyAttackCollider;
 
         public enum AIState
         {
@@ -47,8 +53,10 @@ namespace PC {
         public float attackingSpeed = 0.2f;
         public float timer;
 
+        /*
         List<Rigidbody> ragdollRigids = new List<Rigidbody>();
         List<Collider> ragdollColliders = new List<Collider>();
+        */
 
         void Start()
         {
@@ -60,7 +68,11 @@ namespace PC {
             capsuleCollider = GetComponent<CapsuleCollider>();
             isSinking = false;
             player = GameObject.FindGameObjectWithTag("Player").transform;
+            playerObject = GameObject.FindGameObjectWithTag("Player");
             agent = GetComponent<NavMeshAgent>();
+            playerHealth = player.GetComponent<PlayerHealth>();
+            enemyAttackCollider = GetComponent<SphereCollider>();
+            enemyAttackCollider.enabled = false;
 
             rigid = GetComponent<Rigidbody>();
             aiState = AIState.wander;
@@ -87,27 +99,34 @@ namespace PC {
                 transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
             }
 
+            if (isPlayerColliding)
+            {
+                dealDamage();
+            }
+
             if (isInvincible)
             {
                 isInvincible = !canMove;
             }
             canMove = anim.GetBool("can_move");
-            if (canMove  && !isDead)
+            if (canMove && !isDead)
             {
+                timer += delta;
+                agent.enabled = true;
                 agent.isStopped = false;
                 anim.applyRootMotion = false;
                 dist = Vector3.Distance(player.position, transform.position);
-                if (dist >= chaseDistance && aiState != AIState.attack)
+                if (dist >= chaseDistance)
                 {
                     aiState = AIState.wander;
                     wander();
                 }
-                if (dist < attackDistance && aiState != AIState.attack)
+                if (dist <= attackDistance)
                 {
                     aiState = AIState.attack;
                     attack();
                 }
-                else if (dist < chaseDistance && aiState != AIState.attack)
+                if (dist <= chaseDistance && dist > attackDistance)
                 {
                     aiState = AIState.chasePlayer;
                     chasePlayer();
@@ -117,6 +136,11 @@ namespace PC {
                 {
                     attackTimer -= Time.deltaTime;
                 }
+
+                if (aiState == AIState.idle)
+                {
+                    idleTimer += delta;
+                }
             }
         }
 
@@ -125,7 +149,8 @@ namespace PC {
             anim.SetBool("IsIdle", true);
             anim.SetBool("IsRunning", false);
             anim.SetBool("IsWalking", false);
-            Debug.Log("Now idle.");
+            timer = wanderTimer - 2.0f;
+            wander();
         }
 
         void death()
@@ -144,7 +169,7 @@ namespace PC {
         void wander()
         {
             agent.speed = wanderSpeed;
-            if (timer > wanderTimer)
+            if (timer >= wanderTimer)
             {
                 anim.SetBool("IsIdle", false);
                 anim.SetBool("IsRunning", false);
@@ -176,15 +201,16 @@ namespace PC {
             agent.speed = chaseSpeed;
             agent.destination = player.position;
         }
-
+    
         void attack()
         {
-            agent.speed = attackingSpeed;
-            anim.SetBool("IsIdle", true);
-            anim.SetBool("IsWalking", false);
+            anim.SetBool("IsIdle", false);
+            anim.SetBool("IsWalking", true);
             anim.SetBool("IsRunning", false);
             anim.SetBool("can_move", false);
-            anim.Play("ted_attack");
+            anim.Play("Enemy_Attack");
+            agent.isStopped = true;
+            anim.applyRootMotion = true;
             aiState = AIState.idle;
             idle();
         }
@@ -238,33 +264,40 @@ namespace PC {
             this.enabled = false;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void dealDamage()
         {
-            if (other.gameObject.tag == "Player" && aiState == AIState.attack)
+            if (ableToDealDamage)
             {
-                isPlayerColliding = true;
-            }
+                ableToDealDamage = false;
+                playerHealth.TakeDamage(15);
+            } 
         }
 
-        private void OnTriggerStay(Collider other)
+        public void OpenDamageColliders()
         {
-            if (other.gameObject.tag == "Player" && isPlayerColliding == true)
-            {
-                if (attackTimer <= 0.0f)
-                {
-                    Debug.Log("Damage Done to Player");
-                    aiState = AIState.chasePlayer;
-                    isPlayerColliding = false;
-                    attackTimer = 1.0f;
-                }
-            }
+            enemyAttackCollider.enabled = true;
+            ableToDealDamage = true;
+        }
+
+        public void CloseDamageColliders()
+        {
+            enemyAttackCollider.enabled = false;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+           if(other.gameObject.tag == "Player")
+           {
+                isPlayerColliding = true;
+           }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            attackTimer = 1.0f;
-            isPlayerColliding = false;
-            //aiState = AIState.chasePlayer;
+            if (other.gameObject.tag == "Player")
+            {
+                isPlayerColliding = false;
+            }
         }
 
         public Vector3 RandomNavMeshLocation(float radius)
