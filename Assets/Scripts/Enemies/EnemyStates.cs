@@ -262,6 +262,7 @@ namespace PC {
 
             // After 2 seconds destroy the enemy.
             Destroy(gameObject, 2f);
+            enemyManager.currentEnemies -= 1;
         }
 
         IEnumerator CloseAnimator()
