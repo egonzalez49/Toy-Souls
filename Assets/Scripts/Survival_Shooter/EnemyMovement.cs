@@ -24,8 +24,10 @@ namespace Enemy
         private float dist;
         public float random_radius = 45.0f;
         public float wanderTimer = 28.0f;
-        public float chaseDistance = 12.0f;
-        public float attackDistance = 2.0f;
+        public float chaseDistance = 7.0f;
+        public float attackDistance = 1.5f;
+        public float chaseSpeed = 2.0f;
+        public float wanderSpeed = 1.0f;
 
         private void Awake()
         {
@@ -63,10 +65,12 @@ namespace Enemy
 
         void wander()
         {
-            agent.speed = 1.25f;
+            agent.speed = wanderSpeed;
             if (timer > wanderTimer)
             {
-                anim.SetBool("IsMoving", true);
+                anim.SetBool("IsIdle", false);
+                anim.SetBool("IsRunning", false);
+                anim.SetBool("IsWalking", true);
                 timer = 0f;
                 Vector3 random_direction = RandomNavMeshLocation(random_radius);
                 agent.destination = random_direction;
@@ -77,7 +81,9 @@ namespace Enemy
                 {
                     if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                     {
-                        anim.SetBool("IsMoving", false);
+                        anim.SetBool("IsIdle", true);
+                        anim.SetBool("IsRunning", false);
+                        anim.SetBool("IsWalking", false);
                     }
                 } 
             }
@@ -85,7 +91,10 @@ namespace Enemy
 
         void chasePlayer()
         {
-            agent.speed = 3.5f;
+            anim.SetBool("IsIdle", false);
+            anim.SetBool("IsWalking", false);
+            anim.SetBool("IsRunning", true);
+            agent.speed = chaseSpeed;
             agent.destination = player.position;
         }
 
