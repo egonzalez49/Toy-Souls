@@ -343,8 +343,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.10662609
-  m_Center: {x: 0.09601411, y: 0.17763446, z: 0.14410053}
+  m_Radius: 0.13282242
+  m_Center: {x: 0.09601414, y: 0.16155744, z: 0.1863739}
 --- !u!82 &7055457199628049901
 AudioSource:
   m_ObjectHideFlags: 0
@@ -499,6 +499,7 @@ MonoBehaviour:
   isSinking: 0
   sinkSpeed: 2.5
   idleTimer: 0
+  ableToDealDamage: 1
   anim: {fileID: 0}
   rigid: {fileID: 0}
   deathClip: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
