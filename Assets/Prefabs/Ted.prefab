@@ -343,8 +343,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.235
-  m_Center: {x: 0, y: 0.22, z: 0}
+  m_Radius: 0.10662609
+  m_Center: {x: 0.09601411, y: 0.17763446, z: 0.14410053}
 --- !u!82 &7055457199628049901
 AudioSource:
   m_ObjectHideFlags: 0
