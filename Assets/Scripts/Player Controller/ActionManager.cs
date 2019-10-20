@@ -9,6 +9,8 @@ namespace PC
 
         public List<Action> actionSlots = new List<Action>();
 
+        public ItemAction consumableItem;
+
         StateManager states;
 
         public ActionManager()
@@ -100,5 +102,12 @@ namespace PC
         public string targetAnimation;
 
 
+    }
+
+    [System.Serializable]
+    public class ItemAction
+    {
+        public string targetAnim;
+        public string item_id;
     }
 }

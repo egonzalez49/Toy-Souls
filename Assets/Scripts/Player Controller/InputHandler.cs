@@ -18,6 +18,7 @@ namespace PC
         bool a_input;
         bool x_input;
         bool y_input;
+        bool y_input_mem;
 
         bool rb_input;
         float rt_axis;
@@ -106,8 +107,14 @@ namespace PC
             states.x = x_input;
             states.y = y_input;
             states.lsb = left_stick_input;
-
+            states.itemInput = x_input;
             states.rollInput = b_input;
+
+            if (x_input)
+            {
+                left_stick_input = false;
+                b_input = false;
+            }
 
             if (left_stick_input)
             {
@@ -120,12 +127,12 @@ namespace PC
                 states.run = false;
             }
 
-            if (lb_input != lb_input_mem && lb_input)
+            if (y_input != y_input_mem && y_input)
             {
                 states.twoHanded = !states.twoHanded;
                 states.HandleTwoHanded();
             }
-            lb_input_mem = lb_input;
+            y_input_mem = y_input;
 
             if (rs_mem != right_stick_input && right_stick_input)
             {

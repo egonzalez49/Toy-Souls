@@ -19,6 +19,7 @@ namespace PC
     {
         public List<Action> actions;
         public List<Action> two_handed_actions;
+        public GameObject weaponModel;
 
     }
 }

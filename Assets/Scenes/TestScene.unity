@@ -677,6 +677,9 @@ MonoBehaviour:
     targetAnimation: 
   - input: 3
     targetAnimation: 
+  consumableItem:
+    targetAnim: bestus
+    item_id: 
 --- !u!114 &1062409278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,6 +698,8 @@ MonoBehaviour:
       targetAnimation: oh_attack_1
     - input: 2
       targetAnimation: oh_attack_3
+    - input: 1
+      targetAnimation: oh_attack_2
     - input: 3
       targetAnimation: parry
     two_handed_actions:
@@ -702,8 +707,7 @@ MonoBehaviour:
       targetAnimation: th_attack_1
     - input: 2
       targetAnimation: th_attack_2
-    - input: 3
-      targetAnimation: 
+    weaponModel: {fileID: 8296172667837108438}
 --- !u!1001 &1414216526
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1256,27 +1260,47 @@ PrefabInstance:
     - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
         type: 3}
       propertyPath: roll_curve.m_Curve.Array.data[0].inSlope
-      value: 3.1342368
+      value: 15.056807
       objectReference: {fileID: 0}
     - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
         type: 3}
       propertyPath: roll_curve.m_Curve.Array.data[0].outSlope
-      value: 3.1342368
+      value: 15.056807
       objectReference: {fileID: 0}
     - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
         type: 3}
       propertyPath: roll_curve.m_Curve.Array.data[1].value
-      value: 0.662735
+      value: 1.0000038
       objectReference: {fileID: 0}
     - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
         type: 3}
       propertyPath: roll_curve.m_Curve.Array.data[1].outSlope
-      value: 0.5932023
+      value: -0.00784877
       objectReference: {fileID: 0}
     - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
         type: 3}
       propertyPath: roll_curve.m_Curve.Array.data[1].time
-      value: 0.21145019
+      value: 0.0664154
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
+        type: 3}
+      propertyPath: roll_curve.m_Curve.Array.data[2].time
+      value: 0.67005825
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
+        type: 3}
+      propertyPath: roll_curve.m_Curve.Array.data[3].inSlope
+      value: -3.01649
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
+        type: 3}
+      propertyPath: roll_curve.m_Curve.Array.data[2].value
+      value: 0.99526596
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
+        type: 3}
+      propertyPath: rollSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6217638834992638297, guid: bf21279e0e7f7264fb18b5506d201451,
         type: 3}
@@ -1291,3 +1315,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6217638834992638297, guid: bf21279e0e7f7264fb18b5506d201451, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bf21279e0e7f7264fb18b5506d201451, type: 3}
+--- !u!1 &8296172667837108438 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2695563281699554706, guid: bf21279e0e7f7264fb18b5506d201451,
+    type: 3}
+  m_PrefabInstance: {fileID: 6217638835152852292}
+  m_PrefabAsset: {fileID: 0}

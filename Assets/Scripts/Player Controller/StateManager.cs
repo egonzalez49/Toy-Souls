@@ -16,6 +16,7 @@ namespace PC
         public Vector3 moveDirection;
         public bool rt, rb, lt, lb, b, a, y, x, lsb, rsb;
         public bool rollInput;
+        public bool itemInput;
 
         [Header("Stats")]
         public float moveSpeed = 4f;
@@ -31,6 +32,7 @@ namespace PC
         public bool inAttack;
         public bool canMove;
         public bool twoHanded = false;
+        public bool usingItem;
         
 
         [Header("Other")]
@@ -113,7 +115,11 @@ namespace PC
         public void FixedTick(float d)
         {
             delta = d;
+
+            usingItem = anim.GetBool("interacting");
+            DetectItemAction();
             DetectAction();
+            inventoryManager.currentWeapon.weaponModel.SetActive(!usingItem);
 
             // If already in an attack animation...
             if (inAttack)
@@ -144,11 +150,19 @@ namespace PC
             rigid.drag = (moveAmount > 0 || onGround==false ) ? 0 : 4;
 
             float targetSpeed = moveSpeed;
+            if (usingItem)
+            {
+                run = false;
+                moveAmount = Mathf.Clamp(moveAmount, 0, 0.4f);
+            }
             if (run)
             {
                 targetSpeed = runSpeed;
                 lockon = false;
             }
+
+
+
             if (onGround)
                 rigid.velocity = moveDirection * (targetSpeed * moveAmount);
             Vector3 targetDirection = (lockon == false) ? moveDirection
@@ -170,6 +184,19 @@ namespace PC
                 HandleLockOnAnimations(moveDirection);
         }
         
+        public void DetectItemAction()
+        {
+            if (canMove == false || itemInput==false || usingItem)
+                return;
+
+            ItemAction slot = actionManager.consumableItem;
+            string targetAnim = slot.targetAnim;
+            if (string.IsNullOrEmpty(targetAnim))
+                return;
+            usingItem = true;
+            anim.Play(targetAnim);
+        }
+
         /**
          * Detects to see if as a result of inputs, the player character 
          * is in an attack animation state.
@@ -177,7 +204,7 @@ namespace PC
         public void DetectAction()
         {
             // Check if we are in a state to be able to do an action.
-            if (canMove == false || (!rb && !rt && !lt && !lb))
+            if (canMove == false || usingItem || (!rb && !rt && !lt && !lb))
                 return;
 
             // Pull action animation from Action Manager
@@ -206,25 +233,13 @@ namespace PC
 
         void HandleRolls()
         {
-            if (!rollInput)
+            if (!rollInput || usingItem)
                 return;
             float v = vertical;
             float h = horizontal;
             v = (moveAmount > 0.4f) ? 1 : 0;
             h = 0;
 
-            /*if (!lockon)
-            {
-                v = (moveAmount > 0.4f) ? 1 : 0;
-                h = 0;
-            }
-            else
-            {
-                if(Mathf.Abs(v) < 0.4f)
-                    v = 0;
-                if(Mathf.Abs(h) < 0.4f)
-                    h = 0;
-            }*/
             if (v != 0)
             {
                 if (moveDirection == Vector3.zero)
@@ -239,15 +254,12 @@ namespace PC
                 a_hook.rm_multi = Mathf.Max(rollSpeed/6, 1.5f);
             }
 
-            
-
             anim.SetFloat("vertical", v);
             anim.SetFloat("horizontal", h);
 
             canMove = false;
             inAttack = true;
-            anim.CrossFade("Rolls", 0.2f);
-            
+            anim.CrossFade("Rolls", 0.2f); 
         }
 
         public void Tick(float d)
