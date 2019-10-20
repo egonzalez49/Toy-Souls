@@ -6,11 +6,11 @@ namespace Enemy
 {
     public class EnemyManager : MonoBehaviour
     {
+        public int currentEnemies = 0;
         //public PlayerHealth playerHealth;
         public GameObject enemy;
         public float spawnTime = 11f;
         public Transform[] spawnPoints;
-        public int currentEnemies = 0;
         public int maxEnemies = 6;
 
         // Start is called before the first frame update
