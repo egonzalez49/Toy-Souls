@@ -90,6 +90,11 @@ namespace Enemy
             anim.SetBool("IsAttacking", true);
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            attackTimer = 1.5f;
+        }
+
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.tag == "Player" && attackTimer <= 0.1f && attackTimer >= -0.55f)
