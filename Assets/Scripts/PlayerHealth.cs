@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public Image damageImage;
     public Image healthBar;
     public AudioClip deathClip;
+    public AudioClip playerHurt;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
@@ -54,9 +55,11 @@ public class PlayerHealth : MonoBehaviour
         damaged = true;
 
         currentHealth -= amount;
+        Debug.Log("Current health: " + currentHealth);
         healthAmount.SetFillAmount(currentHealth);
 
         /* play a hurt noise */
+        playerAudio.clip = playerHurt;
         playerAudio.Play();
 
         if (currentHealth <= 0 && !isDead)

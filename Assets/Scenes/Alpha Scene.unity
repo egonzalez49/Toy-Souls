@@ -792,6 +792,7 @@ MonoBehaviour:
   damageImage: {fileID: 1426767806}
   healthBar: {fileID: 391185803}
   deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
+  playerHurt: {fileID: 8300000, guid: 9922a12f34d0a084aab32de985459723, type: 3}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
 --- !u!82 &389702542
@@ -3409,6 +3410,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
+        type: 3}
+      propertyPath: clips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
+        type: 3}
+      propertyPath: swordSlash
+      value: 
+      objectReference: {fileID: 8300000, guid: 9fdf4af85e49dae429b7f452a3bfc64a, type: 3}
+    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
+        type: 3}
+      propertyPath: clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9fdf4af85e49dae429b7f452a3bfc64a, type: 3}
+    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
+        type: 3}
+      propertyPath: clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2709c6510b97d054b96520b81cf09a12, type: 3}
+    - target: {fileID: 6217638833146238072, guid: bf21279e0e7f7264fb18b5506d201451,
+        type: 3}
+      propertyPath: clips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1dcb1cde64cb83849a99d07707394270, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf21279e0e7f7264fb18b5506d201451, type: 3}
 --- !u!1001 &1873306636
@@ -3834,5 +3860,10 @@ PrefabInstance:
       propertyPath: attackDistance
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5490365010967215503, guid: 895eb3dc7173cb3429657fe3bc303efc,
+        type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 389702541}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 895eb3dc7173cb3429657fe3bc303efc, type: 3}

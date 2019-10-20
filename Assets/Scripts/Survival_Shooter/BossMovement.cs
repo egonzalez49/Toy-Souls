@@ -19,6 +19,7 @@ namespace Enemy
         public float attackDuration;
         public float attackDistance = 2.0f;
         public float dot;
+        public PlayerHealth playerHealth;
 
         public enum AIState
         {
@@ -93,7 +94,8 @@ namespace Enemy
         {
             if (other.gameObject.tag == "Player" && attackTimer <= 0.1f && attackTimer >= -0.55f)
             {
-                Debug.Log("Damage Done to Player");
+                //Debug.Log("Damage Done to Player");
+                playerHealth.TakeDamage(5);
             }
         }
 
