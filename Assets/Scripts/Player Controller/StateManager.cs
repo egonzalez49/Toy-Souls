@@ -33,6 +33,7 @@ namespace PC
         public bool canMove;
         public bool twoHanded = false;
         public bool usingItem;
+        public bool canRoll = false;
         
 
         [Header("Other")]
@@ -253,7 +254,7 @@ namespace PC
 
         void HandleRolls()
         {
-            if (!rollInput || usingItem)
+            if (!rollInput || usingItem || !canRoll)
                 return;
             float v = vertical;
             float h = horizontal;
