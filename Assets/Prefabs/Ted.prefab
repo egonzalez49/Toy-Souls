@@ -343,8 +343,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.235
-  m_Center: {x: 0, y: 0.22, z: 0}
+  m_Radius: 0.10662609
+  m_Center: {x: 0.09601411, y: 0.17763446, z: 0.14410053}
 --- !u!82 &7055457199628049901
 AudioSource:
   m_ObjectHideFlags: 0
@@ -475,14 +475,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb91c3513d7b104fa7083884a8fa513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
+  _actionDelay: 0
+  attackDuration: 0
   aiState: 0
+  dist: 0
   random_radius: 45
   wanderTimer: 28
   chaseDistance: 7
   attackDistance: 1.5
   chaseSpeed: 2
   wanderSpeed: 1
-  attackingSpeed: 0.2
   timer: 0
 --- !u!114 &-9181396841271316844
 MonoBehaviour:

@@ -249,24 +249,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothingTimeFactor: 0.5
---- !u!114 &389702534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389702532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01f397b939100bd4b8e79e8a01ecd4ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
-  currentHealth: 0
-  damageImage: {fileID: 0}
-  healthBar: {fileID: 0}
-  flashSpeed: 5
-  flashColour: {r: 1, g: 0, b: 0, a: 0.1}
 --- !u!1 &734376513
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,8 +626,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_AnchoredPosition: {x: 5.25, y: 0}
+  m_SizeDelta: {x: 20.5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1290156114
 MonoBehaviour:
@@ -1549,6 +1531,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5490365010967215498, guid: 895eb3dc7173cb3429657fe3bc303efc,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.94407344
+      objectReference: {fileID: 0}
+    - target: {fileID: 5490365010967215498, guid: 895eb3dc7173cb3429657fe3bc303efc,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.04231485
+      objectReference: {fileID: 0}
+    - target: {fileID: 5490365010967215498, guid: 895eb3dc7173cb3429657fe3bc303efc,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.5702832
+      objectReference: {fileID: 0}
+    - target: {fileID: 5490365010967215498, guid: 895eb3dc7173cb3429657fe3bc303efc,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.90019983
+      objectReference: {fileID: 0}
+    - target: {fileID: 5490365010967215503, guid: 895eb3dc7173cb3429657fe3bc303efc,
+        type: 3}
+      propertyPath: attackDistance
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 895eb3dc7173cb3429657fe3bc303efc, type: 3}
