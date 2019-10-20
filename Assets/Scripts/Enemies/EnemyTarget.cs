@@ -11,9 +11,9 @@ namespace PC
         public int index;
         Animator anim;
 
-        private void Start()
+        public void Init(Animator a)
         {
-            anim = GetComponent<Animator>();
+            anim = a;
             if (anim.isHuman == false)
                 return;
 

@@ -10,7 +10,7 @@ namespace PC
         public Weapon currentWeapon;
         public void Init()
         {
-
+            currentWeapon.w_hook.CloseDamageColliders();
         }
     }
 
@@ -20,6 +20,7 @@ namespace PC
         public List<Action> actions;
         public List<Action> two_handed_actions;
         public GameObject weaponModel;
+        public WeaponHook w_hook;
 
     }
 }

@@ -69,6 +69,16 @@ namespace PC
                 states.rigid.velocity = v2;
             }
         }
+
+        public void OpenDamageColliders()
+        {
+            states.inventoryManager.currentWeapon.w_hook.OpenDamageColliders();
+        }
+
+        public void CloseDamageColliders()
+        {
+            states.inventoryManager.currentWeapon.w_hook.CloseDamageColliders();
+        }
     }
 }
 
