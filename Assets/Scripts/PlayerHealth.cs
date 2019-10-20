@@ -9,12 +9,12 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public Image damageImage;
     public Image healthBar;
-    //public AudioClip deathClip;
+    public AudioClip deathClip;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
-    //private Animator anim;
-    //private AudioSource playerAudio;
+    private Animator anim;
+    private AudioSource playerAudio;
     //private PlayerMovement playerMovement; //TODO: creates script for player movement
     private BarScript healthAmount;
     private bool isDead;
@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
     void Awake()
     {
         //anim = GetComponent<Animator>();
-        //playerAudio = GetComponent<AudioSource>();
+        playerAudio = GetComponent<AudioSource>();
         //playerMovement = GetComponent<PlayerMovement>();
         healthAmount = healthBar.GetComponent<BarScript>();
         currentHealth = startingHealth;
@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            TakeDamage(5);
+            TakeDamage(10);
         }
 
         if (damaged)
@@ -56,10 +56,8 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= amount;
         healthAmount.SetFillAmount(currentHealth);
 
-        //healthSlider.value = currentHealth;
-
         /* play a hurt noise */
-        //playerAudio.Play();
+        playerAudio.Play();
 
         if (currentHealth <= 0 && !isDead)
         {
@@ -87,8 +85,8 @@ public class PlayerHealth : MonoBehaviour
         //anim.SetTrigger("Die");
 
         /* play a death noise */
-        //playerAudio.clip = deathClip;
-        //playerAudio.Play();
+        playerAudio.clip = deathClip;
+        playerAudio.Play();
 
         /* disable player movement */
         //playerMovement.enabled = false;
