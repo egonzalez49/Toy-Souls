@@ -29,9 +29,6 @@ namespace Enemy
 
         public AIState aiState;
         public float dist;
-
-        /* added by Elmer to try to reduce one-shot */
-        public bool attackOnce = false;
         
 
         private void Awake()
@@ -93,22 +90,12 @@ namespace Enemy
             anim.SetBool("IsAttacking", true);
         }
 
-        /* added by Elmer to try to reduce one-shot */
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.tag == "Player")
-            {
-                attackOnce = true;
-            }
-        }
-
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.tag == "Player" && attackTimer <= 0.1f && attackTimer >= -0.55f)
             {
-                if (attackOnce) playerHealth.TakeDamage(15);
-
-                attackOnce = false;
+                playerHealth.TakeDamage(15);
+                attackTimer = 1.5f;
                 //Debug.Log("Damage Done to Player");
             }
         }
