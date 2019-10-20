@@ -7,6 +7,10 @@ public class Cube1 : MonoBehaviour
 	public Material m1;
 	public bool isTriggered = false;
 
+	public AudioSource correctAudio;
+	public AudioSource wrongAudio;
+	public AudioSource completeAudio;
+
 	public GameObject c1;
 	public GameObject c2;
 	public GameObject c3;
@@ -36,38 +40,58 @@ public class Cube1 : MonoBehaviour
 			Debug.Log("Object has entered trigger");
 			if (this.gameObject == c1) {
 				if (c2script.isTriggered && c4script.isTriggered) {
+					if (!this.isTriggered) {
+						correctAudio.Play();
+					}
 					this.isTriggered = true;
 					this.gameObject.GetComponent<Renderer>().material.color = Color.green;
 				} else {
 					this.isTriggered = false;
 					this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+					wrongAudio.Play();
 				}
 			} else if (this.gameObject == c2) {
+				if (!this.isTriggered) {
+					correctAudio.Play();
+				}
 				this.isTriggered = true;
 				this.gameObject.GetComponent<Renderer>().material.color = Color.green;
 			} else if (this.gameObject == c3) {
 				if (c1script.isTriggered && c2script.isTriggered && c4script.isTriggered) {
+					if (!this.isTriggered) {
+						correctAudio.Play();
+					}
 					this.isTriggered = true;
 					this.gameObject.GetComponent<Renderer>().material.color = Color.green;
 				} else {
 					this.isTriggered = false;
 					this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+					wrongAudio.Play();
 				}
 			} else if (this.gameObject == c4) {
 				if (c2script.isTriggered) {
+					if (!this.isTriggered) {
+						correctAudio.Play();
+					}
 					this.isTriggered = true;
 					this.gameObject.GetComponent<Renderer>().material.color = Color.green;
 				} else {
 					this.isTriggered = false;
 					this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+					wrongAudio.Play();
 				}
 			} else {
 				if (c1script.isTriggered && c2script.isTriggered && c3script.isTriggered && c4script.isTriggered) {
+					if (!this.isTriggered) {
+						correctAudio.Play();
+						completeAudio.Play();
+					}
 					this.isTriggered = true;
 					this.gameObject.GetComponent<Renderer>().material.color = Color.green;
 				} else {
 					this.isTriggered = false;
 					this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+					wrongAudio.Play();
 				}
 			}
 		}
@@ -75,7 +99,65 @@ public class Cube1 : MonoBehaviour
 
 	void OnTriggerStay(Collider other)
 	{
-		//Debug.Log("Object is within trigger");
+		if (other.tag == "Player") {
+			Debug.Log("Object has entered trigger");
+			if (this.gameObject == c1) {
+				if (c2script.isTriggered && c4script.isTriggered) {
+					if (!this.isTriggered) {
+						//correctAudio.Play();
+					}
+					this.isTriggered = true;
+					this.gameObject.GetComponent<Renderer>().material.color = Color.green;
+				} else {
+					this.isTriggered = false;
+					this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+					//wrongAudio.Play();
+				}
+			} else if (this.gameObject == c2) {
+				if (!this.isTriggered) {
+					//correctAudio.Play();
+				}
+				this.isTriggered = true;
+				this.gameObject.GetComponent<Renderer>().material.color = Color.green;
+			} else if (this.gameObject == c3) {
+				if (c1script.isTriggered && c2script.isTriggered && c4script.isTriggered) {
+					if (!this.isTriggered) {
+						//correctAudio.Play();
+					}
+					this.isTriggered = true;
+					this.gameObject.GetComponent<Renderer>().material.color = Color.green;
+				} else {
+					this.isTriggered = false;
+					this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+					//wrongAudio.Play();
+				}
+			} else if (this.gameObject == c4) {
+				if (c2script.isTriggered) {
+					if (!this.isTriggered) {
+						//correctAudio.Play();
+					}
+					this.isTriggered = true;
+					this.gameObject.GetComponent<Renderer>().material.color = Color.green;
+				} else {
+					this.isTriggered = false;
+					this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+					//wrongAudio.Play();
+				}
+			} else {
+				if (c1script.isTriggered && c2script.isTriggered && c3script.isTriggered && c4script.isTriggered) {
+					if (!this.isTriggered) {
+						//correctAudio.Play();
+						//completeAudio.Play();
+					}
+					this.isTriggered = true;
+					this.gameObject.GetComponent<Renderer>().material.color = Color.green;
+				} else {
+					this.isTriggered = false;
+					this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+					//wrongAudio.Play();
+				}
+			}
+		}
 	}
 
 	void OnTriggerExit(Collider other)
