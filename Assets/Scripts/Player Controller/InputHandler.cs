@@ -4,33 +4,36 @@ using UnityEngine;
 
 namespace PC
 {
+    /// <summary>
+    /// InputHandler class for user keyboard/mouse or controller input processing
+    /// </summary>
     public class InputHandler : MonoBehaviour
     {
+        // Values for inputs    
+        float vertical;             // vertical look axis
+        float horizontal;           // horizontal look axis
 
-        float vertical;
-        float horizontal;
-        bool left_stick_input;
+        bool left_stick_button;     // click left stick
+        bool right_stick_button;    // click right stick
+        bool rs_mem;                // memo for right stick button
 
-        bool right_stick_input;
-        bool rs_mem;
-
-        bool b_input;
-        bool a_input;
+        // Values for controller buttons
+        bool b_input;               
+        bool a_input;               
         bool x_input;
         bool y_input;
-        bool y_input_mem;
+        bool y_input_mem;           // memo for Y button
 
+        // Bumpers and triggers
         bool rb_input;
-        float rt_axis;
-        bool rt_input;
+        float rt_axis;              // Float value for trigger depression amount
+        bool rt_input;              
         bool lb_input;
-        bool lb_input_mem;
         float lt_axis;
-        bool lt_input;
+        bool lt_input;              // Float value for trigger depression amount
 
         StateManager states;
         CameraManager cameraManager;
-
         float delta;
 
         // Start is called before the first frame update
@@ -50,7 +53,6 @@ namespace PC
             UpdateStates();
             states.FixedTick(delta);
             cameraManager.Tick(delta);
-
         }
 
         void Update()
@@ -59,64 +61,59 @@ namespace PC
             states.Tick(delta);
         }
 
+        /// <summary>
+        /// Acquire inputs from keyboard/mouse or controller.
+        /// </summary>
         void GetInput()
         {
-            vertical = Input.GetAxis("Vertical");
-            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis(StaticStrings.Vertical);
+            horizontal = Input.GetAxis(StaticStrings.Horizontal);
 
-            left_stick_input = Input.GetButton("RunInput");
-            right_stick_input = Input.GetButton("LockonInput");
+            left_stick_button = Input.GetButton(StaticStrings.Run);
+            right_stick_button = Input.GetButton(StaticStrings.LockOn);
 
-            lb_input = Input.GetButton("LB");
-            rb_input = Input.GetButton("RB");
+            lb_input = Input.GetButton(StaticStrings.LeftBumper);
+            rb_input = Input.GetButton(StaticStrings.RightBumper);
 
-            a_input = Input.GetButton("A");
-            b_input = Input.GetButton("B");
-            x_input = Input.GetButton("X");
-            y_input = Input.GetButton("Y");
+            a_input = Input.GetButton(StaticStrings.AButton);
+            b_input = Input.GetButton(StaticStrings.BButton);
+            x_input = Input.GetButton(StaticStrings.XButton);
+            y_input = Input.GetButton(StaticStrings.YButton);
 
-            rt_input = Input.GetButton("RT");
-            rt_axis = Input.GetAxis("RT");
+            rt_input = Input.GetButton(StaticStrings.RightTrigger);
+            rt_axis = Input.GetAxis(StaticStrings.RightTrigger);
             if(rt_axis != 0)
                 rt_input = true;
             
-            lt_input = Input.GetButton("LT");
-            lt_axis = Input.GetAxis("LT");
+            lt_input = Input.GetButton(StaticStrings.LeftTrigger);
+            lt_axis = Input.GetAxis(StaticStrings.LeftTrigger);
             if(lt_axis != 0)
                 lt_input = true;
 
         }
 
+        /// <summary>
+        /// Update state machine for player character using inputs.
+        /// </summary>
         void UpdateStates()
         {
+            // Calculate camera vectors, movement direction and amounts.
             states.horizontal = horizontal;
             states.vertical = vertical;
-
             Vector3 v = vertical * cameraManager.transform.forward;
             Vector3 h = horizontal * cameraManager.transform.right;
             states.moveDirection = (v + h).normalized;
             float m = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
             states.moveAmount = Mathf.Clamp01(m);
 
-            states.rt = rt_input;
-            states.lt = lt_input;
-            states.rb = rb_input;
-            states.lb = lb_input;
-            states.a = a_input;
-            states.b = b_input;
-            states.x = x_input;
-            states.y = y_input;
-            states.lsb = left_stick_input;
-            states.itemInput = x_input;
-            states.rollInput = b_input;
-
+            // Determine if the PC is using item...
             if (x_input)
             {
-                left_stick_input = false;
+                left_stick_button = false;
                 b_input = false;
             }
-
-            if (left_stick_input)
+            // Determine if the PC is running...
+            if (left_stick_button)
             {
                 states.run = (states.moveAmount > 0);
                 if (states.run)
@@ -126,15 +123,15 @@ namespace PC
             {
                 states.run = false;
             }
-
+            // Determine if the PC is two-handed...
             if (y_input != y_input_mem && y_input)
             {
                 states.twoHanded = !states.twoHanded;
                 states.HandleTwoHanded();
             }
             y_input_mem = y_input;
-
-            if (states.lockonTarget != null)
+            // Determine if the PC is locking on to a target...
+            if (states.lockonTarget != null)       // Disable lockon if target is dead.
             {
                 if (states.lockonTarget.enemyStates.isDead)
                 {
@@ -145,19 +142,29 @@ namespace PC
                     cameraManager.lockonTarget = null;
                 }
             }
-            
-
-            if (rs_mem != right_stick_input && right_stick_input)
+            if (rs_mem != right_stick_button && right_stick_button) // Check if lockon button pressed.
             {
                 states.lockon = !states.lockon;
-                if(states.lockonTarget == null)
+                if (states.lockonTarget == null)
                     states.lockon = false;
                 cameraManager.lockonTarget = states.lockonTarget;
                 states.lockonTransform = cameraManager.lockonTransform;
                 cameraManager.lockon = states.lockon;
             }
-            rs_mem = right_stick_input;
+            rs_mem = right_stick_button;
 
+            // Set button information for the state machine.
+            states.rt = rt_input;
+            states.lt = lt_input;
+            states.rb = rb_input;
+            states.lb = lb_input;
+            states.a = a_input;
+            states.b = b_input;
+            states.x = x_input;
+            states.y = y_input;
+            states.lsb = left_stick_button;
+            states.itemInput = x_input;
+            states.rollInput = b_input;
         }
     }
 }
