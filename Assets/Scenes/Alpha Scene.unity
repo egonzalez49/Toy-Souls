@@ -3393,6 +3393,21 @@ PrefabInstance:
       propertyPath: clips.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 1dcb1cde64cb83849a99d07707394270, type: 3}
+    - target: {fileID: 4156678087850173988, guid: bf21279e0e7f7264fb18b5506d201451,
+        type: 3}
+      propertyPath: clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9fdf4af85e49dae429b7f452a3bfc64a, type: 3}
+    - target: {fileID: 4156678087850173988, guid: bf21279e0e7f7264fb18b5506d201451,
+        type: 3}
+      propertyPath: clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2709c6510b97d054b96520b81cf09a12, type: 3}
+    - target: {fileID: 4156678087850173988, guid: bf21279e0e7f7264fb18b5506d201451,
+        type: 3}
+      propertyPath: clips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1dcb1cde64cb83849a99d07707394270, type: 3}
     - target: {fileID: 4156678089081372465, guid: bf21279e0e7f7264fb18b5506d201451,
         type: 3}
       propertyPath: soulScript
