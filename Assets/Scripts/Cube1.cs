@@ -163,7 +163,6 @@ namespace PC {
 					c3script.isTriggered = false;
 					c4script.isTriggered = false;
 					c5script.isTriggered = false;
-					print("WTF");
 				}
 			}
 		}
