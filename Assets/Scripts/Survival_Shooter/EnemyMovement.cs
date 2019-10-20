@@ -13,7 +13,10 @@ namespace Enemy
         Animator anim;
         private float attackTimer = 1.0f;
         private bool isPlayerColliding;
-        
+        public bool isAttacking;
+        public float _actionDelay;
+        public float attackDuration;
+
 
         public enum AIState
         {
@@ -30,7 +33,6 @@ namespace Enemy
         public float attackDistance = 1.5f;
         public float chaseSpeed = 2.0f;
         public float wanderSpeed = 1.0f;
-        public float attackingSpeed = 0.2f;
         public float timer;
 
 
@@ -42,6 +44,7 @@ namespace Enemy
             aiState = AIState.wander;
             dist = Vector3.Distance(player.position, transform.position);
             agent.destination = RandomNavMeshLocation(random_radius);
+            UpdateAnimClipTimes();
         }
 
         // Update is called once per frame
@@ -49,25 +52,32 @@ namespace Enemy
         {
             timer += Time.deltaTime;
             dist = Vector3.Distance(player.position, transform.position);
-            if (dist >= chaseDistance && aiState != AIState.attack)
+            if (dist >= chaseDistance && (!isAttacking || _actionDelay >= attackDuration))
             {
                 aiState = AIState.wander;
+                anim.applyRootMotion = false;
                 wander();
             }
-            if (dist < attackDistance && aiState != AIState.attack)
+            if (dist <= attackDistance && (!isAttacking || _actionDelay >= attackDuration))
             {
+                anim.applyRootMotion = false;
+                _actionDelay = 0f;
+                attackTimer = 1f;
                 aiState = AIState.attack;
                 attack();
             }
-            else if (dist < chaseDistance && aiState != AIState.attack)
+            if (dist <= chaseDistance && dist >= attackDistance && (!isAttacking || _actionDelay >= attackDuration))
             {
                 aiState = AIState.chasePlayer;
+                anim.applyRootMotion = false;
                 chasePlayer();
+                timer = wanderTimer;
             }
-
-            if (aiState == AIState.attack)
+            if (isAttacking)
             {
+                _actionDelay += Time.deltaTime;
                 attackTimer -= Time.deltaTime;
+                transform.LookAt(player.position);
             }
         }
 
@@ -79,6 +89,7 @@ namespace Enemy
                 anim.SetBool("IsIdle", false);
                 anim.SetBool("IsRunning", false);
                 anim.SetBool("IsWalking", true);
+                anim.SetBool("Attack", false);
                 timer = 0f;
                 Vector3 random_direction = RandomNavMeshLocation(random_radius);
                 agent.destination = random_direction;
@@ -93,6 +104,7 @@ namespace Enemy
                         anim.SetBool("IsIdle", true);
                         anim.SetBool("IsRunning", false);
                         anim.SetBool("IsWalking", false);
+                        anim.SetBool("Attack", false);
                     }
                 } 
             }
@@ -103,19 +115,23 @@ namespace Enemy
             anim.SetBool("IsIdle", false);
             anim.SetBool("IsWalking", false);
             anim.SetBool("IsRunning", true);
+            anim.SetBool("Attack", false);
             agent.speed = chaseSpeed;
             agent.destination = player.position;
         }
 
         void attack()
         {
-            agent.speed = attackingSpeed;
+            agent.destination = agent.transform.position;
+            isAttacking = true;
+            anim.applyRootMotion = true;
             anim.SetBool("IsIdle", false);
             anim.SetBool("IsWalking", false);
             anim.SetBool("IsRunning", false);
-            anim.SetTrigger("Attack");
+            anim.SetBool("Attack", true);
         }
 
+        /*
         private void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.tag == "Player" && aiState == AIState.attack)
@@ -123,27 +139,30 @@ namespace Enemy
                 isPlayerColliding = true;
             }
         }
+        */
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.tag == "Player" && isPlayerColliding == true)
+            if (other.gameObject.tag == "Player" && attackTimer <= 0.15f && attackTimer >= -0.6f)
             {
-                if (attackTimer <= 0.0f)
-                {
-                    Debug.Log("Damage Done to Player");
-                    aiState = AIState.chasePlayer;
-                    isPlayerColliding = false;
-                    attackTimer = 1.0f;
-                }
+                Debug.Log("Damage Done to Player");
             }
         }
 
+        /*
         private void OnTriggerExit(Collider other)
         {
-            attackTimer = 1.0f;
-            isPlayerColliding = false;
-            aiState = AIState.chasePlayer;
+            if (_actionDelay > attackDuration)
+            {
+                attackTimer = 1.0f;
+                isPlayerColliding = false;
+                aiState = AIState.chasePlayer;
+                agent.destination = player.position;
+                anim.applyRootMotion = false;
+                isAttacking = false;
+            }
         }
+        */
 
         public Vector3 RandomNavMeshLocation(float radius)
         {
@@ -151,6 +170,18 @@ namespace Enemy
             NavMeshHit hit;
             NavMesh.SamplePosition(randomDirection, out hit, radius, -1);
             return hit.position;
+        }
+
+        public void UpdateAnimClipTimes()
+        {
+            AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
+            foreach(AnimationClip clip in clips)
+            {
+                if (clip.name == "Ted_Attack")
+                {
+                    attackDuration = clip.length;
+                }
+            }
         }
     }
 }
