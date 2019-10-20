@@ -17,6 +17,25 @@ namespace PC
         float roll_t;
         float delta;
         AnimationCurve roll_curve;
+        public AudioClip[] clips = new AudioClip[3];
+        private AudioSource audioSource;
+
+        private void Awake()
+        {
+            audioSource = GetComponentInParent<AudioSource>();
+        }
+
+        public void PlaySwingSound()
+        {
+            PlayRandomSoundEffect(clips, 0.5f);
+        }
+
+        // Input an array of audio clips and volume to randomly select and play a clip.
+        private void PlayRandomSoundEffect(AudioClip[] audioClips, float volume)
+        {
+            int randomValue = Random.Range(0, audioClips.Length - 1);
+            audioSource.PlayOneShot(audioClips[randomValue], volume);
+        }
 
         public void InitForRoll()
         {

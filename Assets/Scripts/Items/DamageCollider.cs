@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PC { 
+namespace PC {
     public class DamageCollider : MonoBehaviour
     {
         private void OnTriggerEnter(Collider other)
@@ -14,7 +14,6 @@ namespace PC {
 
             // do damage
             eStates.TakeDamage(50);
-            
         }
     }
 }  

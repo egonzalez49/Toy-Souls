@@ -16,6 +16,7 @@ namespace PC {
 
         public Animator anim;
         public Rigidbody rigid;
+        SoulScript soulScript;
         EnemyTarget enemyTarget;
         AnimatorHook a_hook;
         CapsuleCollider capsuleCollider;
@@ -70,6 +71,9 @@ namespace PC {
             if (a_hook == null)
                 a_hook = anim.gameObject.AddComponent<AnimatorHook>();
             a_hook.Init(null, this);
+
+            GameObject SoulsText = GameObject.FindGameObjectWithTag("Souls");
+            soulScript = SoulsText.GetComponent<SoulScript>();
 
         }
 
@@ -134,6 +138,7 @@ namespace PC {
             capsuleCollider.isTrigger = true;
             enemyAudio.clip = deathClip;
             enemyAudio.Play();
+            soulScript.AddSouls(10);
         }
 
         void wander()

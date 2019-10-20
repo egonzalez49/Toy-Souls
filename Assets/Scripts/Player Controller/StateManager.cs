@@ -39,8 +39,7 @@ namespace PC
         public EnemyTarget lockonTarget;
         public Transform lockonTransform;
         public AnimationCurve roll_curve;
-        public AudioClip[] clips = new AudioClip[3];
-        public AudioClip swordSlash;
+        //public AudioClip[] clips = new AudioClip[3];
 
         [HideInInspector]
         public Animator anim;
@@ -57,7 +56,7 @@ namespace PC
         [HideInInspector]
         public LayerMask ignoreLayers;
 
-        private AudioSource audioSource;
+        //private AudioSource audioSource;
 
         float _actionDelay;
        
@@ -86,7 +85,7 @@ namespace PC
             anim.SetBool("onGround", true);
             anim.SetBool("run", false);
 
-            audioSource = GetComponent<AudioSource>();
+            //audioSource = GetComponent<AudioSource>();
         }
 
         
@@ -225,18 +224,23 @@ namespace PC
                 return;
 
             // Cross-fade into new animation
-            PlayRandomSoundEffect(clips, 0.5f);
+            //PlayRandomSoundEffect(clips, 0.5f);
             canMove = false;
             inAttack = true;
             anim.CrossFade(targetAnim, 0.2f);
         }
 
-        // Input an array of audio clips and volume to randomly select and play a clip.
-        private void PlayRandomSoundEffect(AudioClip[] audioClips, float volume)
-        {
-            int randomValue = Random.Range(0, audioClips.Length - 1);
-            audioSource.PlayOneShot(audioClips[randomValue], volume);
-        }
+        //public void PlaySwingSound()
+        //{
+        //    PlayRandomSoundEffect(clips, 0.5f);
+        //}
+
+        //// Input an array of audio clips and volume to randomly select and play a clip.
+        //private void PlayRandomSoundEffect(AudioClip[] audioClips, float volume)
+        //{
+        //    int randomValue = Random.Range(0, audioClips.Length - 1);
+        //    audioSource.PlayOneShot(audioClips[randomValue], volume);
+        //}
 
         public void HandleTwoHanded()
         {
