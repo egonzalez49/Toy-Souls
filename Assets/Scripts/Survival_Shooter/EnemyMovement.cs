@@ -133,16 +133,6 @@ namespace Enemy
             anim.SetBool("Attack", true);
         }
 
-        /*
-        private void OnTriggerEnter(Collider other)
-        {
-            if(other.gameObject.tag == "Player" && aiState == AIState.attack)
-            {
-                isPlayerColliding = true;
-            }
-        }
-        */
-
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.tag == "Player" && attackTimer <= 0.15f && attackTimer >= -0.6f)
@@ -150,21 +140,6 @@ namespace Enemy
                 Debug.Log("Damage Done to Player");
             }
         }
-
-        /*
-        private void OnTriggerExit(Collider other)
-        {
-            if (_actionDelay > attackDuration)
-            {
-                attackTimer = 1.0f;
-                isPlayerColliding = false;
-                aiState = AIState.chasePlayer;
-                agent.destination = player.position;
-                anim.applyRootMotion = false;
-                isAttacking = false;
-            }
-        }
-        */
 
         public Vector3 RandomNavMeshLocation(float radius)
         {
