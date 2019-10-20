@@ -11,16 +11,21 @@ namespace PC {
         public bool canMove;
         public float delta;
         public bool isDead;
+        public bool isSinking;
+        public float sinkSpeed = 2.5f;
 
         public Animator anim;
         public Rigidbody rigid;
         EnemyTarget enemyTarget;
         AnimatorHook a_hook;
+        CapsuleCollider capsuleCollider;
 
         Transform player;
         NavMeshAgent agent;
         private float attackTimer = 1.0f;
         private bool isPlayerColliding;
+        AudioSource enemyAudio;
+        public AudioClip deathClip;
 
         public enum AIState
         {
@@ -46,11 +51,13 @@ namespace PC {
 
         void Start()
         {
+            enemyAudio = GetComponent<AudioSource>();
             health = 100;
             anim = GetComponentInChildren<Animator>();
             enemyTarget = GetComponent<EnemyTarget>();
             enemyTarget.Init(this);
-
+            capsuleCollider = GetComponent<CapsuleCollider>();
+            isSinking = false;
             player = GameObject.FindGameObjectWithTag("Player").transform;
             agent = GetComponent<NavMeshAgent>();
 
@@ -69,18 +76,13 @@ namespace PC {
         void Update()
         {
             delta = Time.deltaTime;
-            
 
-            if (health <= 0)
+            if (isSinking)
             {
-                if (!isDead)
-                {
-                    isDead = true;
-                    anim.SetBool("IsDead", true);
-                    agent = null;
-                }
-                return;
+                // ... move the enemy down by the sinkSpeed per second.
+                transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
             }
+
             if (isInvincible)
             {
                 isInvincible = !canMove;
@@ -119,8 +121,19 @@ namespace PC {
             anim.SetBool("IsIdle", true);
             anim.SetBool("IsRunning", false);
             anim.SetBool("IsWalking", false);
-            agent.isStopped = true;
             Debug.Log("Now idle.");
+        }
+
+        void death()
+        {
+            anim.SetBool("IsIdle", true);
+            anim.SetBool("IsRunning", false);
+            anim.SetBool("IsWalking", false);
+            anim.SetTrigger("IsDead");
+            isDead = true;
+            capsuleCollider.isTrigger = true;
+            enemyAudio.clip = deathClip;
+            enemyAudio.Play();
         }
 
         void wander()
@@ -171,18 +184,46 @@ namespace PC {
             idle();
         }
 
-        public void DoDamage(float v)
+        public void TakeDamage(float v)
         {
-            if (isInvincible)
+            if (isInvincible || isDead)
                 return;
             health -= v;
             isInvincible = true;
             // Play damage animation
+            enemyAudio.Play();
             anim.applyRootMotion = true;
             anim.SetBool("can_move", false);
-            anim.Play("ted_react");
             aiState = AIState.idle;
-            idle();
+            agent.isStopped = true;
+            if (health <= 0)
+            {
+                death();
+            }
+            else
+            {
+                anim.Play("ted_react");
+                idle();
+            }
+            
+        }
+
+        public void StartSinking()
+        {
+            // Find and disable the Nav Mesh Agent.
+            GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+
+            // Find the rigidbody component and make it kinematic (since we use Translate to sink the enemy).
+            GetComponent<Rigidbody>().isKinematic = true;
+
+            // The enemy should no sink.
+            isSinking = true;
+
+            // Increase the score by the enemy's score value.
+            //ScoreManager.score += scoreValue;
+
+            // After 2 seconds destroy the enemy.
+            Destroy(gameObject, 2f);
         }
 
         IEnumerator CloseAnimator()

@@ -13,7 +13,7 @@ namespace PC {
                 return;
 
             // do damage
-            eStates.DoDamage(50);
+            eStates.TakeDamage(50);
             
         }
     }
