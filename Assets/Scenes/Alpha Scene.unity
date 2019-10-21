@@ -787,6 +787,7 @@ MonoBehaviour:
   playerHurt: {fileID: 8300000, guid: 9922a12f34d0a084aab32de985459723, type: 3}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
+  endMenu: {fileID: 0}
 --- !u!82 &389702542
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4037,7 +4038,7 @@ PrefabInstance:
     - target: {fileID: 5490365010967215498, guid: 895eb3dc7173cb3429657fe3bc303efc,
         type: 3}
       propertyPath: m_Radius
-      value: 0.76895833
+      value: 0.70518494
       objectReference: {fileID: 0}
     - target: {fileID: 5490365010967215498, guid: 895eb3dc7173cb3429657fe3bc303efc,
         type: 3}
@@ -4047,12 +4048,12 @@ PrefabInstance:
     - target: {fileID: 5490365010967215498, guid: 895eb3dc7173cb3429657fe3bc303efc,
         type: 3}
       propertyPath: m_Center.z
-      value: 0.6636702
+      value: 0.5998968
       objectReference: {fileID: 0}
     - target: {fileID: 5490365010967215498, guid: 895eb3dc7173cb3429657fe3bc303efc,
         type: 3}
       propertyPath: m_Center.y
-      value: 0.93005633
+      value: 0.9300563
       objectReference: {fileID: 0}
     - target: {fileID: 5490365010967215503, guid: 895eb3dc7173cb3429657fe3bc303efc,
         type: 3}
@@ -4077,7 +4078,7 @@ PrefabInstance:
     - target: {fileID: 5490365010967215497, guid: 895eb3dc7173cb3429657fe3bc303efc,
         type: 3}
       propertyPath: m_Radius
-      value: 0.6351736
+      value: 0.599185
       objectReference: {fileID: 0}
     - target: {fileID: 5490365010967215497, guid: 895eb3dc7173cb3429657fe3bc303efc,
         type: 3}
@@ -4092,7 +4093,7 @@ PrefabInstance:
     - target: {fileID: 5490365010967215497, guid: 895eb3dc7173cb3429657fe3bc303efc,
         type: 3}
       propertyPath: m_Center.z
-      value: 0.47786316
+      value: 0.4418745
       objectReference: {fileID: 0}
     - target: {fileID: 5490365010967215497, guid: 895eb3dc7173cb3429657fe3bc303efc,
         type: 3}
