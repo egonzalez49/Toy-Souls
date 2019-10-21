@@ -112,6 +112,10 @@ namespace PC {
                 isInvincible = !canMove;
             }
             canMove = anim.GetBool("can_move");
+            if (!canMove && !isDead)
+            {
+                transform.LookAt(player.position);
+            }
             if (canMove && !isDead)
             {
                 timer += delta;

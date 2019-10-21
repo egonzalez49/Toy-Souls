@@ -25,6 +25,8 @@ namespace Enemy
         public AudioClip hitClip;
         public AudioClip deathClip;
         AudioSource enemyAudio;
+        private Quaternion previousRotation;
+        public float timeSinceLastAttack;
 
         public enum AIState
         {
@@ -36,7 +38,6 @@ namespace Enemy
         public AIState aiState;
         public float dist;
         
-
         private void Awake()
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -55,6 +56,7 @@ namespace Enemy
         // Update is called once per frame
         void Update()
         {
+            timeSinceLastAttack += Time.deltaTime;
             if (isPlayerColliding)
             {
                 dealDamage();
@@ -64,16 +66,22 @@ namespace Enemy
                 isInvincible = !canMove;
             }
             canMove = anim.GetBool("can_move");
+            if (!canMove && !isDead)
+            {
+                transform.LookAt(player.position);
+            }
             if (canMove && !isDead)
             {
                 agent.enabled = true;
                 agent.isStopped = false;
                 anim.applyRootMotion = false;
                 dist = Vector3.Distance(player.position, transform.position);
-                if (dist <= attackDistance)
+                if (dist <= attackDistance && timeSinceLastAttack >= 2.5f)
                 {
+                    previousRotation = transform.rotation;
                     anim.applyRootMotion = false;
                     aiState = AIState.attack;
+                    timeSinceLastAttack = 0.0f;
                     attack();
                 }
                 if (dist > attackDistance)
