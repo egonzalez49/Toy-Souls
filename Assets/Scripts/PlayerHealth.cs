@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip playerHurt;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
+    public EndGameManager endMenu;
 
     private Animator anim;
     private AudioSource playerAudio;
@@ -86,6 +87,15 @@ public class PlayerHealth : MonoBehaviour
         /* play a death noise */
         playerAudio.clip = deathClip;
         playerAudio.Play();
+
+        float time = 10.0f;
+
+        while (time >= 0f)
+        {
+            time -= Time.deltaTime;
+        }
+
+        endMenu.EndScreen(false);
 
         /* disable player movement */
         //playerMovement.enabled = false;

@@ -25,4 +25,9 @@ public class SoulScript : MonoBehaviour
     {
         souls += s;
     }
+
+    public int GetSouls()
+    {
+        return souls;
+    }
 }
