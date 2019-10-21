@@ -76,7 +76,7 @@ namespace Enemy
                 agent.isStopped = false;
                 anim.applyRootMotion = false;
                 dist = Vector3.Distance(player.position, transform.position);
-                if (dist <= attackDistance && timeSinceLastAttack >= 2.5f)
+                if (dist <= attackDistance && timeSinceLastAttack >= 2.65f)
                 {
                     previousRotation = transform.rotation;
                     anim.applyRootMotion = false;
