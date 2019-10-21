@@ -14,7 +14,6 @@ namespace PC {
         public bool isDead;
         public bool isSinking;
         public float sinkSpeed = 2.5f;
-        public float idleTimer = 0.0f;
         public bool ableToDealDamage = true;
 
         public Animator anim;
@@ -29,7 +28,6 @@ namespace PC {
 
         Transform player;
         NavMeshAgent agent;
-        private float attackTimer = 1.0f;
         private bool isPlayerColliding = false;
         AudioSource enemyAudio;
         public AudioClip deathClip;
@@ -117,7 +115,6 @@ namespace PC {
             if (canMove && !isDead)
             {
                 timer += delta;
-                agent.enabled = true;
                 agent.isStopped = false;
                 anim.applyRootMotion = false;
                 dist = Vector3.Distance(player.position, transform.position);
@@ -135,16 +132,6 @@ namespace PC {
                 {
                     aiState = AIState.chasePlayer;
                     chasePlayer();
-                }
-
-                if (aiState == AIState.attack)
-                {
-                    attackTimer -= Time.deltaTime;
-                }
-
-                if (aiState == AIState.idle)
-                {
-                    idleTimer += delta;
                 }
             }
         }
@@ -211,8 +198,8 @@ namespace PC {
     
         void attack()
         {
-            anim.SetBool("IsIdle", false);
-            anim.SetBool("IsWalking", true);
+            anim.SetBool("IsIdle", true);
+            anim.SetBool("IsWalking", false);
             anim.SetBool("IsRunning", false);
             anim.SetBool("can_move", false);
             anim.Play("Enemy_Attack");
@@ -242,8 +229,7 @@ namespace PC {
             {
                 anim.Play("ted_react");
                 idle();
-            }
-            
+            } 
         }
 
         public void StartSinking()

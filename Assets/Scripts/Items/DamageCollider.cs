@@ -8,12 +8,17 @@ namespace PC {
         private void OnTriggerEnter(Collider other)
         {
             EnemyStates eStates = other.transform.GetComponentInParent<EnemyStates>();
-
-            if (eStates == null)
-                return;
+            Enemy.BossMovement boss = other.transform.GetComponentInParent<Enemy.BossMovement>();
 
             // do damage
-            eStates.TakeDamage(50);
+            if (eStates != null && boss == null)
+            {
+                eStates.TakeDamage(50);
+            }
+            if (boss != null)
+            {
+                boss.TakeDamage(50);
+            }
         }
     }
 }  

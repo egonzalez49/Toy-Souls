@@ -191,9 +191,6 @@ AnimatorStateMachine:
     m_State: {fileID: 3936163026875086475}
     m_Position: {x: 370, y: -10, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -3495938815981442581}
-    m_Position: {x: 850, y: 50, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -360898439629031059}
     m_Position: {x: 570, y: -119, z: 0}
   - serializedVersion: 1
@@ -213,33 +210,6 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 3936163026875086475}
---- !u!1102 &-3495938815981442581
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: ted_attack
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 1
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: c5cb065c530a9fe438d633e591ecd340,
-    type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-2663545512555633639
 AnimatorState:
   serializedVersion: 5

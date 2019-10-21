@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9f3553711b7b001418570f26553bfec8
+guid: e54907727f454454dbcbcb0d129d2abd
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
@@ -8,7 +8,7 @@ ModelImporter:
     second: Take 001
   - first:
       74: -203655887218126122
-    second: Luigi_Death_1
+    second: Luigi_Idle
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -38,19 +38,19 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Luigi_Death_1
+      name: Luigi_Idle
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 156
+      lastFrame: 78
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0

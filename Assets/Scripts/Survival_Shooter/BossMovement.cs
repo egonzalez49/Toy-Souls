@@ -12,19 +12,25 @@ namespace Enemy
         NavMeshAgent agent;
         Animator anim;
         private VelocityReporter playerVelocityReporter;
-        private float attackTimer = 1.0f;
+        private SphereCollider enemyAttackCollider;
+        public bool isInvincible;
+        public bool canMove;
         private bool isPlayerColliding;
-        public bool isAttacking;
-        public float _actionDelay;
-        public float attackDuration;
+        public bool isDead;
         public float attackDistance = 2.0f;
         public float dot;
         public PlayerHealth playerHealth;
+        public float health;
+        public bool ableToDealDamage = true;
+        public AudioClip hitClip;
+        public AudioClip deathClip;
+        AudioSource enemyAudio;
 
         public enum AIState
         {
             chasePlayer,
             attack,
+            idle
         };
 
         public AIState aiState;
@@ -34,43 +40,60 @@ namespace Enemy
         private void Awake()
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
+            health = 250;
             agent = GetComponent<NavMeshAgent>();
-            anim = GetComponent<Animator>();
+            anim = GetComponentInChildren<Animator>();
             playerVelocityReporter = player.GetComponent<VelocityReporter>();
             aiState = AIState.chasePlayer;
             dist = Vector3.Distance(player.position, transform.position);
-            UpdateAnimClipTimes();
+            enemyAttackCollider = GetComponent<SphereCollider>();
+            enemyAttackCollider.enabled = false;
+            playerHealth = player.GetComponent<PlayerHealth>();
+            enemyAudio = GetComponent<AudioSource>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            dist = Vector3.Distance(player.position, transform.position);
-            if (dist <= attackDistance && (!isAttacking || _actionDelay >= attackDuration))
+            if (isPlayerColliding)
             {
+                dealDamage();
+            }
+            if (isInvincible)
+            {
+                isInvincible = !canMove;
+            }
+            canMove = anim.GetBool("can_move");
+            if (canMove && !isDead)
+            {
+                agent.enabled = true;
+                agent.isStopped = false;
                 anim.applyRootMotion = false;
-                _actionDelay = 0f;
-                attackTimer = 1f;
-                aiState = AIState.attack;
-                attack();
+                dist = Vector3.Distance(player.position, transform.position);
+                if (dist <= attackDistance)
+                {
+                    anim.applyRootMotion = false;
+                    aiState = AIState.attack;
+                    attack();
+                }
+                if (dist > attackDistance)
+                {
+                    anim.applyRootMotion = false;
+                    aiState = AIState.chasePlayer;
+                    chasePlayer();
+                }
             }
-            if (dist > attackDistance && (!isAttacking || _actionDelay >= attackDuration))
-            {
-                anim.applyRootMotion = false;
-                aiState = AIState.chasePlayer;
-                chasePlayer();
-            }
-            if (isAttacking)
-            {
-                _actionDelay += Time.deltaTime;
-                attackTimer -= Time.deltaTime;
-                transform.LookAt(player.position);
-            }
+        }
+
+        void idle()
+        {
+            anim.SetBool("IsIdle", true);
+            chasePlayer();
         }
 
         void chasePlayer()
         {
-            anim.SetBool("IsAttacking", false);
+            anim.SetBool("IsIdle", false);
             dot = Vector3.Dot((transform.position- player.position).normalized, (playerVelocityReporter.velocity).normalized);
             if (dot >= 0.7f)
             {
@@ -84,24 +107,81 @@ namespace Enemy
         
         void attack()
         {
-            agent.destination = agent.transform.position;
-            isAttacking = true;
+            anim.SetBool("IsIdle", true);
+            anim.SetBool("can_move", false);
+            anim.Play("Luigi_Kick");
+            agent.isStopped = true;
             anim.applyRootMotion = true;
-            anim.SetBool("IsAttacking", true);
+            aiState = AIState.idle;
+            idle();
+        }
+
+        public void TakeDamage(float v)
+        {
+            if (isInvincible || isDead)
+                return;
+            health -= v;
+            isInvincible = true;
+            // Play damage animation
+            enemyAudio.clip = hitClip;
+            enemyAudio.Play();
+            anim.applyRootMotion = true;
+            anim.SetBool("can_move", false);
+            aiState = AIState.idle;
+            agent.isStopped = true;
+            if (health <= 0)
+            {
+                death();
+            }
+            else
+            {
+                //anim.Play("ted_react");
+                idle();
+            }
+        }
+
+        void death()
+        {
+            anim.SetBool("IsIdle", true);
+            anim.SetTrigger("IsDead");
+            isDead = true;
+            enemyAudio.clip = deathClip;
+            enemyAudio.Play();
+        }
+
+        private void dealDamage()
+        {
+            if (ableToDealDamage)
+            {
+                ableToDealDamage = false;
+                playerHealth.TakeDamage(25);
+            }
+        }
+
+        public void OpenDamageColliders()
+        {
+            enemyAttackCollider.enabled = true;
+            ableToDealDamage = true;
+        }
+
+        public void CloseDamageColliders()
+        {
+            enemyAttackCollider.enabled = false;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            attackTimer = 1.5f;
+            if (other.gameObject.tag == "Player")
+            {
+                isPlayerColliding = true;
+            }
         }
 
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.tag == "Player" && attackTimer <= 0.1f && attackTimer >= -0.55f)
+            if (other.gameObject.tag == "Player")
             {
-                playerHealth.TakeDamage(15);
-                attackTimer = 1.5f;
-                //Debug.Log("Damage Done to Player");
+                isPlayerColliding = false;
             }
         }
 
@@ -114,18 +194,6 @@ namespace Enemy
             Vector3 targetPoint = player.position + lookAheadT * targetVelocity;
             NavMesh.SamplePosition(targetPoint, out hit, 8.0f, -1);
             agent.destination = hit.position;
-        }
-
-        public void UpdateAnimClipTimes()
-        {
-            AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
-            foreach (AnimationClip clip in clips)
-            {
-                if (clip.name == "Luigi_Kick")
-                {
-                    attackDuration = clip.length;
-                }
-            }
         }
     }
 }
