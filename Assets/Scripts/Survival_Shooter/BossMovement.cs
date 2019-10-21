@@ -27,6 +27,7 @@ namespace Enemy
         AudioSource enemyAudio;
         private Quaternion previousRotation;
         public float timeSinceLastAttack;
+        public EndGameManager endMenu;
 
         public enum AIState
         {
@@ -155,6 +156,8 @@ namespace Enemy
             isDead = true;
             enemyAudio.clip = deathClip;
             enemyAudio.Play();
+
+            endMenu.EndScreen(true);
         }
 
         private void dealDamage()
