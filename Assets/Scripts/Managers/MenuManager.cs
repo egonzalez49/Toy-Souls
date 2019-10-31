@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
@@ -22,7 +20,7 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Alpha Scene");
+        SceneManager.LoadScene("IntroScene");
         EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
     }
 

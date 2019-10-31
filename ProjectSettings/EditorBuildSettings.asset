@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/UIScene.unity
-    guid: 95ca256bdb69d4e4fa93263f6a637ae7
-  - enabled: 1
     path: Assets/Scenes/TitleScreenScene.unity
     guid: 1b8bcc7487facd0409bcd1dfc92a5c2e
+  - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: 16d392df5808731419095556cf09e65e
   - enabled: 1
     path: Assets/Scenes/Alpha Scene.unity
     guid: d232cd3613b5c804282c5d6f55d9235d

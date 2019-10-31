@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using PC;
 using UnityEngine;
 
 [RequireComponent(typeof(CanvasGroup))]
@@ -7,7 +6,6 @@ public class PauseManager : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
 
-    // Start is called before the first frame update
     void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -17,11 +15,12 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        // TODO: Change to include controller input.
+        if (!EndGameManager.gameIsFinished && Input.GetKeyUp(KeyCode.Escape) || Input.GetButton(StaticStrings.Start))
         {
+            // If the menu is open, close it.
             if (canvasGroup.interactable)
             {
                 canvasGroup.interactable = false;

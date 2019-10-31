@@ -23,6 +23,7 @@ namespace PC
         bool x_input;
         bool y_input;
         bool y_input_mem;           // memo for Y button
+        bool startBtn;
 
         // Bumpers and triggers
         bool rb_input;
@@ -68,6 +69,8 @@ namespace PC
         {
             vertical = Input.GetAxis(StaticStrings.Vertical);
             horizontal = Input.GetAxis(StaticStrings.Horizontal);
+
+            startBtn = Input.GetButton(StaticStrings.Start);
 
             left_stick_button = Input.GetButton(StaticStrings.Run);
             right_stick_button = Input.GetButton(StaticStrings.LockOn);
@@ -163,6 +166,7 @@ namespace PC
             states.x = x_input;
             states.y = y_input;
             states.lsb = left_stick_button;
+            states.startBtn = startBtn;
             states.itemInput = x_input;
             states.rollInput = b_input;
         }

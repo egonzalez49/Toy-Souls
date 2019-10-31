@@ -18,6 +18,7 @@ namespace PC {
         public static string YButton = "Y";
         public static string RightTrigger = "RT";
         public static string LeftTrigger = "LT";
+        public static string Start = "Start";
 
         // Animator Parameters
 

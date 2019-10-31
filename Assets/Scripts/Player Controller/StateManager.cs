@@ -14,7 +14,7 @@ namespace PC
         public float horizontal;
         public float moveAmount;
         public Vector3 moveDirection;
-        public bool rt, rb, lt, lb, b, a, y, x, lsb, rsb;
+        public bool rt, rb, lt, lb, b, a, y, x, lsb, rsb, startBtn;
         public bool rollInput;
         public bool itemInput;
 
