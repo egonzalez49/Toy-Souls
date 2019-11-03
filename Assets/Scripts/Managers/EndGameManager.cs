@@ -17,6 +17,7 @@ public class EndGameManager : MonoBehaviour
 
     void Awake()
     {
+        gameIsFinished = false;
         anim = GetComponent<Animator>();
         canvasGroup = GetComponent<CanvasGroup>();
         if (canvasGroup == null)
@@ -38,6 +39,7 @@ public class EndGameManager : MonoBehaviour
     public void EndScreen(bool win)
     {
         gameIsFinished = true;
+        GeneralManager.UpdateGameState(true);
 
         if (win)
         {

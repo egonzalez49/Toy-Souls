@@ -39,6 +39,7 @@ public class MenuManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        GeneralManager.UpdateGameState(false);
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0f;

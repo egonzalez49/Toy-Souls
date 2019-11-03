@@ -23,6 +23,7 @@ public class PauseManager : MonoBehaviour
             // If the menu is open, close it.
             if (canvasGroup.interactable)
             {
+                GeneralManager.UpdateGameState(true);
                 canvasGroup.interactable = false;
                 canvasGroup.blocksRaycasts = false;
                 canvasGroup.alpha = 0f;
@@ -30,6 +31,7 @@ public class PauseManager : MonoBehaviour
             }
             else
             {
+                GeneralManager.UpdateGameState(true);
                 canvasGroup.interactable = true;
                 canvasGroup.blocksRaycasts = true;
                 canvasGroup.alpha = 1f;
