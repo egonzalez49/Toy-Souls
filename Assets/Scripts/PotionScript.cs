@@ -9,13 +9,13 @@ public class PotionScript : MonoBehaviour
 
     private Text text;
     private PlayerHealth pHealth;
-    private AudioSource audio;
+    private AudioSource audioSource;
     private Animator anim;
 
     void Awake()
     {
         text = GetComponent<Text>();
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         pHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         potionCount = 3;
@@ -35,13 +35,13 @@ public class PotionScript : MonoBehaviour
     {
         if (potionCount - 1 < 0)
         {
-            audio.clip = error;
-            audio.Play();
+            audioSource.clip = error;
+            audioSource.Play();
             anim.SetTrigger("error");
         } else
         {
-            audio.clip = consume;
-            audio.Play();
+            audioSource.clip = consume;
+            audioSource.Play();
 
             potionCount--;
             pHealth.IncreaseHealth(10);

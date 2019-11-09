@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+// class to keep track of general game states like whether the game is paused
 public class GeneralManager : MonoBehaviour
 {
     public static bool gamePausedOrDone;

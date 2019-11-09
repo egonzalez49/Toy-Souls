@@ -9,7 +9,7 @@ public class EndGameManager : MonoBehaviour
     public Text soulsText;
     public Text winText;
     public Text headerText;
-    public SoulScript soulScript;
+    public PlayerSouls playerSouls;
     public static bool gameIsFinished = false;
 
     private CanvasGroup canvasGroup;
@@ -24,6 +24,8 @@ public class EndGameManager : MonoBehaviour
         {
             Debug.LogError("CanvasGroup not found.");
         }
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        playerSouls = playerObject.GetComponent<PlayerSouls>();
     }
 
     // Update is called once per frame
@@ -51,7 +53,7 @@ public class EndGameManager : MonoBehaviour
             winText.text = "You got stomped by Billy!";
         }
 
-        soulsText.text = "Souls: " + soulScript.GetSouls();
+        soulsText.text = "Souls: " + playerSouls.souls;
 
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
