@@ -32,7 +32,8 @@ namespace PC {
         AudioSource enemyAudio;
         public AudioClip deathClip;
         public bool enemyDamagePossible = false;
-        private SphereCollider enemyAttackCollider;
+        public GameObject rightHandCollider;
+        public GameObject leftHandCollider;
 
         public enum AIState
         {
@@ -53,11 +54,6 @@ namespace PC {
         public float attackingSpeed = 0.2f;
         public float timer;
 
-        /*
-        List<Rigidbody> ragdollRigids = new List<Rigidbody>();
-        List<Collider> ragdollColliders = new List<Collider>();
-        */
-
         void Start()
         {
             enemyAudio = GetComponent<AudioSource>();
@@ -72,8 +68,9 @@ namespace PC {
             agent = GetComponent<NavMeshAgent>();
             playerHealth = player.GetComponent<PlayerHealth>();
             playerSouls = player.GetComponent<PlayerSouls>();
-            enemyAttackCollider = GetComponent<SphereCollider>();
-            enemyAttackCollider.enabled = false;
+
+            rightHandCollider.SetActive(false);
+            leftHandCollider.SetActive(false);
 
             rigid = GetComponent<Rigidbody>();
             aiState = AIState.wander;
@@ -98,11 +95,6 @@ namespace PC {
             {
                 // ... move the enemy down by the sinkSpeed per second.
                 transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
-            }
-
-            if (isPlayerColliding)
-            {
-                dealDamage();
             }
 
             if (isInvincible)
@@ -260,40 +252,15 @@ namespace PC {
             this.enabled = false;
         }
 
-        private void dealDamage()
+        public void OpenEnemyRightHandDamageCollider()
         {
-            if (ableToDealDamage)
-            {
-                ableToDealDamage = false;
-                playerHealth.TakeDamage(15);
-            } 
-        }
-
-        public void OpenDamageColliders()
-        {
-            enemyAttackCollider.enabled = true;
             ableToDealDamage = true;
+            rightHandCollider.SetActive(true);
         }
 
-        public void CloseDamageColliders()
+        public void CloseEnemyRightHandDamageCollider()
         {
-            enemyAttackCollider.enabled = false;
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-           if(other.gameObject.tag == "Player")
-           {
-                isPlayerColliding = true;
-           }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.gameObject.tag == "Player")
-            {
-                isPlayerColliding = false;
-            }
+            rightHandCollider.SetActive(false);
         }
 
         public Vector3 RandomNavMeshLocation(float radius)
