@@ -8,6 +8,14 @@ namespace Enemy
     {
         public BossMovement boss;
         public PC.EnemyStates parentObject;
+        private SceneData InfoSaver;
+        private GameObject bossObject;
+
+        private void Awake()
+        {
+            InfoSaver = GameObject.FindGameObjectWithTag("InfoSaver").GetComponent<SceneData>();
+            bossObject = GameObject.FindGameObjectWithTag("Boss");
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -17,7 +25,11 @@ namespace Enemy
                 if (other.gameObject.tag == "Player" && boss.ableToDealDamage == true)
                 {
                     PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-                    playerHealth.TakeDamage(15);
+                    playerHealth.TakeDamage(InfoSaver.getEnemyBossDamage());
+                    if (InfoSaver.getBossKnockbackBool())
+                    {
+                        other.GetComponent<Rigidbody>().AddForce(bossObject.transform.forward.normalized * 50, ForceMode.VelocityChange);
+                    }
                     boss.ableToDealDamage = false;
                 }
             }

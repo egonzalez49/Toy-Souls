@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 namespace Enemy
 {
@@ -9,13 +10,16 @@ namespace Enemy
     public class BossMovement : MonoBehaviour
     {
         Transform player;
+        GameObject playerObject;
         NavMeshAgent agent;
         Animator anim;
+        SceneData InfoSaver;
         private VelocityReporter playerVelocityReporter;
         public GameObject leftLegCollider;
         public GameObject rightLegCollider;
         public GameObject leftArmCollider;
         public GameObject rightArmCollider;
+        public GameObject forceAttackCollider;
         public bool isInvincible;
         public bool canMove;
         public bool isDead;
@@ -26,6 +30,9 @@ namespace Enemy
         public bool ableToDealDamage = true;
         public AudioClip hitClip;
         public AudioClip deathClip;
+        public AudioClip powerUp;
+        public AudioClip powerDown;
+        public AudioClip stomp;
         AudioSource enemyAudio;
         private Quaternion previousRotation;
         public EndGameManager endMenu;
@@ -33,6 +40,11 @@ namespace Enemy
         private bool strongAttack = false;
         public int numAttacks;
         private int randomAnimSelector = 0;
+        public GameObject[] floorArray;
+        private int floorPointer = 0;
+        //private int num_moves_start = 1;
+        //private int num_moves_end = 2;
+        //private bool phase_two = false;
 
         public enum AIState
         {
@@ -51,8 +63,11 @@ namespace Enemy
             rightLegCollider.SetActive(false);
             leftArmCollider.SetActive(false);
             rightArmCollider.SetActive(false);
+            forceAttackCollider.SetActive(false);
             player = GameObject.FindGameObjectWithTag("Player").transform;
-            health = 250;
+            playerObject = GameObject.FindGameObjectWithTag("Player");
+            InfoSaver = GameObject.FindGameObjectWithTag("InfoSaver").GetComponent<SceneData>();
+            health = 500;
             agent = GetComponent<NavMeshAgent>();
             anim = GetComponentInChildren<Animator>();
             playerVelocityReporter = player.GetComponent<VelocityReporter>();
@@ -60,6 +75,7 @@ namespace Enemy
             dist = Vector3.Distance(player.position, transform.position);
             playerHealth = player.GetComponent<PlayerHealth>();
             enemyAudio = GetComponent<AudioSource>();
+            agent.speed = InfoSaver.getAgentSpeed();
         }
 
         // Update is called once per frame
@@ -70,11 +86,15 @@ namespace Enemy
             {
                 isInvincible = !canMove;
             }
+            if (health <= 300 && !InfoSaver.getPhase_two())
+            {
+                anim.Play("Luigi_PhaseTwo");
+            }
             canMove = anim.GetBool("can_move");
             if (!canMove && !isDead && randomAnimSelector != 2)
             {
                 Quaternion rotationAngle = Quaternion.LookRotation(player.position - transform.position);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotationAngle, delta / 2f);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotationAngle, delta / InfoSaver.getSlepSpeed());
             }
             if (canMove && !isDead)
             {
@@ -132,7 +152,7 @@ namespace Enemy
         {
             anim.SetBool("IsIdle", true);
             anim.SetBool("can_move", false);
-            randomAnimSelector = (int)Random.Range(1, numAttacks + 1);
+            randomAnimSelector = (int)Random.Range(1, InfoSaver.getNumBossMovesEnd() + 1);
             anim.Play("Luigi_Attack" + randomAnimSelector);
             agent.isStopped = true;
             anim.applyRootMotion = true;
@@ -185,14 +205,116 @@ namespace Enemy
             ableToDealDamage = true;
         }
 
+        public void OpenBossForceAttackCollider()
+        {
+            forceAttackCollider.SetActive(true);
+            ableToDealDamage = true;
+        }
+
         public void CloseBossLeftLegDamageCollider()
         {
             leftLegCollider.SetActive(false);
         }
 
+        public void CloseBossForceAttackCollider()
+        {
+            forceAttackCollider.SetActive(false);
+        }
+
         public void CloseBossRightLegDamageCollider()
         {
             rightLegCollider.SetActive(false);
+        }
+
+        public void GrowOneSize()
+        {
+            transform.localScale += new Vector3(0.65f, 0.65f, 0.65f);
+        }
+
+        public void playPowerUp()
+        {
+            enemyAudio.clip = powerUp;
+            enemyAudio.Play();
+        }
+
+        public void ShrinkOneSize()
+        {
+            transform.localScale -= new Vector3(0.65f, 0.65f, 0.65f);
+        }
+
+        public void playPowerDown()
+        {
+            enemyAudio.clip = powerDown;
+            enemyAudio.Play();
+        }
+
+        public void playStomp()
+        {
+            enemyAudio.clip = stomp;
+            enemyAudio.Play();
+        }
+
+        public void begin_phase_two()
+        {
+            InfoSaver.setPhase_two(true);
+            playerObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 75, ForceMode.Impulse);
+            InfoSaver.setNumBossMovesEnd(4);
+            InfoSaver.setAgentSpeed(4.0f);
+            InfoSaver.setSlepSpeed(1.5f);
+            InfoSaver.setBossKnockbackBool(true);
+            InfoSaver.setEnemyBossDamage(20);
+            agent.speed = InfoSaver.getAgentSpeed();
+            Invoke("load_final_battle", 3);
+        }
+
+        public void load_final_battle()
+        {
+            SceneManager.LoadScene("Final_Battle");
+        }
+
+        public void destroyFloor()
+        {
+            if (floorPointer < floorArray.Length && floorArray[floorPointer] != null)
+            {
+                int i = 0;
+                GameObject destructibleFloor = floorArray[floorPointer];
+                GameObject[] childrenObjects = new GameObject[4];
+                foreach (Transform child in destructibleFloor.transform)
+                {
+                    childrenObjects[i] = child.gameObject;
+                    ++i;
+                }
+                StartCoroutine(flashCoroutine(childrenObjects, 0.2f));
+                ++floorPointer;
+            }
+        }
+
+        IEnumerator flashCoroutine(GameObject[] childrenObjects, float intervalTime)
+        {
+            float duration = 0.35f;
+            bool stop = false;
+            int index = 0;
+            Color startColor = childrenObjects[0].GetComponent<MeshRenderer>().material.color;
+            Color[] colorArray = { startColor, Color.red };
+            while (!stop)
+            {
+                for (int i = 0; i < childrenObjects.Length; ++i)
+                {
+                    childrenObjects[i].GetComponent<MeshRenderer>().material.color = colorArray[index % 2];
+                }
+                duration -= Time.deltaTime;
+                if (duration < 0)
+                {
+                    stop = true;
+                    for (int i = 0; i < childrenObjects.Length; ++i)
+                    {
+                        childrenObjects[i].GetComponent<FloorDestruction>().destroy = true;
+                    }
+                    yield break;
+                }
+                ++index;
+                yield return new WaitForSeconds(intervalTime);
+            }
         }
 
         /*

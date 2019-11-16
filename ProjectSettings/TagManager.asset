@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Souls
   - Enemy Manager
+  - InfoSaver
+  - Boss
   layers:
   - Default
   - TransparentFX
