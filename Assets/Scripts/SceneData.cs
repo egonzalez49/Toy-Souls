@@ -5,7 +5,7 @@ using UnityEngine;
 public class SceneData : MonoBehaviour
 {
     public static float agentSpeed = 1.5f;
-    public static bool bossKnockbackBool = true;
+    public static bool bossKnockbackBool = false;
     public static bool phase_two = false;
     public static int numBossMovesEnd = 2;
     public static float bossAngularSpeed = 120f;
