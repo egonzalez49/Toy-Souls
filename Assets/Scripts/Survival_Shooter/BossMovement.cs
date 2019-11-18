@@ -91,7 +91,13 @@ namespace Enemy
             canMove = anim.GetBool("can_move");
             if (health <= 300 && canMove && !InfoSaver.getPhase_two())
             {
+                anim.SetBool("IsIdle", true);
+                anim.SetBool("can_move", false);
                 anim.Play("Luigi_PhaseTwo");
+                agent.isStopped = true;
+                anim.applyRootMotion = true;
+                aiState = AIState.idle;
+                idle();
             }
             if (!canMove && !isDead && randomAnimSelector != 2)
             {
@@ -272,7 +278,7 @@ namespace Enemy
             InfoSaver.setBossKnockbackBool(true);
             InfoSaver.setEnemyBossDamage(20);
             agent.speed = InfoSaver.getAgentSpeed();
-            Invoke("load_final_battle", 3);
+            Invoke("load_final_battle", 2.5f);
         }
 
         public void load_final_battle()
