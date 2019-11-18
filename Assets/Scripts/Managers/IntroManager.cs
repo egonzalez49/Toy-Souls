@@ -19,7 +19,7 @@ public class IntroManager : MonoBehaviour
         // Skip the intro and load the game scene.
         if (Input.GetKeyUp("space") || Input.GetButton(StaticStrings.AButton) || timerToLoadGameScene <= 0)
         {
-            SceneManager.LoadScene("Alpha Scene");
+            SceneManager.LoadScene("AlphaScene");
         }
     }
 }
