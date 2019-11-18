@@ -8,6 +8,7 @@ TagManager:
   - Enemy Manager
   - InfoSaver
   - Boss
+  - Final_Barrier
   layers:
   - Default
   - TransparentFX
@@ -19,8 +20,8 @@ TagManager:
   - 
   - Controller
   - DamageColliders
-  - 
-  - 
+  - Final_Barrier
+  - Player
   - 
   - 
   - 

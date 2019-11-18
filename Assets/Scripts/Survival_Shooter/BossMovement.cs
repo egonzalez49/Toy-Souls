@@ -33,6 +33,7 @@ namespace Enemy
         public AudioClip powerUp;
         public AudioClip powerDown;
         public AudioClip stomp;
+        public AudioClip explosion;
         AudioSource enemyAudio;
         private Quaternion previousRotation;
         public EndGameManager endMenu;
@@ -42,6 +43,7 @@ namespace Enemy
         private int randomAnimSelector = 0;
         public GameObject[] floorArray;
         private int floorPointer = 0;
+        public GameObject forceAttackRenderer;
         //private int num_moves_start = 1;
         //private int num_moves_end = 2;
         //private bool phase_two = false;
@@ -86,11 +88,11 @@ namespace Enemy
             {
                 isInvincible = !canMove;
             }
-            if (health <= 300 && !InfoSaver.getPhase_two())
+            canMove = anim.GetBool("can_move");
+            if (health <= 300 && canMove && !InfoSaver.getPhase_two())
             {
                 anim.Play("Luigi_PhaseTwo");
             }
-            canMove = anim.GetBool("can_move");
             if (!canMove && !isDead && randomAnimSelector != 2)
             {
                 Quaternion rotationAngle = Quaternion.LookRotation(player.position - transform.position);
@@ -237,6 +239,12 @@ namespace Enemy
             enemyAudio.Play();
         }
 
+        public void playExplosion()
+        {
+            enemyAudio.clip = explosion;
+            enemyAudio.Play();
+        }
+
         public void ShrinkOneSize()
         {
             transform.localScale -= new Vector3(0.65f, 0.65f, 0.65f);
@@ -310,6 +318,39 @@ namespace Enemy
                     {
                         childrenObjects[i].GetComponent<FloorDestruction>().destroy = true;
                     }
+                    yield break;
+                }
+                ++index;
+                yield return new WaitForSeconds(intervalTime);
+            }
+        }
+
+        IEnumerator flashCollider(float intervalTime)
+        {
+            float duration = 0.3f;
+            bool stop = false;
+            int index = 0;
+
+            forceAttackCollider.SetActive(true);
+            forceAttackCollider.GetComponent<SphereCollider>().enabled = false;
+            
+            while (!stop)
+            {
+                if (index % 5 == 0)
+                {
+                    forceAttackRenderer.GetComponent<MeshRenderer>().enabled = true;
+                }
+                else
+                {
+                    forceAttackRenderer.GetComponent<MeshRenderer>().enabled = false;
+                }
+                duration -= Time.deltaTime;
+                if (duration < 0)
+                {
+                    stop = true;
+                    forceAttackCollider.GetComponent<SphereCollider>().enabled = true;
+                    forceAttackRenderer.GetComponent<MeshRenderer>().enabled = false;
+                    forceAttackCollider.SetActive(false);
                     yield break;
                 }
                 ++index;

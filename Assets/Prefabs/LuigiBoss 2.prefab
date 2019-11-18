@@ -1441,12 +1441,14 @@ MonoBehaviour:
   powerUp: {fileID: 8300000, guid: c47c0eb9046a4174ebaf6d6a5c219325, type: 3}
   powerDown: {fileID: 8300000, guid: ce7840ef9a7b0bc4f81d5afa3d4636e0, type: 3}
   stomp: {fileID: 8300000, guid: 8323abe4584d12f4e802e78bfe10d79e, type: 3}
+  explosion: {fileID: 8300000, guid: 107ed5eb1ff9bb246922ec51bb0ddc13, type: 3}
   endMenu: {fileID: 0}
   delta: 0
   numAttacks: 4
   floorArray:
   - {fileID: 0}
   - {fileID: 0}
+  forceAttackRenderer: {fileID: 0}
   aiState: 0
   dist: 0
 --- !u!114 &6540719996040304919

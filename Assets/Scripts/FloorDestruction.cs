@@ -21,7 +21,7 @@ public class FloorDestruction : MonoBehaviour
                 GetComponent<BoxCollider>().enabled = false;
                 sinkSpeed += Time.deltaTime * 10;
             }
-            if (timer > 3.0f)
+            if (timer > 4.0f)
             {
                 GetComponent<MeshRenderer>().enabled = false;
                 Destroy(this);
