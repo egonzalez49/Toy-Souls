@@ -8,7 +8,7 @@ public class ShopManager : MonoBehaviour
     private PlayerDamage playerDamage;
     private int souls;
 
-    public PopupManager popup;
+    //public DialogueManager popup;
 
     public AudioClip errorSound;
     public AudioClip purchaseSound;
@@ -67,8 +67,8 @@ public class ShopManager : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerInRange = true;
-            popup.generatePopupMessage("Hi, I'm Piglet! \n Press I to see my wares.");
-            Debug.Log("Player entered shop zone.");
+            //popup.generatePopupMessage("Hi, I'm Piglet! \n Press I to see my wares.");
+            //Debug.Log("Player entered shop zone.");
         }
     }
 
@@ -76,9 +76,9 @@ public class ShopManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            popup.hideMessage();
             playerInRange = false;
-            Debug.Log("Player left shop zone.");
+            //popup.hideMessage();
+            //Debug.Log("Player left shop zone.");
         }
     }
 

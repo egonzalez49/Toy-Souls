@@ -9,6 +9,8 @@ TagManager:
   - InfoSaver
   - Boss
   - Final_Barrier
+  - Fence
+  - Sheep
   layers:
   - Default
   - TransparentFX
