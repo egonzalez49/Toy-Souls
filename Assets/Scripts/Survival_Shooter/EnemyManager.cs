@@ -16,7 +16,7 @@ namespace Enemy
         // Start is called before the first frame update
         void Start()
         {
-            Spawn();
+            SpawnAtEachPoint();
             InvokeRepeating("Spawn", spawnTime, spawnTime); //calls a function on repeat, only once every so many seconds
         }
 
@@ -27,6 +27,15 @@ namespace Enemy
             {
                 int spawnPointIndex = Random.Range(0, spawnPoints.Length - 1);
                 Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                currentEnemies += 1;
+            }
+        }
+
+        void SpawnAtEachPoint()
+        {
+            for (int i = 0; i < spawnPoints.Length; i++)
+            {
+                Instantiate(enemy, spawnPoints[i].position, spawnPoints[i].rotation);
                 currentEnemies += 1;
             }
         }

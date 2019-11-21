@@ -1055,7 +1055,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 28e1c7b7da6cbda4daaa2ae50cb971dc, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f874cd630973bb94ca478fc578dda83a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
@@ -1167,7 +1167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3070185b050010f42852e0fa6b3c611c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVolume: 0.15
+  maxVolume: 0.25
   speed: 0.03
 --- !u!1 &364630473
 GameObject:
@@ -6053,6 +6053,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5134324116031917913, guid: e7dff27aa9fb9584eaf40650a1eaa990,
+        type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 558993888}
     - target: {fileID: 5134324116031917915, guid: e7dff27aa9fb9584eaf40650a1eaa990,
         type: 3}
       propertyPath: damageImage
@@ -6123,10 +6128,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5134324116031917913, guid: e7dff27aa9fb9584eaf40650a1eaa990,
-        type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 558993888}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7dff27aa9fb9584eaf40650a1eaa990, type: 3}
