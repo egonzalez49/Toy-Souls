@@ -22,14 +22,31 @@ public class PlayerHealth : MonoBehaviour
     private bool isDead;
     private bool damaged;
 
+    private PlayerSouls playerSouls;
+    private SwordScript swordScript;
+    private PlayerDamage playerDamage;
+
     void Awake()
     {
         //anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
+        playerSouls = GetComponent<PlayerSouls>();
+        playerDamage = GetComponent<PlayerDamage>();
+        swordScript = GameObject.FindGameObjectWithTag("Sword").GetComponent<SwordScript>();
         //playerMovement = GetComponent<PlayerMovement>();
         healthAmount = healthBar.GetComponent<BarScript>();
         currentHealth = startingHealth;
         healthAmount.SetFillAmount(currentHealth);
+    }
+
+    void Start()
+    {
+        currentHealth = GlobalControl.Instance.health;
+        healthAmount.SetFillAmount(currentHealth);
+        swordScript.swordIndex = GlobalControl.Instance.swordIndex;
+        playerDamage.damageMultiplier = GlobalControl.Instance.damageMultiplier;
+        PotionScript.potionCount = GlobalControl.Instance.potionCount;
+        playerSouls.souls = GlobalControl.Instance.souls;
     }
 
     void Update()
@@ -103,5 +120,15 @@ public class PlayerHealth : MonoBehaviour
 
         /* disable player movement */
         //playerMovement.enabled = false;
+    }
+
+    //Save data to global control   
+    public void SavePlayer()
+    {
+        GlobalControl.Instance.health = currentHealth;
+        GlobalControl.Instance.swordIndex = swordScript.swordIndex;
+        GlobalControl.Instance.damageMultiplier = playerDamage.damageMultiplier;
+        GlobalControl.Instance.potionCount = PotionScript.potionCount;
+        GlobalControl.Instance.souls = playerSouls.souls;
     }
 }

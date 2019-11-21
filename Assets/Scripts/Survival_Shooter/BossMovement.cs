@@ -270,6 +270,7 @@ namespace Enemy
 
         public void begin_phase_two()
         {
+            playerHealth.SavePlayer();
             InfoSaver.setPhase_two(true);
             playerObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 75, ForceMode.Impulse);
             InfoSaver.setNumBossMovesEnd(4);

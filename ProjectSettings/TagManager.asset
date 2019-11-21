@@ -11,6 +11,7 @@ TagManager:
   - Final_Barrier
   - Fence
   - Sheep
+  - Sword
   layers:
   - Default
   - TransparentFX
