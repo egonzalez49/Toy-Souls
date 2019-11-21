@@ -194,7 +194,7 @@ namespace PC
         
         public void DetectItemAction()
         {
-            if (canMove == false || itemInput==false || usingItem)
+            if (!onGround || canMove == false || itemInput==false || usingItem)
                 return;
 
             ItemAction slot = actionManager.consumableItem;
@@ -212,7 +212,7 @@ namespace PC
         public void DetectAction()
         {
             // Check if we are in a state to be able to do an action.
-            if (canMove == false || usingItem || (!rb && !rt && !lt && !lb))
+            if (!onGround || canMove == false || usingItem || (!rb && !rt && !lt && !lb))
                 return;
 
             // Pull action animation from Action Manager
@@ -254,7 +254,7 @@ namespace PC
 
         void HandleRolls()
         {
-            if (!rollInput || usingItem || !canRoll)
+            if (!onGround || !rollInput || usingItem || !canRoll)
                 return;
             float v = vertical;
             float h = horizontal;
