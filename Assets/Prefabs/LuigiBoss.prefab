@@ -1317,7 +1317,7 @@ GameObject:
   - component: {fileID: 6540719996040304919}
   - component: {fileID: 2702028084310258549}
   m_Layer: 0
-  m_Name: LuigiBoss 2
+  m_Name: LuigiBoss
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

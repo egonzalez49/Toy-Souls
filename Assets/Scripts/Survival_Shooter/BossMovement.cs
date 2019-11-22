@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -27,6 +28,8 @@ namespace Enemy
         public float dot;
         public PlayerHealth playerHealth;
         public float health;
+        public event Action<float> OnHealthPctChanged = delegate { };
+        private float maxHealth = 500;
         public bool ableToDealDamage = true;
         public AudioClip hitClip;
         public AudioClip deathClip;
@@ -69,7 +72,7 @@ namespace Enemy
             player = GameObject.FindGameObjectWithTag("Player").transform;
             playerObject = GameObject.FindGameObjectWithTag("Player");
             InfoSaver = GameObject.FindGameObjectWithTag("InfoSaver").GetComponent<SceneData>();
-            health = 500;
+            health = this.maxHealth;
             agent = GetComponent<NavMeshAgent>();
             anim = GetComponentInChildren<Animator>();
             playerVelocityReporter = player.GetComponent<VelocityReporter>();
@@ -89,7 +92,7 @@ namespace Enemy
                 isInvincible = !canMove;
             }
             canMove = anim.GetBool("can_move");
-            if (health <= 300 && canMove && !InfoSaver.getPhase_two())
+            if (health <= 0.6*this.maxHealth && canMove && !InfoSaver.getPhase_two())
             {
                 anim.SetBool("IsIdle", true);
                 anim.SetBool("can_move", false);
@@ -160,7 +163,7 @@ namespace Enemy
         {
             anim.SetBool("IsIdle", true);
             anim.SetBool("can_move", false);
-            randomAnimSelector = (int)Random.Range(1, InfoSaver.getNumBossMovesEnd() + 1);
+            randomAnimSelector = (int) UnityEngine.Random.Range(1, InfoSaver.getNumBossMovesEnd() + 1);
             anim.Play("Luigi_Attack" + randomAnimSelector);
             agent.isStopped = true;
             anim.applyRootMotion = true;
@@ -172,6 +175,8 @@ namespace Enemy
         {
             if (isInvincible || isDead)
                 return;
+            float currentHealthPct = this.health / this.maxHealth;
+            OnHealthPctChanged(currentHealthPct);
             health -= v;
             isInvincible = true;
             // Play damage animation

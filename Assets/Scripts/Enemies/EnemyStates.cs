@@ -1,4 +1,5 @@
 ﻿using Enemy;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,9 @@ using UnityEngine.AI;
 namespace PC { 
     public class EnemyStates : MonoBehaviour
     {
+        private float maxHealth = 100;
         public float health;
+        public event Action<float> OnHealthPctChanged = delegate { }; 
         public bool isInvincible;
         public bool canMove;
         public float delta;
@@ -57,7 +60,7 @@ namespace PC {
         void Start()
         {
             enemyAudio = GetComponent<AudioSource>();
-            health = 100;
+            health = this.maxHealth;
             anim = GetComponentInChildren<Animator>();
             enemyTarget = GetComponent<EnemyTarget>();
             enemyTarget.Init(this);
@@ -208,6 +211,8 @@ namespace PC {
             if (isInvincible || isDead)
                 return;
             health -= v;
+            float currentHealthPct = health / maxHealth;
+            OnHealthPctChanged(currentHealthPct);
             isInvincible = true;
             // Play damage animation
             enemyAudio.Play();
@@ -265,7 +270,7 @@ namespace PC {
 
         public Vector3 RandomNavMeshLocation(float radius)
         {
-            Vector3 randomDirection = player.position + Random.insideUnitSphere * radius;
+            Vector3 randomDirection = player.position + UnityEngine.Random.insideUnitSphere * radius;
             NavMeshHit hit;
             NavMesh.SamplePosition(randomDirection, out hit, radius, -1);
             return hit.position;
