@@ -57,4 +57,15 @@ public class GlobalControl : MonoBehaviour
         playerDamage.damageMultiplier = Instance.damageMultiplier;
         PotionScript.potionCount = Instance.potionCount;
     }
+
+    public static void ResetPlayer()
+    {
+        swordScript.swordIndex = 0;
+        playerHealth.SetHealth(100);
+        playerSouls.souls = 0;
+        playerDamage.damageMultiplier = 1f;
+        PotionScript.potionCount = 3;
+
+        SavePlayer();
+    }
 }
