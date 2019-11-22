@@ -272,11 +272,12 @@ namespace Enemy
         {
             playerHealth.SavePlayer();
             InfoSaver.setPhase_two(true);
-            playerObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 75, ForceMode.Impulse);
+            playerObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 50, ForceMode.Impulse);
             InfoSaver.setNumBossMovesEnd(4);
             InfoSaver.setAgentSpeed(4.0f);
             InfoSaver.setSlepSpeed(1.5f);
-            InfoSaver.setBossKnockbackBool(true);
+            // commented out knockbacking
+            //InfoSaver.setBossKnockbackBool(true);
             InfoSaver.setEnemyBossDamage(20);
             agent.speed = InfoSaver.getAgentSpeed();
             Invoke("load_final_battle", 2.5f);

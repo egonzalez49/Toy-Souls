@@ -59,7 +59,7 @@ public class PlayerHealth : MonoBehaviour
         {
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
-        if (transform.position.y < -40f && !isDead)
+        if (transform.position.y < -30f && !isDead)
         {
             Death();
         }
