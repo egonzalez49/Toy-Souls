@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -17,13 +15,11 @@ public class PlayerHealth : MonoBehaviour
 
     private Animator anim;
     private AudioSource playerAudio;
-    //private PlayerMovement playerMovement; //TODO: creates script for player movement
     private BarScript healthAmount;
     private bool isDead;
     private bool damaged;
 
     private PlayerSouls playerSouls;
-    private SwordScript swordScript;
     private PlayerDamage playerDamage;
 
     void Awake()
@@ -32,8 +28,6 @@ public class PlayerHealth : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         playerSouls = GetComponent<PlayerSouls>();
         playerDamage = GetComponent<PlayerDamage>();
-        swordScript = GameObject.FindGameObjectWithTag("Sword").GetComponent<SwordScript>();
-        //playerMovement = GetComponent<PlayerMovement>();
         healthAmount = healthBar.GetComponent<BarScript>();
         currentHealth = startingHealth;
         healthAmount.SetFillAmount(currentHealth);
@@ -41,12 +35,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        currentHealth = GlobalControl.Instance.health;
-        healthAmount.SetFillAmount(currentHealth);
-        swordScript.swordIndex = GlobalControl.Instance.swordIndex;
-        playerDamage.damageMultiplier = GlobalControl.Instance.damageMultiplier;
-        PotionScript.potionCount = GlobalControl.Instance.potionCount;
-        playerSouls.souls = GlobalControl.Instance.souls;
+        GlobalControl.LoadPlayer();
     }
 
     void Update()
@@ -64,6 +53,12 @@ public class PlayerHealth : MonoBehaviour
             Death();
         }
         damaged = false;
+    }
+
+    public void SetHealth(int amount)
+    {
+        currentHealth = amount;
+        healthAmount.SetFillAmount(currentHealth);
     }
 
     //call this function to deal damage to the player
@@ -102,9 +97,6 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
 
-        /* play a death animation */
-        //anim.SetTrigger("Die");
-
         /* play a death noise */
         playerAudio.clip = deathClip;
         playerAudio.Play();
@@ -117,18 +109,5 @@ public class PlayerHealth : MonoBehaviour
         }
 
         endMenu.EndScreen(false);
-
-        /* disable player movement */
-        //playerMovement.enabled = false;
-    }
-
-    //Save data to global control   
-    public void SavePlayer()
-    {
-        GlobalControl.Instance.health = currentHealth;
-        GlobalControl.Instance.swordIndex = swordScript.swordIndex;
-        GlobalControl.Instance.damageMultiplier = playerDamage.damageMultiplier;
-        GlobalControl.Instance.potionCount = PotionScript.potionCount;
-        GlobalControl.Instance.souls = playerSouls.souls;
     }
 }

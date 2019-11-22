@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1031174816930573575}
   - component: {fileID: 1031174816930573574}
+  - component: {fileID: 6787654705147434560}
   m_Layer: 0
   m_Name: SceneInfoSaver
   m_TagString: InfoSaver
@@ -43,3 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77366d7118b0c34291d74b056844913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6787654705147434560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031174816930573572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89f2a831f1c64d40aa17382e38955c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  swordIndex: 0
+  damageMultiplier: 1
+  potionCount: 3
+  souls: 0
