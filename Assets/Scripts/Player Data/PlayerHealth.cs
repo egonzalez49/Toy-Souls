@@ -24,7 +24,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Awake()
     {
-        //anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
         playerSouls = GetComponent<PlayerSouls>();
         playerDamage = GetComponent<PlayerDamage>();

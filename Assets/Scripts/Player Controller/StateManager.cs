@@ -40,7 +40,7 @@ namespace PC
         public EnemyTarget lockonTarget;
         public Transform lockonTransform;
         public AnimationCurve roll_curve;
-        //public AudioClip[] clips = new AudioClip[3];
+        public bool validItemAction;
 
         [HideInInspector]
         public Animator anim;
@@ -201,8 +201,14 @@ namespace PC
             string targetAnim = slot.targetAnim;
             if (string.IsNullOrEmpty(targetAnim))
                 return;
-            usingItem = true;
-            anim.Play(targetAnim);
+
+            if (validItemAction)
+            {
+                usingItem = true;
+                anim.Play(targetAnim);
+            }
+
+            validItemAction = false;
         }
 
         /**

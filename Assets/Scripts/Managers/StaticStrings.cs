@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace PC { 
+﻿namespace PC { 
     public static class StaticStrings
     {
         // Inputs
