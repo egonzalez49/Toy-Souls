@@ -175,9 +175,9 @@ namespace Enemy
         {
             if (isInvincible || isDead)
                 return;
+            health -= v;
             float currentHealthPct = this.health / this.maxHealth;
             OnHealthPctChanged(currentHealthPct);
-            health -= v;
             isInvincible = true;
             // Play damage animation
             enemyAudio.clip = hitClip;
