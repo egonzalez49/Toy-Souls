@@ -41,8 +41,8 @@ public class EndGameManager : MonoBehaviour
     public void EndScreen(bool win)
     {
         string won = win ? "win" : "lose";
-        Logger.WriteToFile("Game ended in a : " + won + ".");
-        Logger.WriteToFile("Souls at end : " + playerSouls.souls + ".");
+        //Logger.WriteToFile("Game ended in a : " + won + ".");
+        //Logger.WriteToFile("Souls at end : " + playerSouls.souls + ".");
         gameIsFinished = true;
         GeneralManager.UpdateGameState(true);
 

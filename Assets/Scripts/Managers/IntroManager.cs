@@ -8,18 +8,20 @@ public class IntroManager : MonoBehaviour
 
     void Awake()
     {
-        timerToLoadGameScene = 30f;
+        timerToLoadGameScene = 15f;
     }
 
     // Update is called once per frame
     void Update()
     {
         timerToLoadGameScene -= Time.deltaTime;
+        Debug.Log(timerToLoadGameScene);
         // TODO: Add controller input.
         // Skip the intro and load the game scene.
-        if (Input.GetKeyUp("space") || Input.GetButton(StaticStrings.AButton) || timerToLoadGameScene <= 0)
+        if (Input.GetKeyUp("space") || Input.GetButton(StaticStrings.AButton) || Input.GetButton(StaticStrings.Start) || timerToLoadGameScene <= 0)
         {
-            Logger.WriteToFile("Started a new game.");
+            //Logger.WriteToFile("Started a new game.");
+            
             SceneManager.LoadScene("BetaScene");
         }
     }

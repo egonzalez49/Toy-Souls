@@ -21,6 +21,6 @@ public class PlayerSouls : MonoBehaviour
     {
         souls += s;
 
-        Logger.WriteToFile("Souls earned: " + souls + ".");
+        //Logger.WriteToFile("Souls earned: " + souls + ".");
     }
 }

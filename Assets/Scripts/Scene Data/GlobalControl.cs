@@ -34,12 +34,12 @@ public class GlobalControl : MonoBehaviour
         }
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-
         swordScript = GameObject.FindGameObjectWithTag("Sword").GetComponent<SwordScript>();
         playerHealth = player.GetComponent<PlayerHealth>();
         playerSouls = player.GetComponent<PlayerSouls>();
         playerDamage = player.GetComponent<PlayerDamage>();
         stateManager = player.GetComponent<StateManager>();
+        
     }
 
     //Save data to global control   
@@ -72,7 +72,6 @@ public class GlobalControl : MonoBehaviour
         playerDamage.damageMultiplier = 1f;
         PotionScript.potionCount = 3;
         stateManager.canRoll = false;
-
-        SavePlayer();
+        SavePlayer();     
     }
 }

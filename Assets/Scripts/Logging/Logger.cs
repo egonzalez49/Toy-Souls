@@ -11,7 +11,7 @@ public class Logger : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
+        /*if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
@@ -30,7 +30,7 @@ public class Logger : MonoBehaviour
         else if (Instance != this)
         {
             Destroy(gameObject);
-        }
+        }*/
 
     }
 

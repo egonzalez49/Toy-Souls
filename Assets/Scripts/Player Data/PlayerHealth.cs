@@ -72,8 +72,8 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= amount;
 
-        Logger.WriteToFile("Player took damage.");
-        Logger.WriteToFile("Player health: " + currentHealth + ".");
+        //Logger.WriteToFile("Player took damage.");
+        //Logger.WriteToFile("Player health: " + currentHealth + ".");
 
         healthAmount.SetFillAmount(currentHealth);
 
@@ -100,8 +100,8 @@ public class PlayerHealth : MonoBehaviour
             currentHealth += amount;
         }
 
-        Logger.WriteToFile("Player healed.");
-        Logger.WriteToFile("Player health: " + currentHealth + ".");
+        //Logger.WriteToFile("Player healed.");
+        //Logger.WriteToFile("Player health: " + currentHealth + ".");
         healthAmount.SetFillAmount(currentHealth);
     }
 
@@ -109,7 +109,7 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
 
-        Logger.WriteToFile("Player died.");
+        //Logger.WriteToFile("Player died.");
 
         /* play a death noise */
         playerAudio.clip = deathClip;

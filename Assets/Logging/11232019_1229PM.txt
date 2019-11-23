@@ -1,0 +1,35 @@
+Logging Playtest at: 11/23/2019 12:29:23 PM
+---------------------------------
+11/23/2019 12:29:25 PM: Started a new game.
+Logging Playtest at: 11/23/2019 12:29:58 PM
+---------------------------------
+11/23/2019 12:30:01 PM: Started a new game.
+11/23/2019 12:30:08 PM: Player dealt damage - 50.
+11/23/2019 12:30:11 PM: Player dealt damage - 50.
+11/23/2019 12:30:14 PM: Player dealt damage - 50.
+11/23/2019 12:30:14 PM: Souls earned: 10.
+11/23/2019 12:30:15 PM: Player healed.
+11/23/2019 12:30:15 PM: Player health: 100.
+11/23/2019 12:30:19 PM: Player took damage.
+11/23/2019 12:30:19 PM: Player health: 85.
+11/23/2019 12:30:20 PM: Player took damage.
+11/23/2019 12:30:20 PM: Player health: 70.
+11/23/2019 12:30:24 PM: Player took damage.
+11/23/2019 12:30:24 PM: Player health: 55.
+11/23/2019 12:30:24 PM: Player took damage.
+11/23/2019 12:30:24 PM: Player health: 40.
+11/23/2019 12:30:25 PM: Player dealt damage - 40.
+11/23/2019 12:30:26 PM: Player dealt damage - 50.
+11/23/2019 12:30:26 PM: Player dealt damage - 40.
+11/23/2019 12:30:29 PM: Player dealt damage - 50.
+11/23/2019 12:30:29 PM: Player dealt damage - 50.
+11/23/2019 12:30:32 PM: Player took damage.
+11/23/2019 12:30:32 PM: Player health: 25.
+11/23/2019 12:30:32 PM: Player took damage.
+11/23/2019 12:30:32 PM: Player health: 10.
+11/23/2019 12:30:35 PM: Player took damage.
+11/23/2019 12:30:35 PM: Player health: -5.
+11/23/2019 12:30:35 PM: Player died.
+11/23/2019 12:30:35 PM: Game ended in a : lose.
+11/23/2019 12:30:35 PM: Souls at end : 10.
+11/23/2019 12:30:40 PM: Started a new game.
