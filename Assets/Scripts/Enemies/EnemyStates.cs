@@ -60,6 +60,8 @@ namespace PC {
         void Start()
         {
             enemyAudio = GetComponent<AudioSource>();
+            this.maxHealth = UnityEngine.Random.Range(100, 150);
+            Debug.Log("Enemy Max HP:" + this.maxHealth);
             health = this.maxHealth;
             anim = GetComponentInChildren<Animator>();
             enemyTarget = GetComponent<EnemyTarget>();
