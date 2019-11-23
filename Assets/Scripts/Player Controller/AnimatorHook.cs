@@ -104,10 +104,16 @@ namespace PC
                 rm_multi = 1;
 
             if (rolling == false)
-            { 
+            {
                 Vector3 del = anim.deltaPosition;
                 del.y = 0;
                 Vector3 v = (del * rm_multi) / delta;
+                if (float.IsNaN(v.x))
+                    v.x = 0.0f;
+                if (float.IsNaN(v.y))
+                    v.y = 0.0f;
+                if (float.IsNaN(v.z))
+                    v.z = 0.0f;
                 rigid.velocity = v;
             }
             else
