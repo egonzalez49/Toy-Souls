@@ -26,10 +26,12 @@ namespace PC {
             // do damage
             if (eStates != null && boss == null)
             {
+                Logger.WriteToFile("Player dealt damage - " + ((playerDamage.twoHanded) ? 50 * damageMultiplier * playerDamage.twoHandedMultiplier : 50 * damageMultiplier) + ".");
                 eStates.TakeDamage( (playerDamage.twoHanded)? 50*damageMultiplier*playerDamage.twoHandedMultiplier :50 * damageMultiplier);
             }
             if (boss != null)
             {
+                Logger.WriteToFile("Player dealt damage - " + ((playerDamage.twoHanded) ? 40 * damageMultiplier * playerDamage.twoHandedMultiplier : 40 * damageMultiplier) + ".");
                 boss.TakeDamage((playerDamage.twoHanded) ? 40 * damageMultiplier * playerDamage.twoHandedMultiplier : 40 * damageMultiplier);
             }
         }
