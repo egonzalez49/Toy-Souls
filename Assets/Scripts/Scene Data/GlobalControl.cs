@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PC;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,11 +13,13 @@ public class GlobalControl : MonoBehaviour
     public float damageMultiplier = 1f;
     public int potionCount = 3;
     public int souls = 0;
+    public bool canRoll = false;
 
     private static SwordScript swordScript;
     private static PlayerHealth playerHealth;
     private static PlayerSouls playerSouls;
     private static PlayerDamage playerDamage;
+    private static StateManager stateManager;
 
     void Awake()
     {
@@ -36,6 +39,7 @@ public class GlobalControl : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealth>();
         playerSouls = player.GetComponent<PlayerSouls>();
         playerDamage = player.GetComponent<PlayerDamage>();
+        stateManager = player.GetComponent<StateManager>();
     }
 
     //Save data to global control   
@@ -46,6 +50,7 @@ public class GlobalControl : MonoBehaviour
         Instance.souls = playerSouls.souls;
         Instance.damageMultiplier = playerDamage.damageMultiplier;
         Instance.potionCount = PotionScript.potionCount;
+        Instance.canRoll = stateManager.canRoll;
     }
 
     //Load necessary data on new scene
@@ -56,6 +61,7 @@ public class GlobalControl : MonoBehaviour
         playerSouls.souls = Instance.souls;
         playerDamage.damageMultiplier = Instance.damageMultiplier;
         PotionScript.potionCount = Instance.potionCount;
+        stateManager.canRoll = Instance.canRoll;
     }
 
     public static void ResetPlayer()
@@ -65,6 +71,7 @@ public class GlobalControl : MonoBehaviour
         playerSouls.souls = 0;
         playerDamage.damageMultiplier = 1f;
         PotionScript.potionCount = 3;
+        stateManager.canRoll = false;
 
         SavePlayer();
     }
