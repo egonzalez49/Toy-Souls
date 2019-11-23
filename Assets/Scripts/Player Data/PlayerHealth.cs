@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
         healthAmount = healthBar.GetComponent<BarScript>();
         currentHealth = startingHealth;
         healthAmount.SetFillAmount(currentHealth);
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Start()
@@ -99,7 +100,7 @@ public class PlayerHealth : MonoBehaviour
         /* play a death noise */
         playerAudio.clip = deathClip;
         playerAudio.Play();
-
+        anim.SetTrigger("isDead");
         float time = 10.0f;
 
         while (time >= 0f)
