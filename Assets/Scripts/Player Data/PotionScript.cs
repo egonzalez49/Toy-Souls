@@ -52,7 +52,7 @@ public class PotionScript : MonoBehaviour
         {
             stateManager.validItemAction = true;
             audioSource.clip = consume;
-            audioSource.Play();
+            audioSource.PlayDelayed(1f);
 
             potionCount--;
             pHealth.IncreaseHealth(40);
