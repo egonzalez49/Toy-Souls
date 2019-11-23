@@ -388,6 +388,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  validItemAction: 0
   anim: {fileID: 0}
   rigid: {fileID: 0}
   a_hook: {fileID: 0}
@@ -460,7 +461,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9922a12f34d0a084aab32de985459723, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9e659d59f0976b0438ec50589e741136, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -575,8 +576,8 @@ MonoBehaviour:
   currentHealth: 0
   damageImage: {fileID: 0}
   healthBar: {fileID: 0}
-  deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
-  playerHurt: {fileID: 8300000, guid: 9922a12f34d0a084aab32de985459723, type: 3}
+  deathClip: {fileID: 8300000, guid: 5b69895733356da47964867706eba495, type: 3}
+  playerHurt: {fileID: 8300000, guid: 9e659d59f0976b0438ec50589e741136, type: 3}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
   endMenu: {fileID: 0}
@@ -607,6 +608,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageMultiplier: 0
+  twoHanded: 0
+  twoHandedMultiplier: 0
 --- !u!1 &1383891381093425370
 GameObject:
   m_ObjectHideFlags: 0
@@ -2167,8 +2170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964c22653a0aaf54692b43616c0e3278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageCollider:
-  - {fileID: 9146727444068234029}
 --- !u!1 &7073000046521175497
 GameObject:
   m_ObjectHideFlags: 0
