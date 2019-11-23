@@ -12,7 +12,7 @@ public class PopupManager : MonoBehaviour
 
     void Awake()
     {
-        message = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        message = gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         anim = GetComponent<Animator>();
         canvasGroup = GetComponent<CanvasGroup>();
         activeTimer = false;
@@ -51,14 +51,18 @@ public class PopupManager : MonoBehaviour
 
     public void generateTimedPopupMessage(string text, float time)
     {
+        //transform.localScale = new Vector3(0, 0, 0);
+        message.text = text;
         activeTimer = true;
         showMessage = true;
+        //anim.SetTrigger("Show");
         timer = time;
     }
 
     public void hideMessage()
     {
-        anim.SetTrigger("Hide");
+        //anim.SetTrigger("Hide");
+        //transform.localScale = new Vector3(0, 0, 0);
         showMessage = false;
         activeTimer = false;
         timer = 0;

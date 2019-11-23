@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using PC;
 
 public enum ChestItem
 {
@@ -34,12 +33,12 @@ public class Chest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerInRange && Input.GetKeyUp("i") && !openedChest)
+        if (playerInRange && Input.GetButtonDown(StaticStrings.AButton) && !openedChest)
         {
             openedChest = true;
             audioSource.Play();
             meshFilter.mesh = openMesh;
-            popupManager.generatePopupMessage("Obtained " + item + ".");
+            popupManager.generateTimedPopupMessage("Obtained " + item + ".", 3f);
             GetItem();
         }
     }
@@ -58,7 +57,7 @@ public class Chest : MonoBehaviour
         {
             playerInRange = true;
             if (!openedChest)
-                popupManager.generatePopupMessage("Press I to open the chest.");
+                popupManager.generateTimedPopupMessage("Press A/Z to open the chest.", 3f);
         }
     }
 
@@ -67,7 +66,7 @@ public class Chest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerInRange = false;
-            popupManager.hideMessage();
+            //popupManager.hideMessage();
         }
     }
 }

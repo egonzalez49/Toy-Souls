@@ -26,6 +26,7 @@ public class PlayerDamage : MonoBehaviour
     public void increaseDamage(float f)
     {
         damageMultiplier += f;
+        twoHandedMultiplier += f;
         swordScript.UpgradeSword();
     }
 }

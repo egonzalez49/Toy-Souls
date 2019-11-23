@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using PC;
 
 public class ShopManager : MonoBehaviour
 {
@@ -37,9 +38,9 @@ public class ShopManager : MonoBehaviour
     {
         souls = playerSouls.souls;
 
-        if ((!GeneralManager.gamePausedOrDone || allowAction) && playerInRange && Input.GetKeyUp("i"))
+        if ((!GeneralManager.gamePausedOrDone || allowAction) && playerInRange && Input.GetButtonDown(StaticStrings.AButton))
         {
-            Debug.Log("Pressed 'i' to enter shop.");
+            Debug.Log("Pressed A/Z to enter shop.");
             // If the menu is open, close it.
             if (canvasGroup.interactable)
             {
@@ -67,7 +68,7 @@ public class ShopManager : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerInRange = true;
-            //popup.generatePopupMessage("Hi, I'm Piglet! \n Press I to see my wares.");
+            //popup.generatePopupMessage("Hi, I'm Piglet! \n Press A/Z to see my wares.");
             //Debug.Log("Player entered shop zone.");
         }
     }
