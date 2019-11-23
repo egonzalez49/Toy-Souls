@@ -9,9 +9,10 @@ public class EndGameManager : MonoBehaviour
     public Text soulsText;
     public Text winText;
     public Text headerText;
-    public PlayerSouls playerSouls;
     public static bool gameIsFinished = false;
+    public CanvasGroup bossCanvasGroup;
 
+    private PlayerSouls playerSouls;
     private CanvasGroup canvasGroup;
     private Animator anim;
 
@@ -40,6 +41,7 @@ public class EndGameManager : MonoBehaviour
 
     public void EndScreen(bool win)
     {
+        bossCanvasGroup.alpha = 0;
         string won = win ? "win" : "lose";
         //Logger.WriteToFile("Game ended in a : " + won + ".");
         //Logger.WriteToFile("Souls at end : " + playerSouls.souls + ".");
