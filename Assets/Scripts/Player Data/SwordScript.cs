@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SwordScript : MonoBehaviour
 {
@@ -14,7 +12,7 @@ public class SwordScript : MonoBehaviour
     {
         meshFilter = GetComponent<MeshFilter>();
         meshCollider = GetComponent<MeshCollider>();
-        swordIndex = 0;
+        SetSword(swordIndex);
     }
 
     // Update is called once per frame
@@ -31,5 +29,12 @@ public class SwordScript : MonoBehaviour
             meshFilter.mesh = swordMesh[swordIndex];
             meshCollider.sharedMesh = swordMesh[swordIndex];
         }
+    }
+
+    public void SetSword(int i)
+    {
+        swordIndex = i;
+        //meshFilter.mesh = swordMesh[swordIndex];
+        //meshCollider.sharedMesh = swordMesh[swordIndex];
     }
 }

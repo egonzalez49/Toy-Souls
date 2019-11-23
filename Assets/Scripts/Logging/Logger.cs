@@ -36,7 +36,7 @@ public class Logger : MonoBehaviour
 
     private static string GetFileTimestamp(DateTime value)
     {
-        return value.ToString(("MMddyyyy_hhmmtt"));
+        return value.ToString(("MMddyyyy_hhmmsstt"));
     }
 
     public static string GetTimestamp(DateTime value)

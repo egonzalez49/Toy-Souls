@@ -1,7 +1,0 @@
-Logging Playtest at: 11/23/2019 12:20:06 PM
----------------------------------
-11/23/2019 12:20:08 PM: Started a new game.
-Logging Playtest at: 11/23/2019 12:20:37 PM
----------------------------------
-11/23/2019 12:20:41 PM: Started a new game.
-11/23/2019 12:20:50 PM: Player dealt damage - 50.

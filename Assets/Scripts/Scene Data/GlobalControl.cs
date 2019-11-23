@@ -39,7 +39,6 @@ public class GlobalControl : MonoBehaviour
         playerSouls = player.GetComponent<PlayerSouls>();
         playerDamage = player.GetComponent<PlayerDamage>();
         stateManager = player.GetComponent<StateManager>();
-        
     }
 
     //Save data to global control   
@@ -56,9 +55,9 @@ public class GlobalControl : MonoBehaviour
     //Load necessary data on new scene
     public static void LoadPlayer()
     {
-        swordScript.swordIndex = Instance.swordIndex;
+        swordScript.SetSword(Instance.swordIndex);
         playerHealth.SetHealth(Instance.health);
-        playerSouls.souls = Instance.souls;
+        playerSouls.SetSouls(Instance.souls);
         playerDamage.damageMultiplier = Instance.damageMultiplier;
         PotionScript.potionCount = Instance.potionCount;
         stateManager.canRoll = Instance.canRoll;
@@ -66,12 +65,13 @@ public class GlobalControl : MonoBehaviour
 
     public static void ResetPlayer()
     {
-        swordScript.swordIndex = 0;
+        swordScript.SetSword(0);
         playerHealth.SetHealth(100);
-        playerSouls.souls = 0;
+        playerSouls.SetSouls(0);
         playerDamage.damageMultiplier = 1f;
         PotionScript.potionCount = 3;
         stateManager.canRoll = false;
+
         SavePlayer();     
     }
 }
