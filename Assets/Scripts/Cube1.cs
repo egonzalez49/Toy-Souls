@@ -8,7 +8,9 @@ namespace PC {
 		public Material m1;
 		public bool isTriggered = false;
 
-		public AudioSource correctAudio;
+        public PopupManager popupManager;
+
+        public AudioSource correctAudio;
 		public AudioSource wrongAudio;
 		public AudioSource completeAudio;
 
@@ -31,7 +33,7 @@ namespace PC {
 
 		//public StateManager statemang;
 
-		void Start()
+		void Awake()
 		{
 			c1script = c1.GetComponent<Cube1>();
 			c2script = c2.GetComponent<Cube1>();
@@ -91,11 +93,13 @@ namespace PC {
 						if (!this.isTriggered) {
 							correctAudio.Play();
 							completeAudio.Play();
-							displayMessage = true;
-							displayTime = 7.0f;
-							player.GetComponent<StateManager>().canRoll = true;
+                            //displayMessage = true;
+                            //displayTime = 7.0f;
+                            player.GetComponent<StateManager>().canRoll = true;
 						}
-						this.isTriggered = true;
+
+                        popupManager.generateTimedPopupMessage("You unlocked the ability to roll! Press B/C to try it out!", 5f);
+                        this.isTriggered = true;
 						this.gameObject.GetComponent<Renderer>().material.color = Color.green;
 					} else {
 						this.isTriggered = false;
@@ -176,13 +180,13 @@ namespace PC {
 
 		void OnGUI() {
 			if (displayMessage) {
-				GUIStyle style = new GUIStyle();
-				style.fontSize = 28;
-				style.normal.textColor = Color.white;
-				style.alignment = TextAnchor.UpperCenter;
-				GUI.Label(new Rect(Screen.width / 2-190, Screen.height / 4.5f, 400f, 400f), "Congratulations! You unlocked the 'Roll' Ability.", style);
-				GUI.Label(new Rect(Screen.width / 2-190, Screen.height / 3.3f, 400f, 400f), "To 'Roll', press the 'C' key.", style);
-			}
+                //GUIStyle style = new GUIStyle();
+                //style.fontSize = 28;
+                //style.normal.textColor = Color.white;
+                //style.alignment = TextAnchor.UpperCenter;
+                //GUI.Label(new Rect(Screen.width / 2-190, Screen.height / 4.5f, 400f, 400f), "Congratulations! You unlocked the 'Roll' Ability.", style);
+                //GUI.Label(new Rect(Screen.width / 2-190, Screen.height / 3.3f, 400f, 400f), "To 'Roll', press the 'C' key.", style);
+            }
 		}
 	}
 }

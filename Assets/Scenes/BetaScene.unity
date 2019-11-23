@@ -5646,7 +5646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInRange: 0
   dialogue:
-  - Hi, I'm Piglet! Press I to see what I'm selling!
+  - Hi, I'm Piglet! Press A/Z to see what I'm selling!
   sdManager: {fileID: 2138720218}
   isPuzzleGateKeeper: 0
 --- !u!4 &706143821 stripped
@@ -5747,6 +5747,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 533780846}
+    - target: {fileID: 1711795789915884337, guid: e15e36f4b314a7543bbed41628a2a1ac,
+        type: 3}
+      propertyPath: popupManager
+      value: 
+      objectReference: {fileID: 785613808}
     - target: {fileID: 6440474326542973936, guid: e15e36f4b314a7543bbed41628a2a1ac,
         type: 3}
       propertyPath: m_Constraints
@@ -5767,6 +5772,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 533780846}
+    - target: {fileID: 1719458696469462623, guid: e15e36f4b314a7543bbed41628a2a1ac,
+        type: 3}
+      propertyPath: popupManager
+      value: 
+      objectReference: {fileID: 785613808}
     - target: {fileID: 7204174482149956793, guid: e15e36f4b314a7543bbed41628a2a1ac,
         type: 3}
       propertyPath: m_Constraints
@@ -5835,14 +5845,19 @@ PrefabInstance:
     - target: {fileID: 2900045846843241689, guid: e15e36f4b314a7543bbed41628a2a1ac,
         type: 3}
       propertyPath: m_Volume
-      value: 0.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3171572628367801511, guid: e15e36f4b314a7543bbed41628a2a1ac,
         type: 3}
       propertyPath: m_Volume
-      value: 0.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2709812325844062562, guid: e15e36f4b314a7543bbed41628a2a1ac,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109108556832283041, guid: e15e36f4b314a7543bbed41628a2a1ac,
         type: 3}
       propertyPath: m_Volume
       value: 0.3
