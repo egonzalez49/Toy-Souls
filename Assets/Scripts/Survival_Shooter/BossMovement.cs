@@ -47,6 +47,8 @@ namespace Enemy
         public GameObject[] floorArray;
         private int floorPointer = 0;
         public GameObject forceAttackRenderer;
+        ParticleSystem hitParticles;
+
         //private int num_moves_start = 1;
         //private int num_moves_end = 2;
         //private bool phase_two = false;
@@ -81,6 +83,7 @@ namespace Enemy
             playerHealth = player.GetComponent<PlayerHealth>();
             enemyAudio = GetComponent<AudioSource>();
             agent.speed = InfoSaver.getAgentSpeed();
+            hitParticles = GetComponentInChildren<ParticleSystem>();
         }
 
         // Update is called once per frame
@@ -171,13 +174,15 @@ namespace Enemy
             idle();
         }
 
-        public void TakeDamage(float v)
+        public void TakeDamage(float v, Vector3 hitPoint)
         {
             if (isInvincible || isDead)
                 return;
             health -= v;
             float currentHealthPct = this.health / this.maxHealth;
             OnHealthPctChanged(currentHealthPct);
+            hitParticles.transform.position = hitPoint;
+            hitParticles.Play();
             isInvincible = true;
             // Play damage animation
             enemyAudio.clip = hitClip;

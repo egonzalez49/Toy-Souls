@@ -1,0 +1,30 @@
+Logging Playtest at: 11/23/2019 11:33:32 AM
+---------------------------------
+Logging Playtest at: 11/23/2019 11:33:45 AM
+---------------------------------
+11/23/2019 11:33:49 AM: Started a new game.
+11/23/2019 11:33:56 AM: Player dealt damage - 50.
+11/23/2019 11:33:59 AM: Player dealt damage - 50.
+11/23/2019 11:34:02 AM: Player dealt damage - 50.
+11/23/2019 11:34:02 AM: Souls earned: 10.
+11/23/2019 11:34:04 AM: Player dealt damage - 50.
+11/23/2019 11:34:07 AM: Player dealt damage - 50.
+11/23/2019 11:34:07 AM: Player dealt damage - 40.
+11/23/2019 11:34:08 AM: Player took damage.
+11/23/2019 11:34:08 AM: Player health: 85.
+11/23/2019 11:34:10 AM: Player dealt damage - 50.
+11/23/2019 11:34:10 AM: Souls earned: 20.
+11/23/2019 11:34:10 AM: Player dealt damage - 40.
+11/23/2019 11:34:11 AM: Player took damage.
+11/23/2019 11:34:11 AM: Player health: 70.
+11/23/2019 11:34:13 AM: Player dealt damage - 50.
+11/23/2019 11:34:16 AM: Player dealt damage - 40.
+11/23/2019 11:34:16 AM: Player dealt damage - 50.
+11/23/2019 11:34:19 AM: Player took damage.
+11/23/2019 11:34:19 AM: Player health: 55.
+11/23/2019 11:34:19 AM: Player dealt damage - 50.
+11/23/2019 11:34:19 AM: Souls earned: 30.
+11/23/2019 11:34:19 AM: Player dealt damage - 50.
+11/23/2019 11:34:19 AM: Player dealt damage - 40.
+11/23/2019 11:34:19 AM: Player dealt damage - 40.
+11/23/2019 11:34:19 AM: Player dealt damage - 50.

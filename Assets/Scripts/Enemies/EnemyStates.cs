@@ -28,6 +28,7 @@ namespace PC {
         GameObject playerObject;
         PlayerHealth playerHealth;
         PlayerSouls playerSouls;
+        ParticleSystem hitParticles;
 
         Transform player;
         NavMeshAgent agent;
@@ -89,7 +90,7 @@ namespace PC {
 
             GameObject enemySpawner = GameObject.FindGameObjectWithTag("Enemy Manager");
             enemyManager = enemySpawner.GetComponent<EnemyManager>();
-
+            hitParticles = GetComponentInChildren<ParticleSystem>();
         }
 
         void Update()
@@ -208,7 +209,7 @@ namespace PC {
             idle();
         }
 
-        public void TakeDamage(float v)
+        public void TakeDamage(float v, Vector3 hitPoint)
         {
             if (isInvincible || isDead)
                 return;
@@ -217,6 +218,8 @@ namespace PC {
             OnHealthPctChanged(currentHealthPct);
             isInvincible = true;
             // Play damage animation
+            hitParticles.transform.position = hitPoint;
+            hitParticles.Play();
             enemyAudio.Play();
             anim.applyRootMotion = true;
             anim.SetBool("can_move", false);

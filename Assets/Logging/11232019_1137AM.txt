@@ -1,0 +1,7 @@
+Logging Playtest at: 11/23/2019 11:37:08 AM
+---------------------------------
+11/23/2019 11:37:11 AM: Started a new game.
+11/23/2019 11:37:16 AM: Player dealt damage - 50.
+11/23/2019 11:37:19 AM: Player dealt damage - 50.
+11/23/2019 11:37:23 AM: Player dealt damage - 50.
+11/23/2019 11:37:23 AM: Souls earned: 10.

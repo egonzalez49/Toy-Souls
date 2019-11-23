@@ -22,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
     private PlayerSouls playerSouls;
     private PlayerDamage playerDamage;
 
+    ParticleSystem hitParticles;
+
     void Awake()
     {
         playerAudio = GetComponent<AudioSource>();
@@ -31,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = startingHealth;
         healthAmount.SetFillAmount(currentHealth);
         anim = GetComponentInChildren<Animator>();
+        hitParticles = GetComponentInChildren<ParticleSystem>();
     }
 
     void Start()
@@ -62,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
     //call this function to deal damage to the player
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, Vector3 hitPoint)
     {
         if (currentHealth <= 0) return;
         damaged = true;
@@ -73,6 +76,9 @@ public class PlayerHealth : MonoBehaviour
         Logger.WriteToFile("Player health: " + currentHealth + ".");
 
         healthAmount.SetFillAmount(currentHealth);
+
+        hitParticles.transform.position = hitPoint;
+        hitParticles.Play();
 
         /* play a hurt noise */
         playerAudio.clip = playerHurt;

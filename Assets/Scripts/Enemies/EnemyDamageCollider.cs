@@ -20,12 +20,14 @@ namespace Enemy
         private void OnTriggerEnter(Collider other)
         {
             // do damage
+            Vector3 hitPoint = other.transform.position;
             if (boss != null)
             {
                 if (other.gameObject.tag == "Player" && boss.ableToDealDamage == true)
                 {
                     PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-                    playerHealth.TakeDamage(InfoSaver.getEnemyBossDamage());
+                    playerHealth.TakeDamage(InfoSaver.getEnemyBossDamage(), hitPoint);
+
                     if (InfoSaver.getBossKnockbackBool())
                     {
                         other.GetComponent<Rigidbody>().AddForce(bossObject.transform.forward.normalized * 50, ForceMode.VelocityChange);
@@ -38,7 +40,7 @@ namespace Enemy
                 if (other.gameObject.tag == "Player" && parentObject.ableToDealDamage == true)
                 {
                     PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-                    playerHealth.TakeDamage(15);
+                    playerHealth.TakeDamage(15, hitPoint);
                     parentObject.ableToDealDamage = false;
                 }
             }
