@@ -34,11 +34,12 @@ public class PlayerHealth : MonoBehaviour
         healthAmount.SetFillAmount(currentHealth);
         anim = GetComponentInChildren<Animator>();
         hitParticles = GetComponentInChildren<ParticleSystem>();
+        GlobalControl.LoadPlayer();
     }
 
     void Start()
     {
-        GlobalControl.LoadPlayer();
+        //GlobalControl.LoadPlayer();
     }
 
     void Update()

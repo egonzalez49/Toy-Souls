@@ -11,26 +11,26 @@ public class Logger : MonoBehaviour
 
     void Awake()
     {
-        /*if (Instance == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            Instance = this;
-            DateTime timeNow = DateTime.Now;
-            string timeStamp = GetFileTimestamp(timeNow);
-            Instance.path = "Assets/Logging/" + timeStamp + ".txt";
-            Instance.file = timeStamp + ".txt";
-            timeStamp = GetTimestamp(timeNow);
+        //if (Instance == null)
+        //{
+        //    DontDestroyOnLoad(gameObject);
+        //    Instance = this;
+        //    DateTime timeNow = DateTime.Now;
+        //    string timeStamp = GetFileTimestamp(timeNow);
+        //    Instance.path = "Assets/Logging/" + timeStamp + ".txt";
+        //    Instance.file = timeStamp + ".txt";
+        //    timeStamp = GetTimestamp(timeNow);
 
-            using (StreamWriter sw = File.AppendText(Instance.path))
-            {
-                sw.WriteLine("Logging Playtest at: " + timeStamp);
-                sw.WriteLine("---------------------------------");
-            }
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-        }*/
+        //    using (StreamWriter sw = File.AppendText(Instance.path))
+        //    {
+        //        sw.WriteLine("Logging Playtest at: " + timeStamp);
+        //        sw.WriteLine("---------------------------------");
+        //    }
+        //}
+        //else if (Instance != this)
+        //{
+        //    Destroy(gameObject);
+        //}
 
     }
 

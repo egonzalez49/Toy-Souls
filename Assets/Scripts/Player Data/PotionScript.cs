@@ -24,7 +24,7 @@ public class PotionScript : MonoBehaviour
         pHealth = player.GetComponent<PlayerHealth>();
         stateManager = player.GetComponent<StateManager>();
 
-        potionCount = 3;
+        //potionCount = 3;
     }
 
     // Update is called once per frame

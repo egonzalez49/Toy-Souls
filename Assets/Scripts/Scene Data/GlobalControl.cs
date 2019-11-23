@@ -55,7 +55,8 @@ public class GlobalControl : MonoBehaviour
     //Load necessary data on new scene
     public static void LoadPlayer()
     {
-        swordScript.SetSword(Instance.swordIndex);
+        //swordScript.SetSword(Instance.swordIndex);
+        swordScript.swordIndex = Instance.swordIndex;
         playerHealth.SetHealth(Instance.health);
         playerSouls.SetSouls(Instance.souls);
         playerDamage.damageMultiplier = Instance.damageMultiplier;
@@ -65,7 +66,8 @@ public class GlobalControl : MonoBehaviour
 
     public static void ResetPlayer()
     {
-        swordScript.SetSword(0);
+        //swordScript.SetSword(0);
+        swordScript.swordIndex = 0;
         playerHealth.SetHealth(100);
         playerSouls.SetSouls(0);
         playerDamage.damageMultiplier = 1f;
