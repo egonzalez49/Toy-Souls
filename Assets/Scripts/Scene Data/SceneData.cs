@@ -2,6 +2,8 @@
 
 public class SceneData : MonoBehaviour
 {
+    public static SceneData Instance;
+
     public static float agentSpeed = 1.5f;
     public static bool bossKnockbackBool = false;
     public static bool phase_two = false;
@@ -13,6 +15,17 @@ public class SceneData : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void ResetBoss()
+    {
+        agentSpeed = 1.5f;
+        bossKnockbackBool = false;
+        phase_two = false;
+        numBossMovesEnd = 2;
+        bossAngularSpeed = 120f;
+        slepSpeed = 2.0f;
+        enemyBossDamage = 15;
     }
 
     public void SavePlayer()
