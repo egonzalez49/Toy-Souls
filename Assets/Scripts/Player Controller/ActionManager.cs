@@ -31,7 +31,7 @@ namespace PC
 
         public void UpdateActionsOneHanded()
         {
-            EmpyAllSlots();
+            EmptyAllSlots();
             Weapon w = states.inventoryManager.currentWeapon;
             for (int i = 0; i < w.actions.Count; i++)
             {
@@ -42,7 +42,7 @@ namespace PC
 
         public void UpdateActionsTwoHanded()
         {
-            EmpyAllSlots();
+            EmptyAllSlots();
             Weapon w = states.inventoryManager.currentWeapon;
             for (int i = 0; i < w.two_handed_actions.Count; i++)
             {
@@ -51,7 +51,7 @@ namespace PC
             }
         }
 
-        void EmpyAllSlots()
+        void EmptyAllSlots()
         {
             for (int i = 0; i < 4; i++)
             {

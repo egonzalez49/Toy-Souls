@@ -26,11 +26,11 @@ namespace PC {
             // do damage
             if (eStates != null && boss == null)
             {
-                eStates.TakeDamage(50 * damageMultiplier);
+                eStates.TakeDamage( (playerDamage.twoHanded)? 50*damageMultiplier*playerDamage.twoHandedMultiplier :50 * damageMultiplier);
             }
             if (boss != null)
             {
-                boss.TakeDamage(50 * damageMultiplier);
+                boss.TakeDamage((playerDamage.twoHanded) ? 40 * damageMultiplier * playerDamage.twoHandedMultiplier : 40 * damageMultiplier);
             }
         }
     }
