@@ -6,3 +6,7 @@ You are the much-beloved childhood toy of Blake, your owner.  You’ve spent muc
 
 ## Story Summary
 The player is a child's toy (likely a teddy bear, depending on asset availability) whose owner has bought a new, secretly malicious toy (the antagonist) which perniciously plagues the minds of your owner and other toys. The antagonist, along with its possessed minions, continuously chases the player. The player will acquire skills and better gear throughout the adventure, culminating in a final showdown with this evil toy.  However, the player will decide when it is time to eventually engage in combat, depending on how strong (or impatient) the player feels.
+
+## Releases
+Most recent release can be found:
+https://github.gatech.edu/sliang76/Toys-Souls/releases
