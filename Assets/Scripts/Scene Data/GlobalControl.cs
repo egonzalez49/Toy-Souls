@@ -39,6 +39,7 @@ public class GlobalControl : MonoBehaviour
         playerSouls = player.GetComponent<PlayerSouls>();
         playerDamage = player.GetComponent<PlayerDamage>();
         stateManager = player.GetComponent<StateManager>();
+        GlobalControl.LoadPlayer();
     }
 
     //Save data to global control   
