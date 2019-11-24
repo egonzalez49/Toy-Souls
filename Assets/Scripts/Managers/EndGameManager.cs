@@ -41,7 +41,10 @@ public class EndGameManager : MonoBehaviour
 
     public void EndScreen(bool win)
     {
-        bossCanvasGroup.alpha = 0;
+        if (bossCanvasGroup != null)
+        {
+            bossCanvasGroup.alpha = 0;
+        }
         string won = win ? "win" : "lose";
         //Logger.WriteToFile("Game ended in a : " + won + ".");
         //Logger.WriteToFile("Souls at end : " + playerSouls.souls + ".");
