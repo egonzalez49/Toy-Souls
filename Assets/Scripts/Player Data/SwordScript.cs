@@ -46,6 +46,10 @@ public class SwordScript : MonoBehaviour
     {
         swordIndex = i;
         prevIndex = swordIndex;
+        if (swordIndex >= swordMesh.Length)
+        {
+            swordIndex = swordMesh.Length - 1;
+        }
         meshFilter.mesh = swordMesh[swordIndex];
         meshCollider.sharedMesh = swordMesh[swordIndex];
     }
