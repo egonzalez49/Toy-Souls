@@ -20,6 +20,10 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         Time.timeScale = 1f;
+        try { SceneManager.UnloadSceneAsync("IntroScene"); }
+        catch (System.ArgumentException)
+        { }
+        
         SceneManager.LoadScene("IntroScene");
         EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
     }

@@ -15,13 +15,14 @@ public class IntroManager : MonoBehaviour
     void Update()
     {
         timerToLoadGameScene -= Time.deltaTime;
-        Debug.Log(timerToLoadGameScene);
         // TODO: Add controller input.
         // Skip the intro and load the game scene.
         if (Input.GetKeyUp("space") || Input.GetButton(StaticStrings.AButton) || Input.GetButton(StaticStrings.Start) || timerToLoadGameScene <= 0)
         {
             //Logger.WriteToFile("Started a new game.");
-            
+            try { SceneManager.UnloadSceneAsync("BetaScene"); }
+            catch (System.ArgumentException) { }
+
             SceneManager.LoadScene("BetaScene");
         }
     }
