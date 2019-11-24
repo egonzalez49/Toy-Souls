@@ -20,8 +20,6 @@ public class IntroManager : MonoBehaviour
         if (Input.GetKeyUp("space") || Input.GetButton(StaticStrings.AButton) || Input.GetButton(StaticStrings.Start) || timerToLoadGameScene <= 0)
         {
             //Logger.WriteToFile("Started a new game.");
-            try { SceneManager.UnloadSceneAsync("BetaScene"); }
-            catch (System.ArgumentException) { }
 
             SceneManager.LoadScene("BetaScene");
         }
