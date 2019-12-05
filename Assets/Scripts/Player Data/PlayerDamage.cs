@@ -11,7 +11,7 @@ public class PlayerDamage : MonoBehaviour
     void Awake()
     {
         damageMultiplier = 1f;
-        twoHandedMultiplier = 1.7f;
+        twoHandedMultiplier = 1.5f;
         playerStateManager = GetComponentInParent<PC.StateManager>();
         twoHanded = playerStateManager.twoHanded;
         swordScript = GameObject.FindGameObjectWithTag("Sword").GetComponent<SwordScript>();

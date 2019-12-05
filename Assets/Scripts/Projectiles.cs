@@ -7,6 +7,7 @@ public class Projectiles : MonoBehaviour
 
     public float speed;
     public bool delayedDestruction;
+    public int fireballDamage;
     private float destroyTimer = 0f;
 
     // Update is called once per frame
@@ -30,12 +31,12 @@ public class Projectiles : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(15, hitPoint);
+            playerHealth.TakeDamage(fireballDamage, hitPoint);
             Destroy(gameObject);
         }
-        else if (other.gameObject.tag != "Ted" && other.gameObject.tag != "Boss")
-        {
-            Destroy(gameObject);
-        }
+        //else if (other.gameObject.tag != "Ted" && other.gameObject.tag != "Boss")
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 }
