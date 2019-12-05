@@ -13,6 +13,8 @@ namespace Enemy
         public Transform[] spawnPoints;
         public int maxEnemies = 6;
 
+        public Transform[] trickSpawnPoints;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -40,6 +42,14 @@ namespace Enemy
                 Instantiate(enemies[enemyIndex], spawnPoints[i].position, spawnPoints[i].rotation);
                 currentEnemies += 1;
             }
+        }
+
+        public void TrickSpawn()
+        {
+            int enemyIndex = Random.Range(0, enemies.Length);
+            Instantiate(enemies[enemyIndex], trickSpawnPoints[0].position, trickSpawnPoints[0].rotation);
+            //enemyIndex = Random.Range(0, enemies.Length);
+            //Instantiate(enemies[enemyIndex], trickSpawnPoints[1].position, spawnPoints[spawnPointIndex].rotation);
         }
     }
 }

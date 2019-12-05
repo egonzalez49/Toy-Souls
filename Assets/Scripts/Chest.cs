@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using PC;
+using Enemy;
 
 public enum ChestItem
 {
-    Potion
+    Potion,
+    Souls,
+    Trick
 }
 
 public class Chest : MonoBehaviour
@@ -11,12 +14,15 @@ public class Chest : MonoBehaviour
     public Mesh openMesh;
     public PopupManager popupManager;
     public ChestItem item;
+    public AudioClip trickClip;
 
 
     private bool playerInRange;
     private bool openedChest;
     private AudioSource audioSource;
     private MeshFilter meshFilter;
+    private PlayerSouls pSouls;
+    private EnemyManager enemyManager;
     //private PotionScript potionScript;
 
     void Awake()
@@ -26,7 +32,10 @@ public class Chest : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         meshFilter = GetComponent<MeshFilter>();
 
-        //GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        pSouls = player.GetComponent<PlayerSouls>();
+
+        enemyManager = GameObject.FindGameObjectWithTag("Enemy Manager").GetComponent<EnemyManager>();
         //potionScript = player.GetComponent<PotionScript>();
     }
 
@@ -36,9 +45,19 @@ public class Chest : MonoBehaviour
         if (playerInRange && Input.GetButtonDown(StaticStrings.AButton) && !openedChest)
         {
             openedChest = true;
-            audioSource.Play();
             meshFilter.mesh = openMesh;
-            popupManager.generateTimedPopupMessage("Obtained " + item + ".", 3f);
+            if (item != ChestItem.Souls || item != ChestItem.Trick)
+            {
+                audioSource.Play();
+                popupManager.generateTimedPopupMessage("Obtained " + item + ".", 3f);
+            }
+            if (item == ChestItem.Souls)
+            {
+                audioSource.Play();
+                popupManager.generateTimedPopupMessage("Obtained 20 " + item + ".", 3f);
+            }
+            if (item == ChestItem.Trick)
+                popupManager.generateTimedPopupMessage("Oh no, Billy tricked you!.", 3f);
             GetItem();
         }
     }
@@ -48,6 +67,12 @@ public class Chest : MonoBehaviour
         if (item == ChestItem.Potion)
         {
             PotionScript.potionCount++;
+        } else if (item == ChestItem.Souls) {
+            pSouls.AddSouls(20);
+        } else if (item == ChestItem.Trick)
+        {
+            enemyManager.TrickSpawn();
+            audioSource.PlayOneShot(trickClip);
         }
     }
 
