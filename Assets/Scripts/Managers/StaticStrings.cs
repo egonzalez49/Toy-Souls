@@ -15,6 +15,7 @@
         public static string RightTrigger = "RT";
         public static string LeftTrigger = "LT";
         public static string Start = "Start";
+        public static string Back = "Back";
 
         // Animator Parameters
 
