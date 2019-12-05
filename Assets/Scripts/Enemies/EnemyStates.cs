@@ -18,6 +18,7 @@ namespace PC {
         public bool isSinking;
         public float sinkSpeed = 2.5f;
         public bool ableToDealDamage = true;
+        public bool rangedAttack;
 
         public Animator anim;
         public Rigidbody rigid;
