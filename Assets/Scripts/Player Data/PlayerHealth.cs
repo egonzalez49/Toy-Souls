@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         playerSouls = GetComponent<PlayerSouls>();
         playerDamage = GetComponent<PlayerDamage>();
-        healthAmount = healthBar.GetComponent<BarScript>();
+        healthAmount = healthBar.GetComponentInParent<BarScript>();
         currentHealth = startingHealth;
         healthAmount.SetFillAmount(currentHealth);
         anim = GetComponentInChildren<Animator>();
@@ -62,7 +62,10 @@ public class PlayerHealth : MonoBehaviour
     public void SetHealth(int amount)
     {
         currentHealth = amount;
-        healthAmount.SetFillAmount(currentHealth);
+        if(healthAmount != null)
+        {
+            healthAmount.SetFillAmount(currentHealth);
+        }
     }
 
     //call this function to deal damage to the player
