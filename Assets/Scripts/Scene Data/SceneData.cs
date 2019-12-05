@@ -7,7 +7,7 @@ public class SceneData : MonoBehaviour
     public static float agentSpeed = 1.5f;
     public static bool bossKnockbackBool = false;
     public static bool phase_two = false;
-    public static int numBossMovesEnd = 4;
+    public static int numBossMovesEnd = 2;
     public static float bossAngularSpeed = 120f;
     public static float slepSpeed = 2.0f;
     public static int enemyBossDamage = 15;
