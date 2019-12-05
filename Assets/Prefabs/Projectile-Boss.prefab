@@ -224,8 +224,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.8737572, g: 0.90588236, b: 0.30196083, a: 1}
-      maxColor: {r: 0.8113208, g: 0.4975108, b: 0.095674604, a: 1}
+      minColor: {r: 0.8745098, g: 0.90588236, b: 0.3019608, a: 1}
+      maxColor: {r: 0.8117647, g: 0.49803922, b: 0.09411765, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -287,8 +287,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.25
-      minScalar: 1.25
+      scalar: 2
+      minScalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4766,7 +4766,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.3974262
+  m_Radius: 0.6
   m_Height: 1.2880778
   m_Direction: 2
   m_Center: {x: -0.054554343, y: -0.032517314, z: -0.07493603}
@@ -4798,5 +4798,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac88fb4dc98149340b91af4ea3018908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 15
   delayedDestruction: 1
