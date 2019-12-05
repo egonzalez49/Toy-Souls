@@ -139,7 +139,7 @@ namespace Enemy
                 }
             }
             dist_2 = Vector3.Distance(player.position, transform.position);
-            if (forceDamagePossible && ableToDealDamage && (dist_2 <= 4.5))
+            if (forceDamagePossible && ableToDealDamage && (dist_2 <= 4.7))
             {
                 playerHealth.TakeDamage(15, player.position);
                 ableToDealDamage = false;
@@ -296,7 +296,6 @@ namespace Enemy
             InfoSaver.SavePlayer();
             InfoSaver.setPhase_two(true);
             playerObject.GetComponent<CapsuleCollider>().enabled = false;
-            playerObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 45, ForceMode.Impulse);
             playerObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 50, ForceMode.Impulse);
             transitionController.fadeOut();
             InfoSaver.setNumBossMovesEnd(4);
