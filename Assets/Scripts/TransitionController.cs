@@ -7,7 +7,7 @@ public class TransitionController : MonoBehaviour
 
     private Animator animator;
 
-    void Awake()
+    void Start()
     {
         animator = GameObject.FindGameObjectWithTag("Fade").GetComponent<Animator>();
 
