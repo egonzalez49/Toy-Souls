@@ -1443,6 +1443,7 @@ MonoBehaviour:
   powerDown: {fileID: 8300000, guid: ce7840ef9a7b0bc4f81d5afa3d4636e0, type: 3}
   stomp: {fileID: 8300000, guid: 8323abe4584d12f4e802e78bfe10d79e, type: 3}
   explosion: {fileID: 8300000, guid: 107ed5eb1ff9bb246922ec51bb0ddc13, type: 3}
+  fireballClip: {fileID: 8300000, guid: 63061542ddab07a4aa61cb92c2e3b0cc, type: 3}
   endMenu: {fileID: 0}
   delta: 0
   numAttacks: 4
@@ -1450,6 +1451,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   forceAttackRenderer: {fileID: 0}
+  projectile: {fileID: 513602062957042168, guid: 0802b40d34ffd784a96756b4ec8dc60c,
+    type: 3}
   dist_2: 0
   radius: 0
   aiState: 0

@@ -6,10 +6,17 @@ public class Projectiles : MonoBehaviour
 {
 
     public float speed;
+    public bool delayedDestruction;
+    private float destroyTimer = 0f;
 
     // Update is called once per frame
     void Update()
     {
+        destroyTimer += Time.deltaTime;
+        if (delayedDestruction && destroyTimer >= 10.0f)
+        {
+            Destroy(gameObject);
+        }
         if (speed != 0)
         {
             transform.position += transform.forward * (speed * Time.deltaTime);
