@@ -48,6 +48,14 @@ namespace Enemy
         private int floorPointer = 0;
         public GameObject forceAttackRenderer;
         ParticleSystem hitParticles;
+<<<<<<< HEAD
+        private bool forceDamagePossible = false;
+
+        public float dist_2;
+        public float radius;
+=======
+        private TransitionController transitionController;
+>>>>>>> cbfd916339da3a11532519d5f7fa0b47c544bcb5
 
         //private int num_moves_start = 1;
         //private int num_moves_end = 2;
@@ -84,6 +92,7 @@ namespace Enemy
             enemyAudio = GetComponent<AudioSource>();
             agent.speed = InfoSaver.getAgentSpeed();
             hitParticles = GetComponentInChildren<ParticleSystem>();
+            transitionController = GameObject.FindGameObjectWithTag("TransitionController").GetComponent<TransitionController>();
         }
 
         // Update is called once per frame
@@ -131,6 +140,12 @@ namespace Enemy
                     aiState = AIState.chasePlayer;
                     chasePlayer();
                 }
+            }
+            dist_2 = Vector3.Distance(player.position, transform.position);
+            if (forceDamagePossible && ableToDealDamage && (dist_2 <= 4.5))
+            {
+                playerHealth.TakeDamage(15, player.position);
+                ableToDealDamage = false;
             }
         }
 
@@ -225,7 +240,8 @@ namespace Enemy
 
         public void OpenBossForceAttackCollider()
         {
-            forceAttackCollider.SetActive(true);
+
+            forceDamagePossible = true;
             ableToDealDamage = true;
         }
 
@@ -236,7 +252,7 @@ namespace Enemy
 
         public void CloseBossForceAttackCollider()
         {
-            forceAttackCollider.SetActive(false);
+            forceDamagePossible = false;
         }
 
         public void CloseBossRightLegDamageCollider()
@@ -282,7 +298,13 @@ namespace Enemy
         {
             InfoSaver.SavePlayer();
             InfoSaver.setPhase_two(true);
+<<<<<<< HEAD
+            playerObject.GetComponent<CapsuleCollider>().enabled = false;
+            playerObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 45, ForceMode.Impulse);
+=======
             playerObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 50, ForceMode.Impulse);
+            transitionController.fadeOut();
+>>>>>>> cbfd916339da3a11532519d5f7fa0b47c544bcb5
             InfoSaver.setNumBossMovesEnd(4);
             InfoSaver.setAgentSpeed(4.0f);
             InfoSaver.setSlepSpeed(1.5f);
@@ -304,17 +326,20 @@ namespace Enemy
             {
                 int i = 0;
                 GameObject destructibleFloor = floorArray[floorPointer];
-                GameObject[] childrenObjects = new GameObject[4];
+                //GameObject[] childrenObjects = new GameObject[4];
                 foreach (Transform child in destructibleFloor.transform)
                 {
-                    childrenObjects[i] = child.gameObject;
+                    //childrenObjects[i] = child.gameObject;
+                    child.gameObject.GetComponent<FloorDestruction>().flashing = true;
                     ++i;
                 }
-                StartCoroutine(flashCoroutine(childrenObjects, 0.2f));
+                //StartCoroutine(flashCoroutine(childrenObjects, 0.2f));
                 ++floorPointer;
             }
         }
 
+        /*
+        // should not be used anymore
         IEnumerator flashCoroutine(GameObject[] childrenObjects, float intervalTime)
         {
             float duration = 0.35f;
@@ -342,9 +367,10 @@ namespace Enemy
                 yield return new WaitForSeconds(intervalTime);
             }
         }
+        */
 
         IEnumerator flashCollider(float intervalTime)
-        {
+        {   
             float duration = 0.3f;
             bool stop = false;
             int index = 0;
