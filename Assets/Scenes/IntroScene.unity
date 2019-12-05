@@ -883,7 +883,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press A/Space
+  m_Text: 'Press Button A/Space
 
     to Continue'
 --- !u!222 &2101402564
