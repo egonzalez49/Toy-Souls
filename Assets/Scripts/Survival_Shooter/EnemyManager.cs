@@ -8,7 +8,7 @@ namespace Enemy
     {
         public int currentEnemies = 0;
         //public PlayerHealth playerHealth;
-        public GameObject enemy;
+        public GameObject[] enemies;
         public float spawnTime = 11f;
         public Transform[] spawnPoints;
         public int maxEnemies = 6;
@@ -25,8 +25,9 @@ namespace Enemy
         {
             if (currentEnemies < maxEnemies)
             {
-                int spawnPointIndex = Random.Range(0, spawnPoints.Length - 1);
-                Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+                int enemyIndex = Random.Range(0, enemies.Length);
+                Instantiate(enemies[enemyIndex], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
                 currentEnemies += 1;
             }
         }
@@ -35,7 +36,8 @@ namespace Enemy
         {
             for (int i = 0; i < spawnPoints.Length; i++)
             {
-                Instantiate(enemy, spawnPoints[i].position, spawnPoints[i].rotation);
+                int enemyIndex = Random.Range(0, enemies.Length);
+                Instantiate(enemies[enemyIndex], spawnPoints[i].position, spawnPoints[i].rotation);
                 currentEnemies += 1;
             }
         }

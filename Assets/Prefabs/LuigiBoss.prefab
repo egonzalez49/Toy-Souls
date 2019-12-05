@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 2702028084533742339}
   m_Layer: 0
   m_Name: LeftFootDamageCollider
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 2702028085330128061}
   m_Layer: 0
   m_Name: RightFootDamageCollider
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -801,7 +801,7 @@ GameObject:
   - component: {fileID: 2702028085703756724}
   m_Layer: 0
   m_Name: RightArmCollider
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1450,6 +1450,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   forceAttackRenderer: {fileID: 0}
+  dist_2: 0
+  radius: 0
   aiState: 0
   dist: 0
 --- !u!114 &6540719996040304919

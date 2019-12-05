@@ -18,7 +18,10 @@ namespace PC {
         public bool isSinking;
         public float sinkSpeed = 2.5f;
         public bool ableToDealDamage = true;
-        public bool rangedAttack;
+        public GameObject projectile;
+        public float fireballCooldown = 12.0f;
+        public float shootForce = 1000.0f;
+
 
         public Animator anim;
         public Rigidbody rigid;
@@ -36,9 +39,12 @@ namespace PC {
         private bool isPlayerColliding = false;
         AudioSource enemyAudio;
         public AudioClip deathClip;
+        public AudioClip fireballClip;
+        public AudioClip hitClip;
         public bool enemyDamagePossible = false;
         public GameObject rightHandCollider;
         public GameObject leftHandCollider;
+        public float timeSinceLastFireball;
 
         public enum AIState
         {
@@ -58,6 +64,8 @@ namespace PC {
         public float wanderSpeed = 1.0f;
         public float attackingSpeed = 0.2f;
         public float timer;
+        public float castDistance = 7.0f;
+        public float minFireballRange = 4.0f;
 
         void Start()
         {
@@ -97,6 +105,7 @@ namespace PC {
         void Update()
         {
             delta = Time.deltaTime;
+            timeSinceLastFireball += delta;
 
             if (isSinking)
             {
@@ -129,10 +138,15 @@ namespace PC {
                     aiState = AIState.attack;
                     attack();
                 }
-                if (dist <= chaseDistance && dist > attackDistance)
+                if (dist <= chaseDistance && dist > attackDistance && (projectile == null || timeSinceLastFireball < fireballCooldown))
                 {
                     aiState = AIState.chasePlayer;
                     chasePlayer();
+                }
+                if (dist >= minFireballRange && dist <= castDistance && projectile != null && timeSinceLastFireball >= fireballCooldown)
+                {
+                    timeSinceLastFireball = 0f;
+                    castFireball();
                 }
             }
         }
@@ -221,6 +235,7 @@ namespace PC {
             // Play damage animation
             hitParticles.transform.position = hitPoint;
             hitParticles.Play();
+            enemyAudio.clip = hitClip;
             enemyAudio.Play();
             anim.applyRootMotion = true;
             anim.SetBool("can_move", false);
@@ -280,6 +295,31 @@ namespace PC {
             NavMeshHit hit;
             NavMesh.SamplePosition(randomDirection, out hit, radius, -1);
             return hit.position;
+        }
+
+        public void castFireball()
+        {
+            anim.SetBool("IsIdle", false);
+            anim.SetBool("IsWalking", true);
+            anim.SetBool("IsRunning", false);
+            anim.SetBool("can_move", false);
+            transform.LookAt(player.position);
+            anim.Play("Ted_Fireball_Cast");
+            agent.isStopped = true;
+            anim.applyRootMotion = true;
+            idle();
+        }
+
+        public void playFireball()
+        {
+            enemyAudio.clip = fireballClip;
+            enemyAudio.Play();
+        }
+
+        public void generateFireball()
+        {
+            GameObject fireBall = Instantiate(projectile, transform.position + new Vector3(0, 0.75f, 0), transform.rotation);
+            //fireBall.GetComponent<Rigidbody>().AddRelativeForce(fireBall.transform.forward * 1000);
         }
     }
 }

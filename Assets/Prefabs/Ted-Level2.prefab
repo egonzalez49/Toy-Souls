@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 2306275503944573886}
   m_Layer: 0
   m_Name: LeftHandCollider
-  m_TagString: Untagged
+  m_TagString: Ted
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: -485482801572694891}
   m_Layer: 0
   m_Name: Ted-Level2
-  m_TagString: Untagged
+  m_TagString: Ted
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -595,13 +595,19 @@ MonoBehaviour:
   isSinking: 0
   sinkSpeed: 2.5
   ableToDealDamage: 1
-  rangedAttack: 1
+  projectile: {fileID: 513602062957042168, guid: 2370b61ee8ca01b43980bd53cd17f959,
+    type: 3}
+  fireballCooldown: 10
+  shootForce: 15
   anim: {fileID: 0}
   rigid: {fileID: 0}
   deathClip: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
+  fireballClip: {fileID: 8300000, guid: 63061542ddab07a4aa61cb92c2e3b0cc, type: 3}
+  hitClip: {fileID: 8300000, guid: 02e6208ec76314158a9f548f51fe9f11, type: 3}
   enemyDamagePossible: 0
   rightHandCollider: {fileID: 7475274137844149009}
   leftHandCollider: {fileID: 1302463816849020424}
+  timeSinceLastFireball: 0
   aiState: 0
   dist: 0
   random_radius: 45
@@ -612,6 +618,8 @@ MonoBehaviour:
   wanderSpeed: 1
   attackingSpeed: 0.2
   timer: 0
+  castDistance: 10
+  minFireballRange: 4
 --- !u!1 &1365258230914822276
 GameObject:
   m_ObjectHideFlags: 0
@@ -1849,7 +1857,7 @@ GameObject:
   - component: {fileID: 2701002843867204672}
   m_Layer: 0
   m_Name: RightHandCollider
-  m_TagString: Untagged
+  m_TagString: Ted
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
