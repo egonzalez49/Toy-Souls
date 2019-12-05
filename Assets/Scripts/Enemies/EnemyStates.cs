@@ -8,7 +8,7 @@ using UnityEngine.AI;
 namespace PC { 
     public class EnemyStates : MonoBehaviour
     {
-        private float maxHealth = 100;
+        private float maxHealth = 120;
         public float health;
         public event Action<float> OnHealthPctChanged = delegate { }; 
         public bool isInvincible;
@@ -61,7 +61,7 @@ namespace PC {
         void Start()
         {
             enemyAudio = GetComponent<AudioSource>();
-            this.maxHealth = UnityEngine.Random.Range(100, 150);
+            this.maxHealth = UnityEngine.Random.Range(this.maxHealth, (int) (this.maxHealth*1.2));
             Debug.Log("Enemy Max HP:" + this.maxHealth);
             health = this.maxHealth;
             anim = GetComponentInChildren<Animator>();
