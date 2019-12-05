@@ -48,14 +48,11 @@ namespace Enemy
         private int floorPointer = 0;
         public GameObject forceAttackRenderer;
         ParticleSystem hitParticles;
-<<<<<<< HEAD
         private bool forceDamagePossible = false;
 
         public float dist_2;
         public float radius;
-=======
         private TransitionController transitionController;
->>>>>>> cbfd916339da3a11532519d5f7fa0b47c544bcb5
 
         //private int num_moves_start = 1;
         //private int num_moves_end = 2;
@@ -298,13 +295,10 @@ namespace Enemy
         {
             InfoSaver.SavePlayer();
             InfoSaver.setPhase_two(true);
-<<<<<<< HEAD
             playerObject.GetComponent<CapsuleCollider>().enabled = false;
             playerObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 45, ForceMode.Impulse);
-=======
             playerObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 50, ForceMode.Impulse);
             transitionController.fadeOut();
->>>>>>> cbfd916339da3a11532519d5f7fa0b47c544bcb5
             InfoSaver.setNumBossMovesEnd(4);
             InfoSaver.setAgentSpeed(4.0f);
             InfoSaver.setSlepSpeed(1.5f);
