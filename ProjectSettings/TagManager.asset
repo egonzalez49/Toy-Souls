@@ -12,6 +12,8 @@ TagManager:
   - Fence
   - Sheep
   - Sword
+  - Fade
+  - TransitionController
   layers:
   - Default
   - TransparentFX
