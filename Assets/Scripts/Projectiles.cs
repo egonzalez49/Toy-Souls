@@ -34,9 +34,9 @@ public class Projectiles : MonoBehaviour
             playerHealth.TakeDamage(fireballDamage, hitPoint);
             Destroy(gameObject);
         }
-        //else if (other.gameObject.tag != "Ted" && other.gameObject.tag != "Boss")
-        //{
-        //    Destroy(gameObject);
-        //}
+        else if (other.gameObject.tag != "Ted" && other.gameObject.tag != "Boss")
+        {
+            Destroy(gameObject);
+        }
     }
 }

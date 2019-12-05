@@ -40,7 +40,19 @@ public class ShopManager : MonoBehaviour
     void Update()
     {
         souls = playerSouls.souls;
-
+        if (!playerInRange)
+        {
+            if (canvasGroup.interactable)
+            {
+                allowAction = false;
+                GeneralManager.UpdateGameState(false);
+                shopOpen = false;
+                canvasGroup.interactable = false;
+                canvasGroup.blocksRaycasts = false;
+                canvasGroup.alpha = 0f;
+                Time.timeScale = 1f;
+            }
+        }
         if ((!GeneralManager.gamePausedOrDone || allowAction) && playerInRange && (Input.GetKeyUp(KeyCode.H) || Input.GetButtonUp(StaticStrings.AButton)))
         {
             // If the menu is open, close it.
@@ -68,7 +80,7 @@ public class ShopManager : MonoBehaviour
             }
         }
 
-        if (shopOpen && Input.GetButtonDown(StaticStrings.XButton))
+        if (shopOpen && Input.GetButtonDown(StaticStrings.YButton))
         {
             Debug.Log("Pressed X");
             buyDamage();
