@@ -19,14 +19,14 @@ public class StoryDialogueManager : MonoBehaviour
     void Update()
     {
         // TODO: Change to include controller input.
-        if (Input.GetKeyUp("space"))
+        //if (Input.GetKeyUp("space"))
+        if (Input.GetButtonUp(StaticStrings.AButton))
         {
             GeneralManager.UpdateGameState(false);
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
             canvasGroup.alpha = 0f;
             Time.timeScale = 1f;
-
         }
     }
 }

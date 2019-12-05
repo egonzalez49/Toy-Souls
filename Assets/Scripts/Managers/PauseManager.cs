@@ -20,7 +20,7 @@ public class PauseManager : MonoBehaviour
     void Update()
     {
         // TODO: Change to include controller input.
-        if ((!GeneralManager.gamePausedOrDone || allowAction) && Input.GetKeyUp(KeyCode.Escape) || Input.GetButtonUp(StaticStrings.Start))
+        if ((!GeneralManager.gamePausedOrDone || allowAction) && (Input.GetKeyUp(KeyCode.Escape) || Input.GetButtonUp(StaticStrings.Start)))
         {
             // If the menu is open, close it.
             if (canvasGroup.interactable)

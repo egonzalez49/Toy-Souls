@@ -38,9 +38,10 @@ public class ShopManager : MonoBehaviour
     {
         souls = playerSouls.souls;
 
-        if ((!GeneralManager.gamePausedOrDone || allowAction) && playerInRange && Input.GetButtonDown(StaticStrings.AButton))
+        if ((!GeneralManager.gamePausedOrDone || allowAction) && playerInRange && (Input.GetKeyDown(KeyCode.H) || Input.GetButtonDown(StaticStrings.AButton)))
         {
-            Debug.Log("Pressed A/Z to enter shop.");
+            Debug.Log("Pressed A to enter shop.");
+            Debug.Log("Game paused: " + GeneralManager.gamePausedOrDone);
             // If the menu is open, close it.
             if (canvasGroup.interactable)
             {
@@ -55,6 +56,7 @@ public class ShopManager : MonoBehaviour
             {
                 allowAction = true;
                 GeneralManager.UpdateGameState(true);
+                Debug.Log("Game paused: " + GeneralManager.gamePausedOrDone);
                 canvasGroup.interactable = true;
                 canvasGroup.blocksRaycasts = true;
                 canvasGroup.alpha = 1f;

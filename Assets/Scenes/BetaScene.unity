@@ -6280,7 +6280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInRange: 0
   dialogue:
-  - Hi, I'm Piglet! Press A/Z to see what I'm selling!
+  - Hi, I'm Piglet! Press A to see what I'm selling!
   sdManager: {fileID: 2138720218}
   isPuzzleGateKeeper: 0
 --- !u!4 &706143821 stripped
@@ -10021,7 +10021,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press A/Space to Continue
+  m_Text: Press A to Continue
 --- !u!222 &1167122141
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17107,7 +17107,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press Space to Continue
+  m_Text: Press A to Continue
 --- !u!222 &1948451219
 CanvasRenderer:
   m_ObjectHideFlags: 0

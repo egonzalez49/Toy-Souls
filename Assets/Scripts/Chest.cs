@@ -57,7 +57,7 @@ public class Chest : MonoBehaviour
         {
             playerInRange = true;
             if (!openedChest)
-                popupManager.generateTimedPopupMessage("Press A/Z to open the chest.", 3f);
+                popupManager.generateTimedPopupMessage("Press A to open the chest.", 3f);
         }
     }
 
