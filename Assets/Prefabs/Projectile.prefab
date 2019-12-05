@@ -4800,3 +4800,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 13
   delayedDestruction: 0
+  fireballDamage: 15
