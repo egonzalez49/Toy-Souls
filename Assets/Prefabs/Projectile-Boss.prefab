@@ -4798,6 +4798,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac88fb4dc98149340b91af4ea3018908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 12
   delayedDestruction: 1
-  fireballDamage: 25
+  fireballDamage: 30
