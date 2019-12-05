@@ -48,6 +48,7 @@ namespace Enemy
         private int floorPointer = 0;
         public GameObject forceAttackRenderer;
         ParticleSystem hitParticles;
+        private TransitionController transitionController;
 
         //private int num_moves_start = 1;
         //private int num_moves_end = 2;
@@ -84,6 +85,7 @@ namespace Enemy
             enemyAudio = GetComponent<AudioSource>();
             agent.speed = InfoSaver.getAgentSpeed();
             hitParticles = GetComponentInChildren<ParticleSystem>();
+            transitionController = GameObject.FindGameObjectWithTag("TransitionController").GetComponent<TransitionController>();
         }
 
         // Update is called once per frame
@@ -283,6 +285,7 @@ namespace Enemy
             InfoSaver.SavePlayer();
             InfoSaver.setPhase_two(true);
             playerObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 50, ForceMode.Impulse);
+            transitionController.fadeOut();
             InfoSaver.setNumBossMovesEnd(4);
             InfoSaver.setAgentSpeed(4.0f);
             InfoSaver.setSlepSpeed(1.5f);
