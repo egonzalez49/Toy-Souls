@@ -55,7 +55,7 @@ public class PotionScript : MonoBehaviour
             audioSource.PlayDelayed(1f);
 
             potionCount--;
-            pHealth.IncreaseHealth(40);
+            pHealth.IncreaseHealth(60);
         }
     }
 }

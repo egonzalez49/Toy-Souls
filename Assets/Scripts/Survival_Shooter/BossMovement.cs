@@ -29,7 +29,7 @@ namespace Enemy
         public PlayerHealth playerHealth;
         public float health;
         public event Action<float> OnHealthPctChanged = delegate { };
-        private float maxHealth = 1000;
+        private float maxHealth = 1200;
         public bool ableToDealDamage = true;
         public AudioClip hitClip;
         public AudioClip deathClip;
@@ -101,7 +101,7 @@ namespace Enemy
                 isInvincible = !canMove;
             }
             canMove = anim.GetBool("can_move");
-            if (health <= 0.8*this.maxHealth && canMove && !InfoSaver.getPhase_two())
+            if (health <= 0.75*this.maxHealth && canMove && !InfoSaver.getPhase_two())
             {
                 anim.SetBool("IsIdle", true);
                 anim.SetBool("can_move", false);
