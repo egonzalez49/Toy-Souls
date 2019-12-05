@@ -37,6 +37,7 @@ namespace Enemy
         public AudioClip powerDown;
         public AudioClip stomp;
         public AudioClip explosion;
+        public AudioClip fireballClip;
         AudioSource enemyAudio;
         private Quaternion previousRotation;
         public EndGameManager endMenu;
@@ -49,6 +50,7 @@ namespace Enemy
         public GameObject forceAttackRenderer;
         ParticleSystem hitParticles;
         private bool forceDamagePossible = false;
+        public GameObject projectile;
 
         public float dist_2;
         public float radius;
@@ -362,6 +364,7 @@ namespace Enemy
         }
         */
 
+        /*
         IEnumerator flashCollider(float intervalTime)
         {   
             float duration = 0.3f;
@@ -393,6 +396,20 @@ namespace Enemy
                 ++index;
                 yield return new WaitForSeconds(intervalTime);
             }
+        }
+        */
+
+        public void playFireball()
+        {
+            enemyAudio.clip = fireballClip;
+            enemyAudio.Play();
+        }
+
+        public void generateFireball()
+        {
+            transform.LookAt(player.position);
+            GameObject fireBall = Instantiate(projectile, transform.position + new Vector3(0, 1.25f, 0), transform.rotation);
+            //fireBall.GetComponent<Rigidbody>().AddRelativeForce(fireBall.transform.forward * 1000);
         }
 
         /*
