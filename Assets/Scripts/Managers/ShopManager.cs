@@ -18,12 +18,13 @@ public class ShopManager : MonoBehaviour
     private CanvasGroup canvasGroup;
     private AudioSource audioSource;
     private bool allowAction;
+    private bool shopOpen;
 
     void Awake()
     {
         allowAction = false;
         playerInRange = false;
-        menu = this.gameObject.transform.GetChild(0).gameObject;
+        menu = gameObject.transform.GetChild(0).gameObject;
         canvasGroup = menu.GetComponent<CanvasGroup>();
         audioSource = GetComponent<AudioSource>();
 
@@ -31,6 +32,8 @@ public class ShopManager : MonoBehaviour
         playerSouls = player.GetComponent<PlayerSouls>();
         playerDamage = player.GetComponent<PlayerDamage>();
         souls = playerSouls.souls;
+
+        shopOpen = false;
     }
 
     // Update is called once per frame
@@ -38,15 +41,14 @@ public class ShopManager : MonoBehaviour
     {
         souls = playerSouls.souls;
 
-        if ((!GeneralManager.gamePausedOrDone || allowAction) && playerInRange && (Input.GetKeyDown(KeyCode.H) || Input.GetButtonDown(StaticStrings.AButton)))
+        if ((!GeneralManager.gamePausedOrDone || allowAction) && playerInRange && (Input.GetKeyUp(KeyCode.H) || Input.GetButtonUp(StaticStrings.AButton)))
         {
-            Debug.Log("Pressed A to enter shop.");
-            Debug.Log("Game paused: " + GeneralManager.gamePausedOrDone);
             // If the menu is open, close it.
             if (canvasGroup.interactable)
             {
                 allowAction = false;
                 GeneralManager.UpdateGameState(false);
+                shopOpen = false;
                 canvasGroup.interactable = false;
                 canvasGroup.blocksRaycasts = false;
                 canvasGroup.alpha = 0f;
@@ -56,12 +58,26 @@ public class ShopManager : MonoBehaviour
             {
                 allowAction = true;
                 GeneralManager.UpdateGameState(true);
-                Debug.Log("Game paused: " + GeneralManager.gamePausedOrDone);
+                Debug.Log("Game is paused: " + GeneralManager.gamePausedOrDone);
+                shopOpen = true;
                 canvasGroup.interactable = true;
                 canvasGroup.blocksRaycasts = true;
                 canvasGroup.alpha = 1f;
                 Time.timeScale = 0f;
+                Debug.Log("Time scale: " + Time.timeScale);
             }
+        }
+
+        if (shopOpen && Input.GetButtonDown(StaticStrings.XButton))
+        {
+            Debug.Log("Pressed X");
+            buyDamage();
+        }
+
+        if (shopOpen && Input.GetButtonDown(StaticStrings.BButton))
+        {
+            Debug.Log("Pressed B");
+            buyPotion();
         }
     }
 

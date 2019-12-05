@@ -749,7 +749,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015259, y: -727}
+  m_AnchoredPosition: {x: 0.000015259, y: -537}
   m_SizeDelta: {x: 555, y: 1136.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2058665816
@@ -772,22 +772,22 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: c7896985b2885414cb8252f44d80768a, type: 3}
-    m_FontSize: 38
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "You are the much-beloved childhood toy of Blake, your owner.\n\nYou\u2019ve
-    spent much of Blake\u2019s life providing joy, comfort, and support. \n\nLife
-    is idyllic, and you cannot imagine a world without Blake.\n\nOne Fall day, Blake\u2019s
-    parents brought home Billy, a flashy new toy.\n\nYou hope you and Billy can become
-    friends. \n\n\n\n\nLittle did you know..."
+  m_Text: "You are the much-beloved childhood toy of Blake, your owner.\n\n\nYou\u2019ve
+    spent much of Blake\u2019s life providing joy, comfort, and support. \n\n\nOne
+    Fall day, Blake\u2019s parents brought home Billy, a flashy new toy.\n\n\nYou
+    noticed that something is suspicious about this new toy. \n\n\nHe plagues the
+    minds of your owner and other toys. \n\n\nWhat would you do now?\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 --- !u!222 &2058665817
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -883,7 +883,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press A/Space
+  m_Text: 'Press Button A/Space
 
     to Continue'
 --- !u!222 &2101402564
