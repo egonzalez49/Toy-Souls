@@ -29,7 +29,7 @@ namespace Enemy
         public PlayerHealth playerHealth;
         public float health;
         public event Action<float> OnHealthPctChanged = delegate { };
-        private float maxHealth = 500;
+        private float maxHealth = 1000;
         public bool ableToDealDamage = true;
         public AudioClip hitClip;
         public AudioClip deathClip;
@@ -101,7 +101,7 @@ namespace Enemy
                 isInvincible = !canMove;
             }
             canMove = anim.GetBool("can_move");
-            if (health <= 0.6*this.maxHealth && canMove && !InfoSaver.getPhase_two())
+            if (health <= 0.8*this.maxHealth && canMove && !InfoSaver.getPhase_two())
             {
                 anim.SetBool("IsIdle", true);
                 anim.SetBool("can_move", false);
@@ -141,7 +141,7 @@ namespace Enemy
             dist_2 = Vector3.Distance(player.position, transform.position);
             if (forceDamagePossible && ableToDealDamage && (dist_2 <= 4.7))
             {
-                playerHealth.TakeDamage(15, player.position);
+                playerHealth.TakeDamage(25, player.position);
                 ableToDealDamage = false;
             }
         }

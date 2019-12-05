@@ -90,7 +90,7 @@ public class ShopManager : MonoBehaviour
             playSound(errorSound);
         } else
         {
-            playerDamage.increaseDamage(0.1f);
+            playerDamage.increaseDamage(0.2f);
             Debug.Log("Damage multiplier is " + playerDamage.damageMultiplier);
             playerSouls.AddSouls(-50);
             playSound(purchaseSound);
