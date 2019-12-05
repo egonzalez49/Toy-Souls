@@ -1,0 +1,62 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 13.02.2012 14:22:22
+
+newmtl 13601_Greaves_Armor_ver_C_holder_R
+	Ns 34.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 1.0000 1.0000 1.0000
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.5400 0.5400 0.5400
+	Ke 0.0000 0.0000 0.0000
+	map_Ka 13601_Greaves_Armor_ver_C_holder_diff.jpg
+	map_Kd 13601_Greaves_Armor_ver_C_holder_diff.jpg
+	map_Ks 13601_Greaves_Armor_ver_C_holder_spec.jpg
+
+newmtl 13601_Greaves_Armor_ver_C_metal_R
+	Ns 34.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 1.0000 1.0000 1.0000
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.5400 0.5400 0.5400
+	Ke 0.0000 0.0000 0.0000
+	map_Ka 13601_Greaves_Armor_ver_C_metal_diff.jpg
+	map_Kd 13601_Greaves_Armor_ver_C_metal_diff.jpg
+	map_Ks 13601_Greaves_Armor_ver_C_metal_spec.jpg
+
+newmtl 13601_Greaves_Armor_ver_C_metal_L
+	Ns 34.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 1.0000 1.0000 1.0000
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.5400 0.5400 0.5400
+	Ke 0.0000 0.0000 0.0000
+	map_Ka 13601_Greaves_Armor_ver_C_metal_mirror_diff.jpg
+	map_Kd 13601_Greaves_Armor_ver_C_metal_mirror_diff.jpg
+	map_Ks 13601_Greaves_Armor_ver_C_metal_mirror_spec.jpg
+
+newmtl 13601_Greaves_Armor_ver_C_holder_L
+	Ns 34.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 1.0000 1.0000 1.0000
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.5400 0.5400 0.5400
+	Ke 0.0000 0.0000 0.0000
+	map_Ka 13601_Greaves_Armor_ver_C_holder_mirror_diff.jpg
+	map_Kd 13601_Greaves_Armor_ver_C_holder_mirror_diff.jpg
+	map_Ks 13601_Greaves_Armor_ver_C_holder_mirror_spec.jpg
