@@ -4,11 +4,13 @@ using PC;
 
 public class IntroManager : MonoBehaviour
 {
-    private float timerToLoadGameScene;
+    public bool loadBeta = true;
+
+    public float timerToLoadGameScene = 15f;
 
     void Awake()
     {
-        timerToLoadGameScene = 15f;
+        //timerToLoadGameScene = 15f;
     }
 
     // Update is called once per frame
@@ -20,8 +22,10 @@ public class IntroManager : MonoBehaviour
         if (Input.GetKeyUp("space") || Input.GetButton(StaticStrings.AButton) || Input.GetButton(StaticStrings.Start) || timerToLoadGameScene <= 0)
         {
             //Logger.WriteToFile("Started a new game.");
-
-            SceneManager.LoadScene("BetaScene");
+            if (loadBeta)
+                SceneManager.LoadScene("BetaScene");
+            else
+                SceneManager.LoadScene("TitleScreenScene");
         }
     }
 }
