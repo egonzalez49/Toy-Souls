@@ -88,6 +88,7 @@ namespace PC {
             leftHandCollider.SetActive(false);
 
             rigid = GetComponent<Rigidbody>();
+            rigid.velocity = new Vector3(0.0f, 0.0f, 0.0f);
             aiState = AIState.wander;
             dist = Vector3.Distance(player.position, transform.position);
             agent.destination = RandomNavMeshLocation(random_radius);
