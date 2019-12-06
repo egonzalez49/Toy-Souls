@@ -316,6 +316,7 @@ Work Breakdown:
 
 What Scenes to Open in Unity:
 	-TitleScreenScene
+	-Other scenes can be opened to be considered individually, but the game is designed to work with that scene open only on start.  Bugs might occur if that instruction isn't followed.
 
 
 
