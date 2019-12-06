@@ -35,7 +35,7 @@ public class EndGameManager : MonoBehaviour
         if (canvasGroup.alpha == 1f && (Input.GetKeyUp("space") || Input.GetButton(StaticStrings.AButton)))
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene("TitleScreenScene");
+            SceneManager.LoadScene("CreditsScene");
         }
     }
 

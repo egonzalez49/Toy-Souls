@@ -28,6 +28,13 @@ public class MenuManager : MonoBehaviour
         EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
     }
 
+    public void Credits()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("CreditsScene");
+        EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
+    }
+
     //Close application whenever the user clicks 'Quit'
     public void QuitGame()
     {
