@@ -658,6 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadBeta: 1
+  timerToLoadGameScene: 22
 --- !u!4 &1762549213
 Transform:
   m_ObjectHideFlags: 0
