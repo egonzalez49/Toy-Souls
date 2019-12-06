@@ -1,4 +1,4 @@
-Team Name: Out-of-Bounds Exception
+﻿Team Name: Out-of-Bounds Exception
 
 Team Members:
 	Elmer Gonzalez, egonzalez49@gatech.edu, egonzalez49
@@ -83,7 +83,7 @@ on how to see evidence of rubric row.
 	1. Spectacle - This player likes the spectacle, so getting a bigger sword will appeal to this player.
 	2. Creative - This player wants to find creative ways to play the game. Puzzles appeal to this player.
 	3. Competitive - This player wants to defeat the boss as quickly and efficiently as possible. For this player, finding the right balance of killing enemies to upgrade vs. time investment is key.
-- Reward successes and threat of punishment for failure :Explore the map: 
+- Reward successes and threat of punishment for failure: Explore the map: 
 	-Find the bucket to enable the dodge/roll puzzle.
 	-Find a reward by exploring the map. 
 	-Hit multiple enemies at a time to more efficiently farm souls.  However, this runs the risk of getting swarmed.  
