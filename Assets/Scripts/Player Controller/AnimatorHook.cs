@@ -108,11 +108,11 @@ namespace PC
                 Vector3 del = anim.deltaPosition;
                 del.y = 0;
                 Vector3 v = (del * rm_multi) / delta;
-                if (float.IsNaN(v.x))
+                if (float.IsNaN(v.x) ||  float.IsInfinity(v.x))
                     v.x = 0.0f;
-                if (float.IsNaN(v.y))
+                if (float.IsNaN(v.y) || float.IsInfinity(v.y))
                     v.y = 0.0f;
-                if (float.IsNaN(v.z))
+                if (float.IsNaN(v.z) || float.IsInfinity(v.z))
                     v.z = 0.0f;
                 rigid.velocity = v;
             }
