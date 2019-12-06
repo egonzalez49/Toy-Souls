@@ -281,8 +281,11 @@ namespace PC {
 
         public void OpenEnemyRightHandDamageCollider()
         {
-            ableToDealDamage = true;
-            rightHandCollider.SetActive(true);
+            if (!isDead)
+            {
+                ableToDealDamage = true;
+                rightHandCollider.SetActive(true);
+            }
         }
 
         public void CloseEnemyRightHandDamageCollider()

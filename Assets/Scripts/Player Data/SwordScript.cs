@@ -34,7 +34,7 @@ public class SwordScript : MonoBehaviour
 
     public void UpgradeSword()
     {
-        if (swordIndex < swordMesh.Length)
+        if (swordIndex < swordMesh.Length - 1)
         {
             swordIndex++;
             meshFilter.mesh = swordMesh[swordIndex];
