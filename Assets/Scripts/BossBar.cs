@@ -13,14 +13,12 @@ namespace PC
         private Image foregroundImage;
         [SerializeField]
         private float updateSpeedSeconds = 0.5f;
-
+        public GameObject boss;
         private Canvas healthBarCanvas;
 
         private void Awake()
         {
-            GameObject boss = GameObject.FindWithTag("Boss");
-            boss.GetComponent<Enemy.BossMovement>().OnHealthPctChanged += HandleHealthChanged;
-            healthBarCanvas = GetComponentInParent<Canvas>();
+            
         }
 
         public void HandleHealthChanged(float pct)
@@ -44,6 +42,12 @@ namespace PC
         // Update is called once per frame
         void LateUpdate()
         {
+            if(boss == null)
+            {
+                GameObject boss = GameObject.FindWithTag("Boss");
+                boss.GetComponent<Enemy.BossMovement>().OnHealthPctChanged += HandleHealthChanged;
+                healthBarCanvas = GetComponentInParent<Canvas>();
+            }
             transform.LookAt(Camera.main.transform);
             transform.Rotate(0, 180, 0);
         }
