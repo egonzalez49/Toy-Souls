@@ -188,7 +188,7 @@ on how to see evidence of rubric row.
 - Fluid animation: 
 	Animations were individually created for each enemy using Mixamo, and in some cases are blended together to create a smooth transition between different animations. 
 	As previously mentioned, some animations also use some programmatic interpolation to ameliorate any unrealistic movements.
-- Sensory feedback of AI state(animation) :
+- Sensory feedback of AI state(animation):
 	Each state for both the Teddy Bear enemies and the Boss has an individual animation attached to it, so visually distinguishing between the different states of the AI enemies is obvious.
 - Difficulty of engagement is appropriate: 
 	Engagement with Teddy Bear enemies is a good difficulty.
