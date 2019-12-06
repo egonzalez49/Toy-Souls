@@ -116,7 +116,14 @@ namespace Enemy
             if (!canMove && !isDead && randomAnimSelector != 2)
             {
                 Quaternion rotationAngle = Quaternion.LookRotation(player.position - transform.position);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotationAngle, delta / InfoSaver.getSlepSpeed());
+                if (randomAnimSelector == 4)
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, rotationAngle, delta);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, rotationAngle, delta / InfoSaver.getSlepSpeed());
+                }
             }
             if (canMove && !isDead)
             {
@@ -407,8 +414,8 @@ namespace Enemy
 
         public void generateFireball()
         {
-            transform.LookAt(player.position);
-            GameObject fireBall = Instantiate(projectile, transform.position + new Vector3(0, 1.25f, 0), transform.rotation);
+            //transform.LookAt(player.position);
+            GameObject fireBall = Instantiate(projectile, transform.position + new Vector3(0, 1.25f, 0), Quaternion.LookRotation(player.position - transform.position));
             //fireBall.GetComponent<Rigidbody>().AddRelativeForce(fireBall.transform.forward * 1000);
         }
 
