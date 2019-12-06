@@ -157,7 +157,7 @@ namespace PC {
             anim.SetBool("IsIdle", true);
             anim.SetBool("IsRunning", false);
             anim.SetBool("IsWalking", false);
-            timer = wanderTimer - 0.75f;
+            timer = wanderTimer;
             wander();
         }
 
